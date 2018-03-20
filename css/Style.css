@@ -1,3 +1,155 @@
-body {
-   
+/*-------Fonts---------*/
+
+@font-face {
+    font-family: 'FontAwesome';
+    src: url('../fonts/font-awesome/fontawesome-webfont.ttf');
+    font-weight: normal;
+    font-style: normal;
 }
+
+.fa {
+    font-family: 'FontAwesome';
+}
+
+/*-------Global---------*/
+* {
+    box-sizing: border-box;
+    /* outline: 1px solid hotpink; FOR DEV */
+}
+
+img {
+    width: 100%;
+    height: auto;
+}
+
+html {
+    font-family: 'latoBold', sans-serif;
+    font-size: 16px;
+    text-transform:initial;
+}
+
+body {
+    margin: 0;
+}
+
+h2 {
+    font-size: 30px;
+    font-weight: normal;
+    margin: 0 0 35px;
+}
+
+a {
+    text-decoration: none;
+}
+
+/*----Helpers----*/
+
+.clean-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.clear-btn {
+    border: none;
+    background: transparent;
+    padding: 0;
+    font-family: 'latoBold', sans-serif;
+}
+
+.container {
+    max-width: 980px;
+    margin: 0 auto;
+    width: 100%;
+}
+/*---flex---*/
+
+.flex {
+    display: flex;
+}
+.inline-flex {
+    display: inline-flex;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.align-center {
+    align-items: center;
+}
+
+.space-around {
+    justify-content: space-around;
+}
+.space-between {
+    justify-content: space-between;
+}
+
+.flex-wrap {
+    flex-wrap: wrap;
+}
+
+.flex-full {
+    flex: 1;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+.align-start {
+    align-items: flex-start;
+}
+
+.align-end {
+    align-items: flex-end;
+}
+
+
+/****** header **********/
+
+header {
+    border-top: 6px solid transparent;
+    height: 80px; /* use rem in production */
+    text-transform: uppercase;
+    position: relative;
+}
+
+/***** main ********/
+.img-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+    width: 66.666%;
+}
+
+.filters-container {
+    width: 33.333%;
+}
+
+.social {
+    margin-left:calc(100% - 150px);
+}
+
+.social li {
+    width: 25px;
+}
+
+.contact-input {
+    width: 75%;
+    margin-right: 15px;
+}
+
+.contact-input  input {
+    width: 100%;    
+}
+
+.contact-input button {
+    width: 90px;
+    height: 37px;
+}
+.company-info {
+    width: 25%;
+}
+

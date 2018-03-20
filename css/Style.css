@@ -42,6 +42,7 @@ a {
     text-decoration: none;
 }
 
+
 /*----Helpers----*/
 
 .clean-list {
@@ -131,6 +132,12 @@ header {
 
 .filters-container {
     width: 33.333%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.filter-cloud>span:not(:first-child){
+    margin-left: 10px;
 }
 
 .social {
@@ -177,4 +184,8 @@ header {
     border: 1px solid grey;
     border-left: none;
     cursor: pointer;
+}
+
+.search{
+    margin-bottom: 10px;
 }

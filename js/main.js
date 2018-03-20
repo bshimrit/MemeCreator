@@ -14,3 +14,19 @@ var gMeme = {selectedImgId: 5,
                         }
                         ]
             };
+
+// var gteams = { id: 1, url:}
+
+// }
+
+
+function searchImg(){
+    var searchValue = document.querySelector(".search input").value;
+    // console.log(searchValue);
+    var filteredImgs = gImgs.filter(function(img) {
+        return img.keywords.indexOf(searchValue) !== -1;
+    }) ;
+
+    console.log(filteredImgs);
+    // renderImgs(filteredImgs);
+}

@@ -12,25 +12,25 @@
         <nav class="main-menu">
             <ul class="clean-list flex space-between align-center">
                 <li>
-                    <a>Portfolio</a>
+                    <a href="#">Portfolio</a>
                 </li>
                 <li>
-                    <a>About</a>
+                    <a href="#about">About</a>
                 </li>
                 <li>
                     <img src=""/>
                 </li>
                 <li>
-                    <a>Blog</a>
+                    <a href="#">Blog</a>
                 </li>
                 <li>
-                    <a>Getintouch</a>
+                    <a href="#contactForm">Getintouch</a>
                 </li>
             </ul>
         </nav>
     </header>
     <main>
-        <section class="container img-container flex space-between align-center">
+        <section class="container img-container flex space-between align-start">
             <div>
                 <button>Add image</button>
                 <div class="img-grid">
@@ -40,16 +40,19 @@
                 </div>
             </div>
             <div class="filters-container">
-                <input type="search" id="search" autofocus>Search here</input>
+                <div class="search">
+                    <input type="text" placeholder="Search.." name="search2">
+                    <button type="submit" onclick="searchImg()"><i class="fa"></i></button>
+                </div>
                 <div class="filter-cloud">Cloud words</div>
             </div>
         </section>
         <section class="container">
-            <div class="about-container flex space-between align-center">
+            <div class="about-container flex space-between align-start">
                 <div class="about-img">
                     <img src="img/img01.jpg"/>
                 </div>
-                <div class="about-info flex flex-column align-start">
+                <div class="about-info flex flex-column align-start" id="about">
                     <h1>Smith</h1>
                     <h2>Illustrator</h2>
                     <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci ut cupiditate 

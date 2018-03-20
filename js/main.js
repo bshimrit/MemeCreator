@@ -1,10 +1,9 @@
 /* */
 'use strict'
-var gImgs = [
-             {id: 1, url: 'img/img01.jpg', keywords: ['tree','green','mountain','field']},
-             {id: 2, url: 'img/img02.jpg', keywords: ['water','field','sunrise','sky']},
-             {id: 3, url: 'img/img03.jpg', keywords: ['wheat','field','sky']},
-            ]; 
+
+var gNextId;
+var gImgs;
+
 var gMeme = {selectedImgId: 5,     
                   txts: [{
                             line: 'I never eat Falafel',
@@ -19,6 +18,50 @@ var gMeme = {selectedImgId: 5,
 
 // }
 
+function init(){
+    gNextId = 0;
+    gImgs = createImgs();
+    renderImgs(gImgs);
+}
+
+function createImgs(){
+    var imgs = [];
+
+    imgs.push(createImg('img/img01.jpg', ['tree','green','mountain','field']));
+    imgs.push(createImg('img/img02.jpg', ['water','field','sunrise','sky']));
+    imgs.push(createImg('img/img03.jpg', ['wheat','field','sky']));
+
+    //TODO: fix data
+    imgs.push(createImg('img/img01.jpg', ['tree','green','mountain','field']));
+    imgs.push(createImg('img/img02.jpg', ['water','field','sunrise','sky']));
+    imgs.push(createImg('img/img03.jpg', ['wheat','field','sky']));
+    imgs.push(createImg('img/img01.jpg', ['tree','green','mountain','field']));
+    imgs.push(createImg('img/img02.jpg', ['water','field','sunrise','sky']));
+    imgs.push(createImg('img/img03.jpg', ['wheat','field','sky']));
+    imgs.push(createImg('img/img03.jpg', ['wheat','field','sky']));
+
+    return imgs;
+}
+
+function createImg(url, keywords){
+    return{
+        id: ++gNextId,
+        url: url,
+        keyWords: keywords
+    };
+}
+
+function renderImgs(imgs){
+    var strHtml = '';
+
+    var strHtmls = gImgs.map(function(img, idx){
+        strHtml = `<img id="${img.id}" src="${img.url}"/>`;
+        return strHtml;
+    });
+
+    var imgGrid = document.querySelector('.img-grid');
+    imgGrid.innerHTML = strHtmls.join('');
+}
 
 function searchImg(){
     var searchValue = document.querySelector(".search input").value;
@@ -27,6 +70,6 @@ function searchImg(){
         return img.keywords.indexOf(searchValue) !== -1;
     }) ;
 
-    console.log(filteredImgs);
-    // renderImgs(filteredImgs);
+    // console.log(filteredImgs);
+    renderImgs(filteredImgs);
 }

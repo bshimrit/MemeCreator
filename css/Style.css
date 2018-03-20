@@ -119,9 +119,14 @@ header {
 /***** main ********/
 .img-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(12, 1fr);
     grid-gap: 20px;
     width: 66.666%;
+}
+
+.img-grid>img{
+    grid-column: span 4;
+    grid-row: span 4;
 }
 
 .filters-container {

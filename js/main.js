@@ -47,29 +47,54 @@ function createImg(url, keywords){
     return{
         id: ++gNextId,
         url: url,
-        keyWords: keywords
+        keywords: keywords
     };
 }
 
 function renderImgs(imgs){
     var strHtml = '';
 
-    var strHtmls = gImgs.map(function(img, idx){
-        strHtml = `<img id="${img.id}" src="${img.url}"/>`;
+    var strHtmls = imgs.map(function(img, idx){
+        strHtml = `<img  id="${img.id}" src="${img.url}" onclick="openMemeEditor(this)"/>`;
         return strHtml;
     });
 
-    var imgGrid = document.querySelector('.img-grid');
-    imgGrid.innerHTML = strHtmls.join('');
+    var elImgGrid = document.querySelector('.img-grid');
+    elImgGrid.innerHTML = strHtmls.join('');
 }
 
-function searchImg(){
-    var searchValue = document.querySelector(".search input").value;
-    // console.log(searchValue);
+function searchImgInput(){
+    var searchValue = document.querySelector('.search input').value;
+    searchImg(searchValue);
+}
+
+function searchImg(searchValue) {
     var filteredImgs = gImgs.filter(function(img) {
         return img.keywords.indexOf(searchValue) !== -1;
     }) ;
 
-    // console.log(filteredImgs);
     renderImgs(filteredImgs);
+}
+
+function addImg(){
+    debugger;
+    var elImgInput = document.querySelector('#imgFiles');
+    var filename = elImgInput.value.replace(/^.*[\\\/]/, '');
+    gImgs.push(createImg('img/' + filename,[]));
+    renderImgs(gImgs);
+    elImgInput.value = '';
+}
+
+function openMemeEditor(elImg){
+    // var memeImg = gImgs.find(function(img){
+    //     return img.id === parseInt(elImg.id);
+    // });
+    gMeme = updMeme(elImg);
+}
+
+function updMeme(elImg){
+    return {
+        selectedImgId: parseInt(elImg.id),
+        txts: []
+    }   
 }

@@ -32,19 +32,19 @@
     <main>
         <section class="container img-container flex space-between align-start">
             <div>
-                <button>Add image</button>
+                <label for="imgFiles"></label>
+                <input type="file" id="imgFiles" name="imgFiles"/>
+                <button onclick="addImg()">Add</button>
                 <div class="img-grid">
-                    <!-- <img src="img/img01.jpg"/>
-                    <img src="img/img02.jpg"/>
-                    <img src="img/img03.jpg"/> -->
                 </div>
             </div>
             <div class="filters-container">
                 <div class="search">
                     <input type="text" placeholder="Search.." name="search2">
-                    <button type="submit" onclick="searchImg()"><i class="fa"></i></button>
+                    <button type="submit" onclick="searchImgInput()"><i class="fa"></i></button>
                 </div>
-                <div class="filter-cloud">Cloud words</div>
+                <div class="filter-cloud">
+                </div>
             </div>
         </section>
         <section class="container">
@@ -107,6 +107,28 @@
                     </aside>
                 </div>
             </form>
+        </section>
+        <section class="container meme-container">
+            <canvas>
+                
+            </canvas>
+            <button>choose another image</button>
+            <div>
+                <input placeholder="Enter upper text here"></input>
+                <div clas="upper-txt-ctrl">
+                    <div class="align-txt">
+                        <button>left</button>
+                        <button>center</button>
+                        <button>right</button>
+                    </div>
+                    <div class="size-txt">
+                        <button>+</button>
+                        <button>-</button>
+                    </div>
+                    <input type="color"></input>
+                </div>
+            </div>
+            <input placeholder="Enter lower text here"></input>
         </section>
     </main>
     <footer>

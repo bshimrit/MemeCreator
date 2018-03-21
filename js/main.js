@@ -364,7 +364,9 @@ function changeFontColor(elFontColor, idx) {
 
 function addNewLine() {
     var y = calcNewY();
-    var max = INITIAL_BOTTOM_Y - gMeme.txts[gMeme.txts.length - 1].size;
+    var height = getCanvasHeight();
+    var max = (gMeme.txts.length > 0)? INITIAL_BOTTOM_Y - gMeme.txts[gMeme.txts.length - 1].size : height;
+
     if (y < max) {
         gMeme.txts.push(createNewLineObject(INITIAL_X, y));
         renderMeme(gMeme);
@@ -388,6 +390,7 @@ function deleteLine(elBtn) {
     var idx = elBtn.id.split('-')[1];
     gMeme.txts.splice(idx, 1);
     renderTxtContainer();
+    renderMeme(gMeme);
 }
 
 function createNewLineObject(x, y) {

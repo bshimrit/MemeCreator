@@ -54,14 +54,16 @@
                 <div class="meme-img">
                     <canvas id="meme-canvas" width="500" height="400">
                     </canvas>
-                    <div class="meme-lines flex flex-column space-between align-center">
-                    </div>
                 </div>
                 <div class="meme-controls flex flex-column justify-start"> 
-                    <button onclick="toggleWin()">choose another image</button>
-                    <div class="edit-txt-container">
+                    <div class="ctrl-btns flex justify-end">
+                        <button onclick="toggleWin()">Close</button>
+                        <a href="#" id="btn-save" download="exported-data.png" onclick="downloadCanvas(this)">Save</a>
+                        <button onClick="addNewLine()">Add line</button>
                     </div>
-                    <button onClick="addNewLine()">Add line</button>
+                    <div class="edit-txt-container">
+                        <!-- meme input fields come here -->
+                    </div>
 
                 </div>
             </section>
@@ -73,25 +75,27 @@
             </div>
         </section>
         <section>
-            <form class="container" id="contactForm">
-                <h1>Get in touch</h1>
-                <h2>In order to get in touch use the contact form below:</h2>
-                <div class="contact-info flex space-between">
-                    <div class="contact-input flex flex-column space-between align-end">
-                        <input type="text" placeholder="Name(Required)" required></input>
-                        <input type="email" placeholder="Email(Required)" required></input>
-                        <input type="text" placeholder="Subject"></input>
-                        <input type="text" placeholder="Write your message here..."></input>
-                        <button>Send</button>
+            <form class= "contact-form">
+                <div class="container">
+                    <h1>Get in touch</h1>
+                    <h2>In order to get in touch use the contact form below:</h2>
+                    <div class="contact-info flex space-between">
+                        <div class="contact-input flex flex-column space-between align-end">
+                            <input type="text" placeholder="Name(Required)" required></input>
+                            <input type="email" placeholder="Email(Required)" required></input>
+                            <input type="text" placeholder="Subject"></input>
+                            <input type="text" placeholder="Write your message here..."></input>
+                            <button>Send</button>
+                        </div>
+                        <aside class="company-info">
+                            <p>Quisque Hendrerit: purus dapibus, ornare nibh vitae, viverra nibh. Fusce vitae aliquam tellus. Proin
+                                sit amet volutpat libero. Nulla sed nunc et tortor luctus faucibus morbi vitae.
+                            </p>
+                            <div>Elm St. 14/05 Lost City </div>
+                            <div>+ 3528 331 86 35</div>
+                            <div>info@hexalcorp.com</div>
+                        </aside>
                     </div>
-                    <aside class="company-info">
-                        <p>Quisque Hendrerit: purus dapibus, ornare nibh vitae, viverra nibh. Fusce vitae aliquam tellus. Proin
-                            sit amet volutpat libero. Nulla sed nunc et tortor luctus faucibus morbi vitae.
-                        </p>
-                        <div>Elm St. 14/05 Lost City </div>
-                        <div>+ 3528 331 86 35</div>
-                        <div>info@hexalcorp.com</div>
-                    </aside>
                 </div>
             </form>
         </section>

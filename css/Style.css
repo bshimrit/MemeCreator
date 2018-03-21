@@ -206,3 +206,27 @@ header {
 .search{
     margin-bottom: 10px;
 }
+
+.meme-container {
+    margin: 0 auto;
+}
+
+.meme-img {
+    position: relative;
+}
+
+.meme-lines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 50vh;
+    width: 50vw;
+}
+
+.close {
+    display: none;
+}
+
+.meme-line-txt {
+    width: 50%;
+}

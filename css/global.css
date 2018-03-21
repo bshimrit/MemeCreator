@@ -104,6 +104,10 @@ h1 {
     justify-content: center;
 }
 
+.justify-start {
+    justify-content: flex-start;
+}
+
 .align-center {
     align-items: center;
 }
@@ -274,7 +278,6 @@ li a:visited {
 
 .search button {
     float: left;
-    width: 20%;
     padding: 10px;
     background: #2eb398;
     color: white;
@@ -313,7 +316,23 @@ li a:visited {
 }
 
 .about-img{
-    width: 100%;
+    width: 30.333%;
+}
+
+.about-info{
+    width: 66.666%;
+}
+
+.about-info h1 {
+    color: #d7fcf5;
+    font-size:30px;
+    text-transform: capitalize;
+}
+
+.about-info h2 {
+    color: #20816d;
+    font-size: 18px;
+    text-transform: capitalize;
 }
 
 .about {
@@ -326,6 +345,7 @@ li a:visited {
 }
 .img-container {
     background-color: #ffffff;
+    margin-bottom: 20px;
 }
 
 .contact-form{

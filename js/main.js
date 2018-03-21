@@ -392,12 +392,13 @@ function renderTeam() {
     elAbout.innerHTML = strHtmls.join('');
 }
 
-function renderTeamMemeber(team) {
+function renderTeamMemeber(team, idx) {
     return `
+    <div class="${idx ? 'close' : 'open'} flex space-between align-start">
         <div class="about-img">
         <img src=${team.url} />
         </div>
-        <div class="about-info flex flex-column align-start" id="about">
+        <div class="about-info flex flex-column justify-start align-start" id="about">
             <h1>${team.name}</h1>
             <h2>${team.title}</h2>
             <p>${team.description}</p>
@@ -424,6 +425,7 @@ function renderTeamMemeber(team) {
                 </ul>
             </div>
         </div>
+    </div>
     `;
 }
 

@@ -15,12 +15,24 @@ var gteams = [
       url:'img/team/1.jpg',
       name:'Ilana', 
       title:'developer',
-      description: 'I do everything!'},
+      description: 'I do everything!',
+      facebook:'',
+      twitter:'',
+      google:'',
+      pintrest:'',
+      linkedin:'',
+      dribbble:''},
     { id: 1,
     url:'img/team/2.jpg',
-    name:'Ilana', 
+    name:'Shimrit', 
     title:'developer',
-    description: 'I do everything!'}
+    description: 'I do everything!',
+    facebook:'',
+    twitter:'',
+    google:'',
+    pintrest:'',
+    linkedin:'',
+    dribbble:''}
 
 ];
 
@@ -30,6 +42,7 @@ function init() {
     renderImgs(gImgs);
     renderWords(gImgs);
     renderTxtContainer();
+    renderTeam();
 }
 
 function createImgs() {
@@ -201,7 +214,7 @@ function renderTxtContainer(){
 function renderNewLine(txt,idx){
     return `
     <div class="meme-txt-wrapper">  
-        <input class="meme-line-txt" id="txt-input-${idx} placeholder="${txt}"></input>
+        <input class="meme-line-txt" id="txt-input-${idx}" placeholder="${txt}"></input>
         <div clas="txt-ctrl flex justify-center" id=txt-${idx}>
             <button>left</button>
             <button>center</button>
@@ -245,4 +258,51 @@ function newLineObject(x,y){
         x: x,
         y: y
     }
+}
+
+function renderTeam(){
+    var strHtml = '';
+    var strHtmls = gteams.map(function(team, idx){
+        strHtml = renderTeamMemeber(team,idx);
+        return strHtml;
+    });
+
+    var elAbout = document.querySelector('.about-container');
+    elAbout.innerHTML = strHtmls.join('');
+}
+
+function renderTeamMemeber(team){
+    return `
+        <div class="about-img">
+        <img class="shape" src=${team.url} />
+        </div>
+        <div class="about-info flex flex-column align-start" id="about">
+            <h1>${team.name}</h1>
+            <h2>${team.title}</h2>
+            <p>${team.description}</p>
+            <div class="social flex">
+                <ul class="clean-list inline-flex">
+                    <li class="fa facebook pointer flex justify-center align-center">
+                        <a href="${team.facebook}"></a>
+                    </li>
+                    <li class="fa twitter pointer flex justify-center align-center">
+                        <a href="${team.twitter}"></a>
+                    </li>
+                    <li class="fa google-plus pointer flex justify-center align-center">
+                        <a href="${team.google}"></a>
+                    </li>
+                    <li class="fa pinterest pointer flex justify-center align-center">
+                        <a href="${team.pintrest}"></a>
+                    </li>
+                    <li class="fa linkedin pointer flex justify-center align-center">
+                        <a href="${team.linkedin}"></a>
+                    </li>
+                    <li class="fa dribbble pointer flex justify-center align-center">
+                        <a href="${team.dribble}"></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    `;
+
 }

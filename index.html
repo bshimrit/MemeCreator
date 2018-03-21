@@ -31,71 +31,43 @@
         </nav>
     </header>
     <main>
-        <section class="container img-container flex space-between align-start open">
-            <div>
-                <label for="imgFiles"></label>
-                <input type="file" id="imgFiles" name="imgFiles" />
-                <button onclick="addImg()">Add</button>
-                <div class="img-grid">
-                </div>
-            </div>
-            <div class="filters-container">
-                <div class="search">
-                    <input type="text" placeholder="Search.." name="search2">
-                    <button type="submit" onclick="searchImgInput()">
-                        <i class="fa"></i>
-                    </button>
-                </div>
-                <div class="filter-cloud flex flex-wrap"></div>
-            </div>
-        </section>
-        <section class="container meme-container flex space-between close">
-            <div class="meme-img">
-                <canvas id="meme-canvas" width="500" height="400">
-                </canvas>
-                <div class="meme-lines flex flex-column space-between align-center">
-                </div>
-            </div>
-            <div class="meme-controls flex flex-column justify-start"> 
-                <button onclick="toggleWin()">choose another image</button>
-                <div class="edit-txt-container">
-                </div>
-                <button onClick="addNewLine()">Add line</button>
-            </div>
-        </section>
-        <section>
-            <div class="container about-container flex space-between align-start">
-                <div class="about-img">
-                    <img src="img/img01.jpg" />
-                </div>
-                <div class="about-info flex flex-column align-start" id="about">
-                    <h1>Smith</h1>
-                    <h2>Illustrator</h2>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci ut cupiditate neque culpa sunt. Explicabo
-                        ea esse dolorum similique recusandae, ratione, in eos consequuntur nisi culpa provident necessitatibus,
-                        nesciunt error?</p>
-                    <div class="social flex">
-                        <ul class="clean-list inline-flex">
-                            <li class="fa facebook pointer flex justify-center align-center">
-                                <a href=""></a>
-                            </li>
-                            <li class="fa twitter pointer flex justify-center align-center">
-                                <a href=""></a>
-                            </li>
-                            <li class="fa google-plus pointer flex justify-center align-center">
-                                <a href=""></a>
-                            </li>
-                            <li class="fa pinterest pointer flex justify-center align-center">
-                                <a href=""></a>
-                            </li>
-                            <li class="fa linkedin pointer flex justify-center align-center">
-                                <a href=""></a>
-                            </li>
-                            <li class="fa dribbble pointer flex justify-center align-center">
-                                <a href=""></a>
-                            </li>
-                        </ul>
+        <div class="img-container">
+            <section class="container flex space-between align-start open">
+                <div>
+                    <label for="imgFiles"></label>
+                    <input type="file" id="imgFiles" name="imgFiles" />
+                    <button onclick="addImg()">Add</button>
+                    <div class="img-grid">
                     </div>
+                </div>
+                <div class="filters-container">
+                    <div class="search">
+                        <input type="text" placeholder="Search.." name="search2">
+                        <button type="submit" onclick="searchImgInput()">
+                            <i class="fa"></i>
+                        </button>
+                    </div>
+                    <div class="filter-cloud flex flex-wrap"></div>
+                </div>
+            </section>
+            <section class="container meme-container flex space-between close">
+                <div class="meme-img">
+                    <canvas id="meme-canvas" width="500" height="400">
+                    </canvas>
+                    <div class="meme-lines flex flex-column space-between align-center">
+                    </div>
+                </div>
+                <div class="meme-controls flex flex-column justify-start"> 
+                    <button onclick="toggleWin()">choose another image</button>
+                    <div class="edit-txt-container">
+                    </div>
+                    <button onClick="addNewLine()">Add line</button>
+                </div>
+            </section>
+        </div>
+        <section>
+            <div class="about">
+                <div class="about-container container flex space-between align-start">
                 </div>
             </div>
         </section>

@@ -5,9 +5,9 @@ var gNextId;
 var gImgs;
 
 var gMeme = {
-    selectedImgId: 5,
+    selectedImgId: 0,
     txts: [{
-        line: 'I never eat Falafel',
+        line: 'Your text will appear here',
         size: 20,
         align: 'left',
         color: 'red'
@@ -106,8 +106,7 @@ function renderWords(imgs) {
     wordsCloud.innerHTML = strHtmls;
 }
 
-function searchImg() {
-    var searchValue = document.querySelector(".search input").value;
+function searchImg(searchValue) {
     var filteredImgs = gImgs.filter(function (img) {
         return img.keywords.indexOf(searchValue) !== -1;
     });
@@ -124,10 +123,9 @@ function addImg(){
 }
 
 function openMemeEditor(elImg){
-    // var memeImg = gImgs.find(function(img){
-    //     return img.id === parseInt(elImg.id);
-    // });
     gMeme = updMeme(elImg);
+    drawImage();
+    toggleWin();
 }
 
 function updMeme(elImg){
@@ -135,4 +133,29 @@ function updMeme(elImg){
         selectedImgId: parseInt(elImg.id),
         txts: []
     }   
+}
+
+
+function drawImage() {
+    var canvas = document.getElementById('meme-canvas');    
+    var context = canvas.getContext('2d');
+    var memeImg = gImgs.find(function(img){
+        return img.id === gMeme.selectedImgId;
+    });
+    var img = new Image();
+    img.src = memeImg.url;
+
+    img.onload = function () {
+        context.drawImage(img, 0, 0, 400, 360);
+    };
+}
+
+function toggleWin()
+{
+    var elOpen = document.querySelector('.open');
+    var elClose = document.querySelector('.close');
+    elOpen.classList.toggle('open');
+    elOpen.classList.toggle('close');
+    elClose.classList.toggle('open');
+    elClose.classList.toggle('close');
 }

@@ -30,7 +30,7 @@
         </nav>
     </header>
     <main>
-        <section class="container img-container flex space-between align-start">
+        <section class="container img-container flex space-between align-start open">
             <div>
                 <label for="imgFiles"></label>
                 <input type="file" id="imgFiles" name="imgFiles"/>
@@ -46,8 +46,41 @@
                 <div class="filter-cloud flex flex-wrap"></div>
             </div>
         </section>
-        <section class="container">
-            <div class="about-container flex space-between align-start">
+        <section class="container meme-container flex space-between close">
+            <div class="meme-img">
+                <canvas id="meme-canvas" width="500" height="400">
+                </canvas>
+                <div class="meme-lines flex flex-column space-between align-center">
+                    <div> Enter your text</div>
+                    <div> Enter your text</div>
+                </div>
+            </div>
+            <div class="meme-controls flex flex-column justify-start"> 
+                <button onclick="toggleWin()">choose another image</button>
+                <div>
+                    <input class="meme-line-txt" placeholder="Enter your text here"></input>
+                    <div clas="txt-ctrl flex justify-center">
+                        <button>left</button>
+                        <button>center</button>
+                        <button>right</button>
+                        <button>+</button>
+                        <button>-</button>
+                        <input type="color"></input>
+                        <label for="txt-shadow">Text shadow</label>
+                        <input type="checkbox" name="txt-shadow"></input>
+                        <label for="txt-font">Font</label>
+                        <input type="text" name="txt-font"></input>
+                        <button>up</button>
+                        <button>down</button>
+                        <button>Add</button>
+                        <button>Delete</button>
+                    </div>
+                </div>
+                <!-- <input placeholder="Enter lower text here"></input><button>delete</button> -->
+            </div>
+        </section>
+        <section>
+            <div class="container about-container flex space-between align-start">
                 <div class="about-img">
                     <img src="img/img01.jpg"/>
                 </div>
@@ -106,28 +139,6 @@
                     </aside>
                 </div>
             </form>
-        </section>
-        <section class="container meme-container">
-            <canvas>
-                
-            </canvas>
-            <button>choose another image</button>
-            <div>
-                <input placeholder="Enter upper text here"></input>
-                <div clas="upper-txt-ctrl">
-                    <div class="align-txt">
-                        <button>left</button>
-                        <button>center</button>
-                        <button>right</button>
-                    </div>
-                    <div class="size-txt">
-                        <button>+</button>
-                        <button>-</button>
-                    </div>
-                    <input type="color"></input>
-                </div>
-            </div>
-            <input placeholder="Enter lower text here"></input>
         </section>
     </main>
     <footer>

@@ -38,12 +38,37 @@ var gteams = [
 
 function init() {
     gNextId = 0;
+    gMeme = creategMeme();
     gImgs = createImgs();
     renderImgs(gImgs);
     renderWords(gImgs);
     renderTxtContainer();
     renderTeam();
     
+}
+
+function creategMeme() {
+    // var elCanvas = document.getElementById('meme-canvas');
+    // var height = elCanvas.height;
+    var height = getCanvasHeight();
+
+    return {
+        selectedImgId: 0,
+        txts: [newLineObject(20, 40),
+        newLineObject(20, height - 70)]
+    }
+}
+
+function getCanvasHeight() {
+    var elCanvas = document.getElementById('meme-canvas');
+    var height = elCanvas.height;
+    return height;
+}
+
+function getCanvasWidth() {
+    var elCanvas = document.getElementById('meme-canvas');
+    var width = elCanvas.width;
+    return width;
 }
 
 function createImgs() {
@@ -54,13 +79,13 @@ function createImgs() {
     imgs.push(createImg('img/meme/img03.jpg', ['wheat', 'field', 'sky']));
 
     //TODO: fix data
-    imgs.push(createImg('img/meme/img01.jpg', ['tree','green','mountain','field']));
-    imgs.push(createImg('img/meme/img02.jpg', ['water','field','sunrise','sky']));
-    imgs.push(createImg('img/meme/img03.jpg', ['wheat','field','sky']));
-    imgs.push(createImg('img/meme/img01.jpg', ['tree','green','mountain','field']));
-    imgs.push(createImg('img/meme/img02.jpg', ['water','field','sunrise','sky']));
-    imgs.push(createImg('img/meme/img03.jpg', ['wheat','field','sky']));
-    imgs.push(createImg('img/meme/img03.jpg', ['wheat','field','sky']));
+    imgs.push(createImg('img/meme/img01.jpg', ['tree', 'green', 'mountain', 'field']));
+    imgs.push(createImg('img/meme/img02.jpg', ['water', 'field', 'sunrise', 'sky']));
+    imgs.push(createImg('img/meme/img03.jpg', ['wheat', 'field', 'sky']));
+    imgs.push(createImg('img/meme/img01.jpg', ['tree', 'green', 'mountain', 'field']));
+    imgs.push(createImg('img/meme/img02.jpg', ['water', 'field', 'sunrise', 'sky']));
+    imgs.push(createImg('img/meme/img03.jpg', ['wheat', 'field', 'sky']));
+    imgs.push(createImg('img/meme/img03.jpg', ['wheat', 'field', 'sky']));
 
     return imgs;
 }
@@ -142,13 +167,13 @@ function addImg() {
     elImgInput.value = '';
 }
 
-function openMemeEditor(elImg){
+function openMemeEditor(elImg) {
     updMeme(elImg);
-    drawImage();
+    drawImageWithText();
     toggleWin();
 }
 
-function updMeme(elImg){
+function updMeme(elImg) {
     gMeme.selectedImgId = parseInt(elImg.id);
 }
 
@@ -158,26 +183,8 @@ function removeAligns(elPicTxt) {
     elPicTxt.classList.remove('align-text-center');
 }
 
-function alignLeft() {
-    var elPicTxt = document.getElementById('div1');
-    removeAligns(elPicTxt);
-    elPicTxt.classList.add('align-text-left');
-}
 
-function alignRight() {
-    var elPicTxt = document.getElementById('div1');
-    removeAligns(elPicTxt);
-    elPicTxt.classList.add('align-text-right');
-}
-
-function alignCenter() {
-    var elPicTxt = document.getElementById('div1');
-    removeAligns(elPicTxt);
-    elPicTxt.classList.add('align-text-center');
-}
-
-
-function drawImage(elInput) {
+function drawImageWithText(el, direction) {
     var canvas = document.getElementById('meme-canvas');
     var context = canvas.getContext('2d');
     var memeImg = gImgs.find(function (img) {
@@ -188,29 +195,50 @@ function drawImage(elInput) {
 
     img.onload = function () {
         context.drawImage(img, 0, 0, 400, 360);
-  
-        if(elInput){
-        var idxStr = elInput.id;
-        var id = +idxStr.substring((0, idxStr.lastIndexOf('-') + 1));
-        
-        gMeme.txts[id].line = elInput.value;
-        var text = gMeme.txts[id].line;
-        var x = gMeme.txts[id].x;
-        var y = gMeme.txts[id].y;
-        drawText(text, context, x, y);
+
+        if (el) {
+            var idxStr = el.id;
+            var width = getCanvasWidth();
+            var idx = getIdxFromStr(idxStr);
+            var elInput = document.getElementById('txt-input-' + idx);
+            gMeme.txts[idx].line = elInput.value;
+
+            var width = getCanvasWidth();
+
+            //TODO: fix align according to direction
+            if (direction) {
+                switch (direction) {
+                    case 'left':
+                        context.textAlign = 'left';
+                        break;
+
+                    case 'center':
+                        context.textAlign = 'center';
+                        break;
+
+                    case 'right':
+                        context.textAlign = 'right';
+                        break;
+                }
+
+                gMeme.txts[idx].x = width / 2;
+            }
+
+         
+            gMeme.txts.forEach(function (txt) {
+                var text = txt.line;
+                var x = txt.x;
+                var y = txt.y;
+                drawText(text, context, x, y);
+            })
         }
     };
-    context.save();
 }
 
-// Gets a string such as: '2,7' and returns {i:2, j:7}
-// function getCellCoord(strCellId) {
-//     var coord = {};
-//     coord.i = +strCellId.substring(0, strCellId.lastIndexOf(','));
-//     coord.j = +strCellId.substring(strCellId.lastIndexOf(',') + 1);
-//     // console.log('coord', coord);
-//     return coord;
-// }
+function getIdxFromStr(idxStr) {
+    var idx = +idxStr.substring((0, idxStr.lastIndexOf('-') + 1));
+    return idx;
+}
 
 function toggleWin() {
     var elOpen = document.querySelector('.open');
@@ -227,13 +255,12 @@ function drawText(text, context, x, y) {
     context.font = "18px sans-serif";
     if (!text) text = "enter your text here";
     context.fillText(text, x, y);
-    // context.fillText(text, 20, 40);
 }
 
 function renderTxtContainer(){
     var strHtml = '';
-    var strHtmls = gMeme.txts.map(function(txt, idx){
-        strHtml = renderNewLine(txt.line,idx);
+    var strHtmls = gMeme.txts.map(function (txt, idx) {
+        strHtml = renderNewLine(txt.line, idx);
         return strHtml;
     });
 
@@ -241,14 +268,16 @@ function renderTxtContainer(){
     elEditTxtCon.innerHTML = strHtmls.join('');
 }
 
-function renderNewLine(txt,idx){
+function renderNewLine(txt, idx) {
+    var width = getCanvasWidth();
+
     return `
     <div class="meme-txt-wrapper">  
-        <input class="meme-line-txt" id="txt-input-${idx}" placeholder="${txt}"></input>
+        <input class="meme-line-txt" id="txt-input-${idx}" placeholder="${txt}" onkeydown="drawImageWithText(this)"></input>
         <div clas="txt-ctrl flex justify-center" id=txt-${idx}>
-            <button>left</button>
-            <button>center</button>
-            <button>right</button>
+            <button id="btn-left-${idx}" onclick="drawImageWithText(this, 'left')">left</button>
+            <button id="btn-center-${idx}" onclick="drawImageWithText(this, 'center')">center</button>
+            <button id="btn-right-${idx}" onclick="drawImageWithText(this, 'right')">right</button>
             <button>+</button>
             <button>-</button>
             <input type="color"></input>
@@ -264,21 +293,21 @@ function renderNewLine(txt,idx){
     `;
 }
 
-function addNewLine(){
-    gMeme.txts.push(newLineObject(0,0));
+function addNewLine() {
+    gMeme.txts.push(newLineObject(0, 0));
     var idx = gMeme.txts.length - 1;
-    
+
     var elEditTxtCon = document.querySelector('.edit-txt-container');
-    elEditTxtCon.innerHTML += renderNewLine(gMeme.txts[idx].line,idx);
+    elEditTxtCon.innerHTML += renderNewLine(gMeme.txts[idx].line, idx);
 }
 
-function deleteLine(elBtn){
+function deleteLine(elBtn) {
     var idx = elBtn.id.split('-')[1];
-    gMeme.txts.splice(idx,1);
+    gMeme.txts.splice(idx, 1);
     renderTxtContainer();
 }
 
-function newLineObject(x,y){
+function newLineObject(x, y) {
     return {
         line: 'Enter your text here',
         size: 20,

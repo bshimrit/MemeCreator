@@ -7,12 +7,21 @@ var gImgs;
 var gMeme = {
     selectedImgId: 0,
     txts: [{
-        line: 'Your text will appear here',
+        line: 'Enter your text here',
         size: 20,
         align: 'left',
-        color: 'red'
-    }
-    ]
+        color: 'red',
+        x: 20,
+        y: 40
+    },
+    {
+        line: 'Enter your text here',
+        size: 20,
+        align: 'left',
+        color: 'red',
+        x: 20,
+        y: 80
+    }]
 };
 
 // var gteams = { id: 1, url:}
@@ -122,14 +131,7 @@ function addImg() {
     elImgInput.value = '';
 }
 
-<<<<<<< HEAD
 function openMemeEditor(elImg) {
-    // var memeImg = gImgs.find(function(img){
-    //     return img.id === parseInt(elImg.id);
-    // });
-=======
-function openMemeEditor(elImg){
->>>>>>> 4282d93ffa561048306577e244f604e73bbbdc2d
     gMeme = updMeme(elImg);
     drawImage();
     toggleWin();
@@ -167,10 +169,10 @@ function alignCenter() {
 }
 
 
-function drawImage() {
-    var canvas = document.getElementById('meme-canvas');    
+function drawImage(elInput) {
+    var canvas = document.getElementById('meme-canvas');
     var context = canvas.getContext('2d');
-    var memeImg = gImgs.find(function(img){
+    var memeImg = gImgs.find(function (img) {
         return img.id === gMeme.selectedImgId;
     });
     var img = new Image();
@@ -178,11 +180,31 @@ function drawImage() {
 
     img.onload = function () {
         context.drawImage(img, 0, 0, 400, 360);
+  
+        if(elInput){
+        var idxStr = elInput.id;
+        var id = +idxStr.substring((0, idxStr.lastIndexOf('-') + 1));
+        
+        gMeme.txts[id].line = elInput.value;
+        var text = gMeme.txts[id].line;
+        var x = gMeme.txts[id].x;
+        var y = gMeme.txts[id].y;
+        drawText(text, context, x, y);
+        }
     };
+    context.save();
 }
 
-function toggleWin()
-{
+// Gets a string such as: '2,7' and returns {i:2, j:7}
+// function getCellCoord(strCellId) {
+//     var coord = {};
+//     coord.i = +strCellId.substring(0, strCellId.lastIndexOf(','));
+//     coord.j = +strCellId.substring(strCellId.lastIndexOf(',') + 1);
+//     // console.log('coord', coord);
+//     return coord;
+// }
+
+function toggleWin() {
     var elOpen = document.querySelector('.open');
     var elClose = document.querySelector('.close');
     elOpen.classList.toggle('open');
@@ -190,3 +212,14 @@ function toggleWin()
     elClose.classList.toggle('open');
     elClose.classList.toggle('close');
 }
+
+function drawText(text, context, x, y) {
+    context.fillStyle = "#000";
+    context.lineStyle = "#ffff00";
+    context.font = "18px sans-serif";
+    if (!text) text = "enter your text here";
+    context.fillText(text, x, y);
+    // context.fillText(text, 20, 40);
+}
+
+

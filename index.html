@@ -53,15 +53,11 @@
             <div class="meme-img">
                 <canvas id="meme-canvas" width="500" height="400">
                 </canvas>
-                <div class="meme-lines flex flex-column space-between align-center">
-                    <div> Enter your text</div>
-                    <div> Enter your text</div>
-                </div>
             </div>
             <div class="meme-controls flex flex-column justify-start"> 
                 <button onclick="toggleWin()">choose another image</button>
                 <div>
-                    <input class="meme-line-txt" placeholder="Enter your text here"></input>
+                    <input id="text-input-0" class="meme-line-txt" placeholder="Enter your text here" onkeydown="drawImage(this)"></input>
                     <div clas="txt-ctrl flex justify-center">
                         <button>left</button>
                         <button>center</button>
@@ -70,8 +66,9 @@
                         <button>-</button>
                         <input type="color"></input>
                         <label for="txt-shadow">Text shadow</label>
-                        <input type="checkbox" name="txt-shadow"></input>
+                        <input id="text-input-1" type="checkbox" name="txt-shadow"></input>
                         <label for="txt-font">Font</label>
+                        <input class="meme-line-txt" placeholder="Enter your text here" onkeydown="drawImage(this)"></input>
                         <input type="text" name="txt-font"></input>
                         <button>up</button>
                         <button>down</button>
@@ -141,40 +138,6 @@
                 </div>
             </form>
         </section>
-<<<<<<< HEAD
-        <section class="container meme-container">
-            <canvas>
-
-            </canvas>
-            <button>choose another image</button>
-
-
-            <div>
-                <input placeholder="Enter upper text here"></input>
-
-                <!-- TEST -->
-                <div id="div1">
-                   text
-                </div>
-                <!-- TEST -->
-
-                <div clas="upper-txt-ctrl">
-                    <div class="align-txt">
-                        <button onclick="alignLeft()">left</button>
-                        <button onclick="alignCenter()">center</button>
-                        <button onclick="alignRight()">right</button>
-                    </div>
-                    <div class="size-txt">
-                        <button>+</button>
-                        <button>-</button>
-                    </div>
-                    <input type="color"></input>
-                </div>
-            </div>
-            <input placeholder="Enter lower text here"></input>
-        </section>
-=======
->>>>>>> 4282d93ffa561048306577e244f604e73bbbdc2d
     </main>
     <footer>
         <small>

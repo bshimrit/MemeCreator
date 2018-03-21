@@ -3,6 +3,9 @@
 
 var SHADOW_COLOR = "black";
 var BLUR = 20;
+var INITIAL_X = 20;
+var INITIAL_TOP_Y = 40;
+var INITIAL_BOTTOM_Y = 270;
 
 var gNextId;
 var gImgs;
@@ -51,8 +54,8 @@ function init() {
 function creategMeme() {
     return {
         selectedImgId: 0,
-        txts: [createNewLineObject(20, 40),
-        createNewLineObject(20, 270)]
+        txts: [createNewLineObject(INITIAL_X, INITIAL_TOP_Y),
+        createNewLineObject(INITIAL_X, INITIAL_BOTTOM_Y)]
     }
 }
 
@@ -246,7 +249,7 @@ function drawTextForTxt(context, txt) {
     context.fillStyle = txt.color;
     context.lineStyle = "#ffff00";
     // context.font = txt.size + "px sans-serif";
-    context.font = txt.size + "px" + " " + txt.font;    
+    context.font = txt.size + "px" + " " + txt.font;
     context.shadowColor = txt.shadowColor;
     context.shadowBlur = txt.blur;
     if (!txt.line) txt.line = "Your text will appear here";
@@ -276,7 +279,9 @@ function renderNewLine(txt, idx) {
             <button id="btn-right-${idx}" onclick="alignText(${idx}, 'right')">right</button>
             <button onclick="increaseFont(${idx})">+</button>
             <button onclick="decreaseFont(${idx})">-</button>
-            <input type="color" id="input-color-${idx}" onchange="changeFontColor(this, ${idx})">color</input>
+            <label for="color">Color</label>
+            <input type="color" name="color" id="input-color-${idx}" onchange="changeFontColor(this, ${idx})"></input>
+            </br>
             <label for="txt-shadow-color">Text shadow</label>
             <input type="checkbox" name="txt-shadow" onchange="switchShadow(this,${idx})"></input>
             <label for="txt-font">Font</label>
@@ -294,34 +299,22 @@ function renderNewLine(txt, idx) {
     `;
 }
 
-/* <datalist id="fontList" onchange="changeFont(this, ${idx})">
-<option value="sans-serif" label="sans-serif" />
-<option value="Arial" label="Arial" />       
-</datalist>
-<form>
-<input type="text" id="font" name="font" list="fontList" />
-</form> */
-
-
 function getElInput(idx) {
     return document.getElementById('txt-input-' + idx);
 }
 
-//TODO: fix
 function changeFont(elFont, idx) {
     gMeme.txts[idx].font = elFont.value;
-    debugger;
     renderMeme(gMeme);
 }
 
 
 function switchShadow(elShadow, idx) {
-    //debugger;
     if (elShadow.checked) {
         gMeme.txts[idx].blur = BLUR;
         gMeme.txts[idx].shadowColor = SHADOW_COLOR;
 
-    } else{
+    } else {
         gMeme.txts[idx].blur = 0;
         gMeme.txts[idx].shadowColor = "rgba(0,0,0,0)";
     }
@@ -370,10 +363,25 @@ function changeFontColor(elFontColor, idx) {
 }
 
 function addNewLine() {
-    gMeme.txts.push(createNewLineObject(0, 0));
-    var idx = gMeme.txts.length - 1;
-    var elEditTxtCon = document.querySelector('.edit-txt-container');
-    elEditTxtCon.innerHTML += renderNewLine(gMeme.txts[idx].line, idx);
+    var y = calcNewY();
+    var max = INITIAL_BOTTOM_Y - gMeme.txts[gMeme.txts.length - 1].size;
+    if (y < max) {
+        gMeme.txts.push(createNewLineObject(INITIAL_X, y));
+        renderMeme(gMeme);
+
+        var idx = gMeme.txts.length - 1;
+        var elEditTxtCon = document.querySelector('.edit-txt-container');
+        elEditTxtCon.innerHTML += renderNewLine(gMeme.txts[idx].line, idx);
+    }
+}
+
+function calcNewY() {
+    var y = gMeme.txts.reduce(function (acc, txt) {
+        acc += txt.size;
+        return acc;
+    }, INITIAL_TOP_Y)
+
+    return y;
 }
 
 function deleteLine(elBtn) {

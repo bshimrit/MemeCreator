@@ -48,6 +48,7 @@ function init() {
     renderWords(gImgs);
     renderTxtContainer();
     renderTeam();
+    
 }
 
 function creategMeme() {
@@ -393,5 +394,11 @@ function renderTeamMemeber(team) {
             </div>
         </div>
     `;
-
 }
+
+function downloadCanvas(elBtn) {
+    // debugger;
+    var dataURL = document.getElementById('meme-canvas').toDataURL();
+    elBtn.href = dataURL;
+}
+

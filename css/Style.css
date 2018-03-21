@@ -36,7 +36,6 @@ html {
 
 body {
     margin: 0;
-    color: #ffffff;
 }
 
 h2 {
@@ -51,6 +50,10 @@ a {
 
 #div1{
     background-color: aqua;
+}
+
+h1 {
+    margin: 0;
 }
 
 
@@ -125,16 +128,24 @@ a {
 
 header {
     border-top: 6px solid transparent;
-    height: 80px; /* use rem in production */
+    height: 60px; /* use rem in production */
     text-transform: uppercase;
     position: relative;
     background-color: #323232;
+    color: #fff;
 }
 
 footer {
     background-color: #323232;
 }
 
+li a:visited {
+    color: #fff;
+}
+
+.main-menu li a:hover {
+    color: #2eb398;
+}
 /***** main ********/
 .img-grid {
     display: grid;
@@ -228,11 +239,6 @@ footer {
     display: none;
     z-index: -1;
 }
-
-.meme-line-txt {
-    width: 50%;
-}
-
 .meme-txt-wrapper {
     margin-top: 20px;
 }
@@ -242,12 +248,18 @@ footer {
 }
 
 .about {
-    margin-top: 40px;
     background-color: #2eb398;
 }
 
+.about-container{
+    margin-top: 40px;
+}
 .img-container {
     background-color: #ffffff;
+}
+
+.contact-form{
+    background-color: #323232;
 }
 
 

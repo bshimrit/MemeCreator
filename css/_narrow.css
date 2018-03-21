@@ -2,3 +2,11 @@
     padding: 30px 230px;
     font-size: 1em;
 }
+
+.filters-container {
+    display:block;
+}
+
+.img-grid {
+    width: 66.666%;
+}

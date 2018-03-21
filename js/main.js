@@ -199,7 +199,6 @@ function drawImageWithText(el, direction) {
 
     img.onload = function () {
         context.drawImage(img, 0, 0, 400, 360);
-        //debugger;
         if (el) {
             var idxStr = el.id;
             var width = getCanvasWidth();
@@ -252,20 +251,16 @@ function toggleWin() {
 
 function drawTextForTxts(gMeme, context) {
     gMeme.txts.forEach(function (txt) {
-        var text = txt.line;
-        var x = txt.x;
-        var y = txt.y;
-        var size = txt.size;
-        drawTextForTxt(text, context, x, y, size);
+        drawTextForTxt(context, txt);
     })
 }
 
-function drawTextForTxt(text, context, x, y, size) {
-    context.fillStyle = "#000";
+function drawTextForTxt(context, txt) {
+    context.fillStyle = txt.color;
     context.lineStyle = "#ffff00";
-    context.font = size + "px sans-serif";
-    if (!text) text = "enter your text here";
-    context.fillText(text, x, y);
+    context.font = txt.size + "px sans-serif";
+    if (!txt.line) txt.line = "enter your text here";
+    context.fillText(txt.line, txt.x, txt.y);
 }
 
 function renderTxtContainer() {
@@ -291,7 +286,7 @@ function renderNewLine(txt, idx) {
             <button id="btn-right-${idx}" onclick="drawImageWithText(this, 'right')">right</button>
             <button onclick="increaseFont(${idx})">+</button>
             <button onclick="decreaseFont(${idx})">-</button>
-            <input type="color"></input>
+            <input type="color" id="input-color-${idx}" onchange="changeFontColor(${idx})"></input>
             <label for="txt-shadow">Text shadow</label>
             <input type="checkbox" name="txt-shadow"></input>
             <label for="txt-font">Font</label>
@@ -321,6 +316,12 @@ function decreaseFont(idx) {
     if (gMeme.txts[idx].size > MIN_VAL) {
         gMeme.txts[idx].size--;
     }
+    drawImageWithText(elInput);
+}
+
+function changeFontColor(idx){
+    var elInput = document.getElementById('input-color-' + idx);
+    gMeme.txts[idx].color = elInput.value;
     drawImageWithText(elInput);
 }
 
@@ -397,7 +398,6 @@ function renderTeamMemeber(team) {
 }
 
 function downloadCanvas(elBtn) {
-    // debugger;
     var dataURL = document.getElementById('meme-canvas').toDataURL();
     elBtn.href = dataURL;
 }

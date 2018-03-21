@@ -34,13 +34,13 @@ function createImgs() {
     imgs.push(createImg('img/img03.jpg', ['wheat', 'field', 'sky']));
 
     //TODO: fix data
-    imgs.push(createImg('img/img01.jpg', ['tree','green','mountain','field']));
-    imgs.push(createImg('img/img02.jpg', ['water','field','sunrise','sky']));
-    imgs.push(createImg('img/img03.jpg', ['wheat','field','sky']));
-    imgs.push(createImg('img/img01.jpg', ['tree','green','mountain','field']));
-    imgs.push(createImg('img/img02.jpg', ['water','field','sunrise','sky']));
-    imgs.push(createImg('img/img03.jpg', ['wheat','field','sky']));
-    imgs.push(createImg('img/img03.jpg', ['wheat','field','sky']));
+    imgs.push(createImg('img/img01.jpg', ['tree', 'green', 'mountain', 'field']));
+    imgs.push(createImg('img/img02.jpg', ['water', 'field', 'sunrise', 'sky']));
+    imgs.push(createImg('img/img03.jpg', ['wheat', 'field', 'sky']));
+    imgs.push(createImg('img/img01.jpg', ['tree', 'green', 'mountain', 'field']));
+    imgs.push(createImg('img/img02.jpg', ['water', 'field', 'sunrise', 'sky']));
+    imgs.push(createImg('img/img03.jpg', ['wheat', 'field', 'sky']));
+    imgs.push(createImg('img/img03.jpg', ['wheat', 'field', 'sky']));
 
     return imgs;
 }
@@ -77,7 +77,7 @@ function createKeywordsForImgs(imgs) {
 function renderImgs(imgs) {
     var strHtml = '';
 
-    var strHtmls = imgs.map(function(img, idx){
+    var strHtmls = imgs.map(function (img, idx) {
         strHtml = `<img  id="${img.id}" src="${img.url}" onclick="openMemeEditor(this)"/>`;
         return strHtml;
     });
@@ -86,7 +86,7 @@ function renderImgs(imgs) {
     elImgGrid.innerHTML = strHtmls.join('');
 }
 
-function searchImgInput(){
+function searchImgInput() {
     var searchValue = document.querySelector('.search input').value;
     searchImg(searchValue);
 }
@@ -99,15 +99,14 @@ function renderWords(imgs) {
 
     for (var key in wordCountMap) {
         var count = wordCountMap[key];
-        strHtmls += `<span style="font-size: ${MIN_SIZE * count}px">${key}</span>`;
+        strHtmls += `<span style="font-size: ${MIN_SIZE * count}px" onclick="searchImg('${key}')">${key}</span>`;
     }
 
     var wordsCloud = document.querySelector('.filter-cloud');
     wordsCloud.innerHTML = strHtmls;
 }
 
-function searchImg() {
-    var searchValue = document.querySelector(".search input").value;
+function searchImg(searchValue) {
     var filteredImgs = gImgs.filter(function (img) {
         return img.keywords.indexOf(searchValue) !== -1;
     });
@@ -115,24 +114,48 @@ function searchImg() {
     renderImgs(filteredImgs);
 }
 
-function addImg(){
+function addImg() {
     var elImgInput = document.querySelector('#imgFiles');
     var filename = elImgInput.value.replace(/^.*[\\\/]/, '');
-    gImgs.push(createImg('img/' + filename,[]));
+    gImgs.push(createImg('img/' + filename, []));
     renderImgs(gImgs);
     elImgInput.value = '';
 }
 
-function openMemeEditor(elImg){
+function openMemeEditor(elImg) {
     // var memeImg = gImgs.find(function(img){
     //     return img.id === parseInt(elImg.id);
     // });
     gMeme = updMeme(elImg);
 }
 
-function updMeme(elImg){
+function updMeme(elImg) {
     return {
         selectedImgId: parseInt(elImg.id),
         txts: []
-    }   
+    }
+}
+
+function removeAligns(elPicTxt) {
+    elPicTxt.classList.remove('align-text-right');
+    elPicTxt.classList.remove('align-text-left');
+    elPicTxt.classList.remove('align-text-center');
+}
+
+function alignLeft() {
+    var elPicTxt = document.getElementById('div1');
+    removeAligns(elPicTxt);
+    elPicTxt.classList.add('align-text-left');
+}
+
+function alignRight() {
+    var elPicTxt = document.getElementById('div1');
+    removeAligns(elPicTxt);
+    elPicTxt.classList.add('align-text-right');
+}
+
+function alignCenter() {
+    var elPicTxt = document.getElementById('div1');
+    removeAligns(elPicTxt);
+    elPicTxt.classList.add('align-text-center');
 }

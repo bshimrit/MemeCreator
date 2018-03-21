@@ -176,10 +176,10 @@ function alignCenter() {
 }
 
 
-function drawImage() {
-    var canvas = document.getElementById('meme-canvas');    
+function drawImage(elInput) {
+    var canvas = document.getElementById('meme-canvas');
     var context = canvas.getContext('2d');
-    var memeImg = gImgs.find(function(img){
+    var memeImg = gImgs.find(function (img) {
         return img.id === gMeme.selectedImgId;
     });
     var img = new Image();
@@ -187,17 +187,46 @@ function drawImage() {
 
     img.onload = function () {
         context.drawImage(img, 0, 0, 400, 360);
+  
+        if(elInput){
+        var idxStr = elInput.id;
+        var id = +idxStr.substring((0, idxStr.lastIndexOf('-') + 1));
+        
+        gMeme.txts[id].line = elInput.value;
+        var text = gMeme.txts[id].line;
+        var x = gMeme.txts[id].x;
+        var y = gMeme.txts[id].y;
+        drawText(text, context, x, y);
+        }
     };
+    context.save();
 }
 
-function toggleWin()
-{
+// Gets a string such as: '2,7' and returns {i:2, j:7}
+// function getCellCoord(strCellId) {
+//     var coord = {};
+//     coord.i = +strCellId.substring(0, strCellId.lastIndexOf(','));
+//     coord.j = +strCellId.substring(strCellId.lastIndexOf(',') + 1);
+//     // console.log('coord', coord);
+//     return coord;
+// }
+
+function toggleWin() {
     var elOpen = document.querySelector('.open');
     var elClose = document.querySelector('.close');
     elOpen.classList.toggle('open');
     elOpen.classList.toggle('close');
     elClose.classList.toggle('open');
     elClose.classList.toggle('close');
+}
+
+function drawText(text, context, x, y) {
+    context.fillStyle = "#000";
+    context.lineStyle = "#ffff00";
+    context.font = "18px sans-serif";
+    if (!text) text = "enter your text here";
+    context.fillText(text, x, y);
+    // context.fillText(text, 20, 40);
 }
 
 function renderTxtContainer(){

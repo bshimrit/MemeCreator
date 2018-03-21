@@ -3,13 +3,7 @@
 
 var gNextId;
 var gImgs;
-
-var gMeme = {
-    selectedImgId: 0,
-    txts: [newLineObject(20, 40),
-    newLineObject(20, 80)]
-};
-
+var gMeme;
 var gteams = [
     {
         id: 1,
@@ -48,18 +42,14 @@ function init() {
     renderWords(gImgs);
     renderTxtContainer();
     renderTeam();
-    
+
 }
 
 function creategMeme() {
-    // var elCanvas = document.getElementById('meme-canvas');
-    // var height = elCanvas.height;
-    var height = getCanvasHeight();
-
     return {
         selectedImgId: 0,
-        txts: [newLineObject(20, 40),
-        newLineObject(20, height - 70)]
+        txts: [createNewLineObject(20, 40),
+        createNewLineObject(20, 270)]
     }
 }
 
@@ -174,7 +164,7 @@ function addImg() {
 
 function openMemeEditor(elImg) {
     updMeme(elImg);
-    drawImageWithText();
+    renderMeme(gMeme);
     toggleWin();
 }
 
@@ -182,14 +172,9 @@ function updMeme(elImg) {
     gMeme.selectedImgId = parseInt(elImg.id);
 }
 
-function removeAligns(elPicTxt) {
-    elPicTxt.classList.remove('align-text-right');
-    elPicTxt.classList.remove('align-text-left');
-    elPicTxt.classList.remove('align-text-center');
-}
 
 
-function drawImageWithText(el, direction) {
+function renderMeme(meme) {
     var canvas = document.getElementById('meme-canvas');
     var context = canvas.getContext('2d');
     var memeImg = gImgs.find(function (img) {
@@ -199,35 +184,27 @@ function drawImageWithText(el, direction) {
     img.src = memeImg.url;
 
     img.onload = function () {
-        canvas.height = img.height ;
-        canvas.width = img.width ;
-        context.drawImage(img, 0, 0, canvas.width, canvas.height);
-        if (el) {
-            var idxStr = el.id;
-            var width = getCanvasWidth();
-            var idx = getIdxFromStr(idxStr);
-            var elInput = document.getElementById('txt-input-' + idx);
-            gMeme.txts[idx].line = elInput.value;
-
-            var width = getCanvasWidth();
-
-            //TODO: fix align according to direction
-            alignText(idx, direction, width);
-            drawTextForTxts(gMeme, context);
-        };
-
+        canvas.width = img.width;
+        canvas.height = img.height;
+        context.drawImage(img, 0, 0, img.width, img.height);
+        drawTextForTxts(gMeme, context);
     }
 }
+function changeMemeText(elInput) {
+    var idxStr = elInput.id;
+    var width = getCanvasWidth();
+    var idx = getIdxFromStr(idxStr);
+    gMeme.txts[idx].line = elInput.value;
 
-//renderMeme(){
-//     gMeme
-// }
+    renderMeme(gMeme);
+}
 
+function alignText(idx, direction) {
+    var width = getCanvasWidth();
 
-function alignText(idx, direction, width){
-    switch (direction){
+    switch (direction) {
         case 'right':
-            gMeme.txts[idx].x = width - 20;
+            gMeme.txts[idx].x = width - 50;
             gMeme.txts[idx].align = 'end';
             break;
         case 'center':
@@ -237,10 +214,10 @@ function alignText(idx, direction, width){
         default:
             gMeme.txts[idx].x = 20;
             gMeme.txts[idx].align = 'start';
-            
     }
-}
 
+    renderMeme(gMeme);
+}
 
 function getIdxFromStr(idxStr) {
     var idx = +idxStr.substring((0, idxStr.lastIndexOf('-') + 1));
@@ -258,16 +235,16 @@ function toggleWin() {
 
 function drawTextForTxts(gMeme, context) {
     gMeme.txts.forEach(function (txt) {
-        drawTextForTxt(txt, context);
+        drawTextForTxt(context, txt);
     })
 }
 
-function drawTextForTxt(txt, context) {
-    context.fillStyle = "#000";
+function drawTextForTxt(context, txt) {
+    context.fillStyle = txt.color;
     context.lineStyle = "#ffff00";
     context.font = txt.size + "px sans-serif";
-    context.textAlign = txt.align; 
-    if (!txt.line) txt.line = "enter your text here";
+    context.shadowColor = txt.shadowColor;
+    if (!txt.line) txt.line = "Your text will appear here";
     context.fillText(txt.line, txt.x, txt.y);
 }
 
@@ -287,50 +264,99 @@ function renderNewLine(txt, idx) {
 
     return `
     <div class="meme-txt-wrapper">  
-        <input class="meme-line-txt" id="txt-input-${idx}" placeholder="${txt}" onkeydown="drawImageWithText(this)"></input>
+        <input class="meme-line-txt" id="txt-input-${idx}" placeholder="${txt}" oninput="changeMemeText(this)"></input>
         <div clas="txt-ctrl flex justify-center" id=txt-${idx}>
-            <button id="btn-left-${idx}" onclick="drawImageWithText(this, 'left')">left</button>
-            <button id="btn-center-${idx}" onclick="drawImageWithText(this, 'center')">center</button>
-            <button id="btn-right-${idx}" onclick="drawImageWithText(this, 'right')">right</button>
+            <button id="btn-left-${idx}" onclick="alignText(${idx}, 'left')">left</button>
+            <button id="btn-center-${idx}" onclick="alignText(${idx}, 'center')">center</button>
+            <button id="btn-right-${idx}" onclick="alignText(${idx}, 'right')">right</button>
             <button onclick="increaseFont(${idx})">+</button>
             <button onclick="decreaseFont(${idx})">-</button>
-            <input type="color"></input>
-            <label for="txt-shadow">Text shadow</label>
-            <input type="checkbox" name="txt-shadow"></input>
+            <input type="color" id="input-color-${idx}" onchange="changeFontColor(this, ${idx})">color</input>
+            <label for="txt-shadow-color">Text shadow color</label>
+            <input type="color" name="txt-shadow-color" onchange="changeShadow(this,${idx})"></input>
+            <label for="txt-shadow-blur">Text shadow blur</label>
+            <input type="checkbox" name="txt-shadow-blur" onclick="switchBlur()"></input>
             <label for="txt-font">Font</label>
-            <input type="text" name="txt-font"></input>
-            <button>up</button>
-            <button>down</button>
+            <datalist id="fontList" onchange="changeFont(this, ${idx})">
+            <option value="sans-serif" label="sans-serif" />
+            <option value="Arial" label="Arial" />       
+            </datalist>
+            <form>
+            <input type="text" id="font" name="font" list="fontList" />
+            </form>
+            <button onclick="moveUp(${idx})">up</button>
+            <button onclick="moveDown(${idx})">down</button>
             <button id=btn-${idx} onclick="deleteLine(this)">Delete</button>
         </div>
     </div>
     `;
 }
 
+
+function getElInput(idx){
+    return document.getElementById('txt-input-' + idx);
+}
+
+//TODO: fix
+function changeFont(elFont, idx) {
+    var elInput = getElInput(idx);
+    gMeme.txts[idx].font = elFont.value;
+    renderMeme(gMeme);
+}
+
+function changeShadow(elColor, idx) {
+    gMeme.txts[idx].shadowColor = elColor.value;
+    renderMeme(gMeme);
+}
+
+function switchBlur() {
+
+}
+
+function moveUp(idx) {
+    var elInput = getElInput(idx);
+    if (gMeme.txts[idx].y > gMeme.txts[idx].size) gMeme.txts[idx].y--;
+    renderMeme(gMeme);
+}
+
+function moveDown(idx) {
+    var elInput = getElInput(idx);
+    var height = getCanvasHeight();
+    var max = (height - gMeme.txts[idx].size);
+    if (gMeme.txts[idx].y < (height - 5)) {
+        gMeme.txts[idx].y++;
+        renderMeme(gMeme);
+    }
+}
+
 function increaseFont(idx) {
-    var elInput = document.getElementById('txt-input-' + idx);
+    var elInput = getElInput(idx);
     var MAX_VAL = 50;
 
     if (gMeme.txts[idx].size < MAX_VAL) {
         gMeme.txts[idx].size++;
-        drawImageWithText(elInput);
+        renderMeme(gMeme);
     }
 }
 
 function decreaseFont(idx) {
-    var elInput = document.getElementById('txt-input-' + idx);
+    var elInput = getElInput(idx);
     var MIN_VAL = 18;
 
     if (gMeme.txts[idx].size > MIN_VAL) {
         gMeme.txts[idx].size--;
+        renderMeme(gMeme);
     }
-    drawImageWithText(elInput);
+}
+
+function changeFontColor(elFontColor, idx) {
+    gMeme.txts[idx].color = elFontColor.value;
+    renderMeme(gMeme);
 }
 
 function addNewLine() {
-    gMeme.txts.push(newLineObject(0, 0));
+    gMeme.txts.push(createNewLineObject(0, 0));
     var idx = gMeme.txts.length - 1;
-
     var elEditTxtCon = document.querySelector('.edit-txt-container');
     elEditTxtCon.innerHTML += renderNewLine(gMeme.txts[idx].line, idx);
 }
@@ -341,13 +367,15 @@ function deleteLine(elBtn) {
     renderTxtContainer();
 }
 
-function newLineObject(x, y) {
+function createNewLineObject(x, y) {
     return {
-        line: 'Enter your text here',
+        line: 'Your text will appear here',
         size: 20,
+        font: 'sans-serif',
         align: 'center',
         color: '#fff',
-        shadow: false,
+        shadowColor: '#fff',
+        blur: false,
         x: x,
         y: y
     }

@@ -120,7 +120,8 @@ function renderImgs(imgs) {
         strHtml = `<img  id="${img.id}" src="${img.url}" onclick="openMemeEditor(this)"/>`;
         return strHtml;
     });
-
+    // strHtmls.push(`<img src="img/addimg.png" onclick="addImg()"/>`);
+    
     var elImgGrid = document.querySelector('.img-grid');
     elImgGrid.innerHTML = strHtmls.join('');
 }
@@ -156,7 +157,7 @@ function searchImg(searchValue) {
 function addImg() {
     var elImgInput = document.querySelector('#imgFiles');
     var filename = elImgInput.value.replace(/^.*[\\\/]/, '');
-    gImgs.push(createImg('img/' + filename, []));
+    gImgs.push(createImg('img/meme/' + filename, []));
     renderImgs(gImgs);
     elImgInput.value = '';
 }
@@ -394,7 +395,7 @@ function renderTeam() {
 function renderTeamMemeber(team) {
     return `
         <div class="about-img">
-        <img class="shape" src=${team.url} />
+        <img src=${team.url} />
         </div>
         <div class="about-info flex flex-column align-start" id="about">
             <h1>${team.name}</h1>

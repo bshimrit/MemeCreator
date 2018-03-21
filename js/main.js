@@ -10,9 +10,19 @@ var gMeme = {
         newLineObject(20,80)]
 };
 
-// var gteams = { id: 1, url:}
+var gteams = [
+    { id: 1,
+      url:'img/team/1.jpg',
+      name:'Ilana', 
+      title:'developer',
+      description: 'I do everything!'},
+    { id: 1,
+    url:'img/team/2.jpg',
+    name:'Ilana', 
+    title:'developer',
+    description: 'I do everything!'}
 
-// }
+];
 
 function init() {
     gNextId = 0;
@@ -25,18 +35,18 @@ function init() {
 function createImgs() {
     var imgs = [];
 
-    imgs.push(createImg('img/img01.jpg', ['tree', 'green', 'mountain', 'field']));
-    imgs.push(createImg('img/img02.jpg', ['water', 'field', 'sunrise', 'sky']));
-    imgs.push(createImg('img/img03.jpg', ['wheat', 'field', 'sky']));
+    imgs.push(createImg('img/meme/img01.jpg', ['tree', 'green', 'mountain', 'field']));
+    imgs.push(createImg('img/meme/img02.jpg', ['water', 'field', 'sunrise', 'sky']));
+    imgs.push(createImg('img/meme/img03.jpg', ['wheat', 'field', 'sky']));
 
     //TODO: fix data
-    imgs.push(createImg('img/img01.jpg', ['tree','green','mountain','field']));
-    imgs.push(createImg('img/img02.jpg', ['water','field','sunrise','sky']));
-    imgs.push(createImg('img/img03.jpg', ['wheat','field','sky']));
-    imgs.push(createImg('img/img01.jpg', ['tree','green','mountain','field']));
-    imgs.push(createImg('img/img02.jpg', ['water','field','sunrise','sky']));
-    imgs.push(createImg('img/img03.jpg', ['wheat','field','sky']));
-    imgs.push(createImg('img/img03.jpg', ['wheat','field','sky']));
+    imgs.push(createImg('img/meme/img01.jpg', ['tree','green','mountain','field']));
+    imgs.push(createImg('img/meme/img02.jpg', ['water','field','sunrise','sky']));
+    imgs.push(createImg('img/meme/img03.jpg', ['wheat','field','sky']));
+    imgs.push(createImg('img/meme/img01.jpg', ['tree','green','mountain','field']));
+    imgs.push(createImg('img/meme/img02.jpg', ['water','field','sunrise','sky']));
+    imgs.push(createImg('img/meme/img03.jpg', ['wheat','field','sky']));
+    imgs.push(createImg('img/meme/img03.jpg', ['wheat','field','sky']));
 
     return imgs;
 }

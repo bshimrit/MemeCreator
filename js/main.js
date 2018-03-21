@@ -273,6 +273,7 @@ function renderTxtContainer() {
 
 function renderNewLine(txt, idx) {
     var width = getCanvasWidth();
+    var options = renderOptions();
 
     return `
     <div class="meme-txt-wrapper">  
@@ -291,12 +292,7 @@ function renderNewLine(txt, idx) {
             <label for="txt-font">Font</label>
             <form>
             <select id = "font" onchange = "changeFont(this,${idx})">
-             <option value = "impactRegular">Impact</option>
-             <option value = "rc">Rc</option>
-             <option value = "erinValerie">Erin-Valerie</option>
-             <option value = "rocky">Rocky</option>
-             <option value = "smoke">Smoke</option>
-             <option value = "vavont">Vavont</option>
+             ${options}
             </select>
              </form>
             <button onclick="moveUp(${idx})">up</button>
@@ -305,6 +301,17 @@ function renderNewLine(txt, idx) {
         </div>
     </div>
     `;
+}
+
+function renderOptions() {
+    var fonts = ["impactRegular", "rc", "erinValerie", "rocky", "smoke", "vavont"];
+
+    var strHtmls = '';
+    var options = fonts.map(function (font) {
+        strHtmls += `<option value = ${font}>${font}</option>`;
+    });
+
+    return strHtmls;
 }
 
 function getElInput(idx) {

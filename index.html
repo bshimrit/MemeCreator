@@ -19,7 +19,14 @@
                     <a href="#about">About</a>
                 </li>
                 <li>
-                    <img src="" />
+                    <ul class="logo">
+                        <li>
+                            <img class="back-img" src="img/pointy-thingy.png"/>
+                        </li>
+                        <li>
+                            <img class="front-img" src="img/logo.png"/>
+                        </li>
+                    </ul>
                 </li>
                 <li>
                     <a href="#">Blog</a>
@@ -34,9 +41,10 @@
         <div class="img-container">
             <section class="container flex space-between align-start open">
                 <div>
-                    <label for="imgFiles"></label>
-                    <input type="file" id="imgFiles" name="imgFiles" />
-                    <button onclick="addImg()">Add</button>
+                    <div class="add-img">
+                        <button class="fa clear-btn" onclick="document.getElementById('imgFiles').click();"></button>
+                        <input type="file" id="imgFiles" onchange="addImg()"/>
+                    </div>
                     <div class="img-grid">
                     </div>
                 </div>
@@ -52,7 +60,7 @@
             </section>
             <section class="container meme-container flex space-between close">
                 <div class="meme-img">
-                    <canvas id="meme-canvas" width="500" height="400">
+                    <canvas id="meme-canvas">
                     </canvas>
                 </div>
                 <div class="meme-controls flex flex-column justify-start"> 

@@ -130,7 +130,8 @@ function renderImgs(imgs) {
         strHtml = `<img  id="${img.id}" src="${img.url}" onclick="openMemeEditor(this)"/>`;
         return strHtml;
     });
-
+    // strHtmls.push(`<img src="img/addimg.png" onclick="addImg()"/>`);
+    
     var elImgGrid = document.querySelector('.img-grid');
     elImgGrid.innerHTML = strHtmls.join('');
 }
@@ -166,7 +167,7 @@ function searchImg(searchValue) {
 function addImg() {
     var elImgInput = document.querySelector('#imgFiles');
     var filename = elImgInput.value.replace(/^.*[\\\/]/, '');
-    gImgs.push(createImg('img/' + filename, []));
+    gImgs.push(createImg('img/meme/' + filename, []));
     renderImgs(gImgs);
     elImgInput.value = '';
 }
@@ -198,8 +199,9 @@ function drawImageWithText(el, direction) {
     img.src = memeImg.url;
 
     img.onload = function () {
-        context.drawImage(img, 0, 0, 400, 360);
-        //debugger;
+        canvas.height = img.height ;
+        canvas.width = img.width ;
+        context.drawImage(img, 0, 0, canvas.width, canvas.height);
         if (el) {
             var idxStr = el.id;
             var width = getCanvasWidth();
@@ -210,30 +212,34 @@ function drawImageWithText(el, direction) {
             var width = getCanvasWidth();
 
             //TODO: fix align according to direction
-            if (direction) {
-                switch (direction) {
-                    case 'left':
-                        context.textAlign = 'left';
-                        break;
-
-                    case 'center':
-                        context.textAlign = 'center';
-                        break;
-
-                    case 'right':
-                        context.textAlign = 'right';
-                        break;
-                }
-
-                gMeme.txts[idx].x = width / 2;
-            }
-
+            alignText(idx, direction, width);
             drawTextForTxts(gMeme, context);
         };
 
     }
 }
 
+//renderMeme(){
+//     gMeme
+// }
+
+
+function alignText(idx, direction, width){
+    switch (direction){
+        case 'right':
+            gMeme.txts[idx].x = width - 20;
+            gMeme.txts[idx].align = 'end';
+            break;
+        case 'center':
+            gMeme.txts[idx].x = width / 2
+            gMeme.txts[idx].align = 'center';
+            break;
+        default:
+            gMeme.txts[idx].x = 20;
+            gMeme.txts[idx].align = 'start';
+            
+    }
+}
 
 
 function getIdxFromStr(idxStr) {
@@ -252,20 +258,17 @@ function toggleWin() {
 
 function drawTextForTxts(gMeme, context) {
     gMeme.txts.forEach(function (txt) {
-        var text = txt.line;
-        var x = txt.x;
-        var y = txt.y;
-        var size = txt.size;
-        drawTextForTxt(text, context, x, y, size);
+        drawTextForTxt(txt, context);
     })
 }
 
-function drawTextForTxt(text, context, x, y, size) {
+function drawTextForTxt(txt, context) {
     context.fillStyle = "#000";
     context.lineStyle = "#ffff00";
-    context.font = size + "px sans-serif";
-    if (!text) text = "enter your text here";
-    context.fillText(text, x, y);
+    context.font = txt.size + "px sans-serif";
+    context.textAlign = txt.align; 
+    if (!txt.line) txt.line = "enter your text here";
+    context.fillText(txt.line, txt.x, txt.y);
 }
 
 function renderTxtContainer() {
@@ -364,7 +367,7 @@ function renderTeam() {
 function renderTeamMemeber(team) {
     return `
         <div class="about-img">
-        <img class="shape" src=${team.url} />
+        <img src=${team.url} />
         </div>
         <div class="about-info flex flex-column align-start" id="about">
             <h1>${team.name}</h1>

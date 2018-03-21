@@ -6,33 +6,37 @@ var gImgs;
 
 var gMeme = {
     selectedImgId: 0,
-    txts: [newLineObject(20,40),
-        newLineObject(20,80)]
+    txts: [newLineObject(20, 40),
+    newLineObject(20, 80)]
 };
 
 var gteams = [
-    { id: 1,
-      url:'img/team/1.jpg',
-      name:'Ilana', 
-      title:'developer',
-      description: 'I do everything!',
-      facebook:'',
-      twitter:'',
-      google:'',
-      pintrest:'',
-      linkedin:'',
-      dribbble:''},
-    { id: 1,
-    url:'img/team/2.jpg',
-    name:'Shimrit', 
-    title:'developer',
-    description: 'I do everything!',
-    facebook:'',
-    twitter:'',
-    google:'',
-    pintrest:'',
-    linkedin:'',
-    dribbble:''}
+    {
+        id: 1,
+        url: 'img/team/1.jpg',
+        name: 'Ilana',
+        title: 'developer',
+        description: 'I do everything!',
+        facebook: '',
+        twitter: '',
+        google: '',
+        pintrest: '',
+        linkedin: '',
+        dribbble: ''
+    },
+    {
+        id: 1,
+        url: 'img/team/2.jpg',
+        name: 'Shimrit',
+        title: 'developer',
+        description: 'I do everything!',
+        facebook: '',
+        twitter: '',
+        google: '',
+        pintrest: '',
+        linkedin: '',
+        dribbble: ''
+    }
 
 ];
 
@@ -194,7 +198,7 @@ function drawImageWithText(el, direction) {
 
     img.onload = function () {
         context.drawImage(img, 0, 0, 400, 360);
-
+        //debugger;
         if (el) {
             var idxStr = el.id;
             var width = getCanvasWidth();
@@ -223,16 +227,13 @@ function drawImageWithText(el, direction) {
                 gMeme.txts[idx].x = width / 2;
             }
 
-         
-            gMeme.txts.forEach(function (txt) {
-                var text = txt.line;
-                var x = txt.x;
-                var y = txt.y;
-                drawText(text, context, x, y);
-            })
-        }
-    };
+            drawTextForTxts(gMeme, context);
+        };
+
+    }
 }
+
+
 
 function getIdxFromStr(idxStr) {
     var idx = +idxStr.substring((0, idxStr.lastIndexOf('-') + 1));
@@ -248,15 +249,25 @@ function toggleWin() {
     elClose.classList.toggle('close');
 }
 
-function drawText(text, context, x, y) {
+function drawTextForTxts(gMeme, context) {
+    gMeme.txts.forEach(function (txt) {
+        var text = txt.line;
+        var x = txt.x;
+        var y = txt.y;
+        var size = txt.size;
+        drawTextForTxt(text, context, x, y, size);
+    })
+}
+
+function drawTextForTxt(text, context, x, y, size) {
     context.fillStyle = "#000";
     context.lineStyle = "#ffff00";
-    context.font = "18px sans-serif";
+    context.font = size + "px sans-serif";
     if (!text) text = "enter your text here";
     context.fillText(text, x, y);
 }
 
-function renderTxtContainer(){
+function renderTxtContainer() {
     var strHtml = '';
     var strHtmls = gMeme.txts.map(function (txt, idx) {
         strHtml = renderNewLine(txt.line, idx);
@@ -277,8 +288,8 @@ function renderNewLine(txt, idx) {
             <button id="btn-left-${idx}" onclick="drawImageWithText(this, 'left')">left</button>
             <button id="btn-center-${idx}" onclick="drawImageWithText(this, 'center')">center</button>
             <button id="btn-right-${idx}" onclick="drawImageWithText(this, 'right')">right</button>
-            <button>+</button>
-            <button>-</button>
+            <button onclick="increaseFont(${idx})">+</button>
+            <button onclick="decreaseFont(${idx})">-</button>
             <input type="color"></input>
             <label for="txt-shadow">Text shadow</label>
             <input type="checkbox" name="txt-shadow"></input>
@@ -290,6 +301,26 @@ function renderNewLine(txt, idx) {
         </div>
     </div>
     `;
+}
+
+function increaseFont(idx) {
+    var elInput = document.getElementById('txt-input-' + idx);
+    var MAX_VAL = 50;
+
+    if (gMeme.txts[idx].size < MAX_VAL) {
+        gMeme.txts[idx].size++;
+        drawImageWithText(elInput);
+    }
+}
+
+function decreaseFont(idx) {
+    var elInput = document.getElementById('txt-input-' + idx);
+    var MIN_VAL = 18;
+
+    if (gMeme.txts[idx].size > MIN_VAL) {
+        gMeme.txts[idx].size--;
+    }
+    drawImageWithText(elInput);
 }
 
 function addNewLine() {
@@ -318,10 +349,10 @@ function newLineObject(x, y) {
     }
 }
 
-function renderTeam(){
+function renderTeam() {
     var strHtml = '';
-    var strHtmls = gteams.map(function(team, idx){
-        strHtml = renderTeamMemeber(team,idx);
+    var strHtmls = gteams.map(function (team, idx) {
+        strHtml = renderTeamMemeber(team, idx);
         return strHtml;
     });
 
@@ -329,7 +360,7 @@ function renderTeam(){
     elAbout.innerHTML = strHtmls.join('');
 }
 
-function renderTeamMemeber(team){
+function renderTeamMemeber(team) {
     return `
         <div class="about-img">
         <img class="shape" src=${team.url} />

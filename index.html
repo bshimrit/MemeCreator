@@ -51,32 +51,13 @@
                 <canvas id="meme-canvas" width="500" height="400">
                 </canvas>
                 <div class="meme-lines flex flex-column space-between align-center">
-                    <div> Enter your text</div>
-                    <div> Enter your text</div>
                 </div>
             </div>
             <div class="meme-controls flex flex-column justify-start"> 
                 <button onclick="toggleWin()">choose another image</button>
-                <div>
-                    <input class="meme-line-txt" placeholder="Enter your text here"></input>
-                    <div clas="txt-ctrl flex justify-center">
-                        <button>left</button>
-                        <button>center</button>
-                        <button>right</button>
-                        <button>+</button>
-                        <button>-</button>
-                        <input type="color"></input>
-                        <label for="txt-shadow">Text shadow</label>
-                        <input type="checkbox" name="txt-shadow"></input>
-                        <label for="txt-font">Font</label>
-                        <input type="text" name="txt-font"></input>
-                        <button>up</button>
-                        <button>down</button>
-                        <button>Add</button>
-                        <button>Delete</button>
-                    </div>
+                <div class="edit-txt-container">
                 </div>
-                <!-- <input placeholder="Enter lower text here"></input><button>delete</button> -->
+                <button onClick="addNewLine()">Add line</button>
             </div>
         </section>
         <section>

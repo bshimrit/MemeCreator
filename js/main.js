@@ -6,13 +6,8 @@ var gImgs;
 
 var gMeme = {
     selectedImgId: 0,
-    txts: [{
-        line: 'Your text will appear here',
-        size: 20,
-        align: 'left',
-        color: 'red'
-    }
-    ]
+    txts: [newLineObject(20,40),
+        newLineObject(20,80)]
 };
 
 // var gteams = { id: 1, url:}
@@ -24,6 +19,7 @@ function init() {
     gImgs = createImgs();
     renderImgs(gImgs);
     renderWords(gImgs);
+    renderTxtContainer();
 }
 
 function createImgs() {
@@ -123,16 +119,13 @@ function addImg(){
 }
 
 function openMemeEditor(elImg){
-    gMeme = updMeme(elImg);
+    updMeme(elImg);
     drawImage();
     toggleWin();
 }
 
 function updMeme(elImg){
-    return {
-        selectedImgId: parseInt(elImg.id),
-        txts: []
-    }   
+    gMeme.selectedImgId = parseInt(elImg.id);
 }
 
 
@@ -158,4 +151,64 @@ function toggleWin()
     elOpen.classList.toggle('close');
     elClose.classList.toggle('open');
     elClose.classList.toggle('close');
+}
+
+function renderTxtContainer(){
+    var strHtml = '';
+    var strHtmls = gMeme.txts.map(function(txt, idx){
+        strHtml = renderNewLine(txt.line,idx);
+        return strHtml;
+    });
+
+    var elEditTxtCon = document.querySelector('.edit-txt-container');
+    elEditTxtCon.innerHTML = strHtmls.join('');
+}
+
+function renderNewLine(txt,idx){
+    return `
+    <div class="meme-txt-wrapper">  
+        <input class="meme-line-txt" id="txt-input-${idx} placeholder="${txt}"></input>
+        <div clas="txt-ctrl flex justify-center" id=txt-${idx}>
+            <button>left</button>
+            <button>center</button>
+            <button>right</button>
+            <button>+</button>
+            <button>-</button>
+            <input type="color"></input>
+            <label for="txt-shadow">Text shadow</label>
+            <input type="checkbox" name="txt-shadow"></input>
+            <label for="txt-font">Font</label>
+            <input type="text" name="txt-font"></input>
+            <button>up</button>
+            <button>down</button>
+            <button id=btn-${idx} onclick="deleteLine(this)">Delete</button>
+        </div>
+    </div>
+    `;
+}
+
+function addNewLine(){
+    gMeme.txts.push(newLineObject(0,0));
+    var idx = gMeme.txts.length - 1;
+    
+    var elEditTxtCon = document.querySelector('.edit-txt-container');
+    elEditTxtCon.innerHTML += renderNewLine(gMeme.txts[idx].line,idx);
+}
+
+function deleteLine(elBtn){
+    var idx = elBtn.id.split('-')[1];
+    gMeme.txts.splice(idx,1);
+    renderTxtContainer();
+}
+
+function newLineObject(x,y){
+    return {
+        line: 'Enter your text here',
+        size: 20,
+        align: 'center',
+        color: '#fff',
+        shadow: false,
+        x: x,
+        y: y
+    }
 }

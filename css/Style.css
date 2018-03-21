@@ -213,3 +213,7 @@ header {
 .meme-line-txt {
     width: 50%;
 }
+
+.meme-txt-wrapper {
+    margin-top: 20px;
+}

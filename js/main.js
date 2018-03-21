@@ -291,11 +291,12 @@ function renderNewLine(txt, idx) {
             <label for="txt-font">Font</label>
             <form>
             <select id = "font" onchange = "changeFont(this,${idx})">
-             <option value = "Arial">Arial</option>
-             <option value = "David">David</option>
              <option value = "impactRegular">Impact</option>
-             <option value = "impacted">Impacted</option>
-             <option value = "impactUnicode">Impact Unicode</option>
+             <option value = "rc">Rc</option>
+             <option value = "erinValerie">Erin-Valerie</option>
+             <option value = "rocky">Rocky</option>
+             <option value = "smoke">Smoke</option>
+             <option value = "vavont">Vavont</option>
             </select>
              </form>
             <button onclick="moveUp(${idx})">up</button>

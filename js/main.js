@@ -245,7 +245,8 @@ function drawTextForTxts(gMeme, context) {
 function drawTextForTxt(context, txt) {
     context.fillStyle = txt.color;
     context.lineStyle = "#ffff00";
-    context.font = txt.size + "px sans-serif";
+    // context.font = txt.size + "px sans-serif";
+    context.font = txt.size + "px" + " " + txt.font;    
     context.shadowColor = txt.shadowColor;
     context.shadowBlur = txt.blur;
     if (!txt.line) txt.line = "Your text will appear here";
@@ -279,13 +280,12 @@ function renderNewLine(txt, idx) {
             <label for="txt-shadow-color">Text shadow</label>
             <input type="checkbox" name="txt-shadow" onchange="switchShadow(this,${idx})"></input>
             <label for="txt-font">Font</label>
-            <datalist id="fontList" onchange="changeFont(this, ${idx})">
-            <option value="sans-serif" label="sans-serif" />
-            <option value="Arial" label="Arial" />       
-            </datalist>
             <form>
-            <input type="text" id="font" name="font" list="fontList" />
-            </form>
+            <select id = "font" onchange = "changeFont(this,${idx})">
+             <option value = "Arial">Arial</option>
+             <option value = "David">David</option>
+            </select>
+             </form>
             <button onclick="moveUp(${idx})">up</button>
             <button onclick="moveDown(${idx})">down</button>
             <button id=btn-${idx} onclick="deleteLine(this)">Delete</button>
@@ -294,13 +294,13 @@ function renderNewLine(txt, idx) {
     `;
 }
 
-{/* <datalist id="fontList" onchange="changeFont(this, ${idx})">
+/* <datalist id="fontList" onchange="changeFont(this, ${idx})">
 <option value="sans-serif" label="sans-serif" />
 <option value="Arial" label="Arial" />       
 </datalist>
 <form>
 <input type="text" id="font" name="font" list="fontList" />
-</form> */}
+</form> */
 
 
 function getElInput(idx) {
@@ -309,14 +309,14 @@ function getElInput(idx) {
 
 //TODO: fix
 function changeFont(elFont, idx) {
-    var elInput = getElInput(idx);
     gMeme.txts[idx].font = elFont.value;
+    debugger;
     renderMeme(gMeme);
 }
 
 
 function switchShadow(elShadow, idx) {
-    debugger;
+    //debugger;
     if (elShadow.checked) {
         gMeme.txts[idx].blur = BLUR;
         gMeme.txts[idx].shadowColor = SHADOW_COLOR;

@@ -189,78 +189,79 @@ function renderMeme(meme) {
         drawTextForTxts(gMeme, context);
     }
 }
-    function changeMemeText(elInput) {
-        var idxStr = elInput.id;
-        var width = getCanvasWidth();
-        var idx = getIdxFromStr(idxStr);
-        gMeme.txts[idx].line = elInput.value;
+function changeMemeText(elInput) {
+    var idxStr = elInput.id;
+    var width = getCanvasWidth();
+    var idx = getIdxFromStr(idxStr);
+    gMeme.txts[idx].line = elInput.value;
 
-        renderMeme(gMeme);
+    renderMeme(gMeme);
+}
+
+function alignText(idx, direction) {
+    var width = getCanvasWidth();
+
+    switch (direction) {
+        case 'right':
+            gMeme.txts[idx].x = width - 50;
+            gMeme.txts[idx].align = 'end';
+            break;
+        case 'center':
+            gMeme.txts[idx].x = width / 2
+            gMeme.txts[idx].align = 'center';
+            break;
+        default:
+            gMeme.txts[idx].x = 20;
+            gMeme.txts[idx].align = 'start';
     }
 
-    function alignText(idx, direction) {
-        var width = getCanvasWidth();
+    renderMeme(gMeme);
+}
 
-        switch (direction) {
-            case 'right':
-                gMeme.txts[idx].x = width - 50;
-                gMeme.txts[idx].align = 'end';
-                break;
-            case 'center':
-                gMeme.txts[idx].x = width / 2
-                gMeme.txts[idx].align = 'center';
-                break;
-            default:
-                gMeme.txts[idx].x = 20;
-                gMeme.txts[idx].align = 'start';
-        }
+function getIdxFromStr(idxStr) {
+    var idx = +idxStr.substring((0, idxStr.lastIndexOf('-') + 1));
+    return idx;
+}
 
-        renderMeme(gMeme);
-    }
+function toggleWin() {
+    var elOpen = document.querySelector('.open');
+    var elClose = document.querySelector('.close');
+    elOpen.classList.toggle('open');
+    elOpen.classList.toggle('close');
+    elClose.classList.toggle('open');
+    elClose.classList.toggle('close');
+}
 
-    function getIdxFromStr(idxStr) {
-        var idx = +idxStr.substring((0, idxStr.lastIndexOf('-') + 1));
-        return idx;
-    }
+function drawTextForTxts(gMeme, context) {
+    gMeme.txts.forEach(function (txt) {
+        drawTextForTxt(context, txt);
+    })
+}
 
-    function toggleWin() {
-        var elOpen = document.querySelector('.open');
-        var elClose = document.querySelector('.close');
-        elOpen.classList.toggle('open');
-        elOpen.classList.toggle('close');
-        elClose.classList.toggle('open');
-        elClose.classList.toggle('close');
-    }
+function drawTextForTxt(context, txt) {
+    context.fillStyle = txt.color;
+    context.lineStyle = "#ffff00";
+    context.font = txt.size + "px sans-serif";
+    context.shadowColor = txt.shadowColor;
+    if (!txt.line) txt.line = "Your text will appear here";
+    context.fillText(txt.line, txt.x, txt.y);
+}
 
-    function drawTextForTxts(gMeme, context) {
-        gMeme.txts.forEach(function (txt) {
-            drawTextForTxt(context, txt);
-        })
-    }
+function renderTxtContainer() {
+    var strHtml = '';
+    var strHtmls = gMeme.txts.map(function (txt, idx) {
+        strHtml = renderNewLine(txt.line, idx);
+        return strHtml;
+    });
 
-    function drawTextForTxt(context, txt) {
-        context.fillStyle = txt.color;
-        context.lineStyle = "#ffff00";
-        context.font = txt.size + "px sans-serif";
-        if (!txt.line) txt.line = "Your text will appear here";
-        context.fillText(txt.line, txt.x, txt.y);
-    }
+    var elEditTxtCon = document.querySelector('.edit-txt-container');
+    elEditTxtCon.innerHTML = strHtmls.join('');
+}
 
-    function renderTxtContainer() {
-        var strHtml = '';
-        var strHtmls = gMeme.txts.map(function (txt, idx) {
-            strHtml = renderNewLine(txt.line, idx);
-            return strHtml;
-        });
+function renderNewLine(txt, idx) {
+    var width = getCanvasWidth();
 
-        var elEditTxtCon = document.querySelector('.edit-txt-container');
-        elEditTxtCon.innerHTML = strHtmls.join('');
-    }
-
-    function renderNewLine(txt, idx) {
-        var width = getCanvasWidth();
-
-        return `
+    return `
     <div class="meme-txt-wrapper">  
         <input class="meme-line-txt" id="txt-input-${idx}" placeholder="${txt}" oninput="changeMemeText(this)"></input>
         <div clas="txt-ctrl flex justify-center" id=txt-${idx}>
@@ -269,99 +270,129 @@ function renderMeme(meme) {
             <button id="btn-right-${idx}" onclick="alignText(${idx}, 'right')">right</button>
             <button onclick="increaseFont(${idx})">+</button>
             <button onclick="decreaseFont(${idx})">-</button>
-            <input type="color" id="input-color-${idx}" onchange="changeFontColor(${idx})"></input>
-            <label for="txt-shadow">Text shadow</label>
-            <input type="checkbox" name="txt-shadow"></input>
+            <input type="color" id="input-color-${idx}" onchange="changeFontColor(this, ${idx})">color</input>
+            <label for="txt-shadow-color">Text shadow color</label>
+            <input type="color" name="txt-shadow-color" onchange="changeShadow(this,${idx})"></input>
+            <label for="txt-shadow-blur">Text shadow blur</label>
+            <input type="checkbox" name="txt-shadow-blur" onclick="switchBlur()"></input>
             <label for="txt-font">Font</label>
-            <input type="text" name="txt-font"></input>
+            <datalist id="fontList" onchange="changeFont(this, ${idx})">
+            <option value="sans-serif" label="sans-serif" />
+            <option value="Arial" label="Arial" />       
+            </datalist>
+            <form>
+            <input type="text" id="font" name="font" list="fontList" />
+            </form>
             <button onclick="moveUp(${idx})">up</button>
             <button onclick="moveDown(${idx})">down</button>
             <button id=btn-${idx} onclick="deleteLine(this)">Delete</button>
         </div>
     </div>
     `;
-    }
+}
 
-    function moveUp(idx) {
-        var elInput = document.getElementById('txt-input-' + idx);
-        if (gMeme.txts[idx].y > gMeme.txts[idx].size) gMeme.txts[idx].y--;
+
+function getElInput(idx){
+    return document.getElementById('txt-input-' + idx);
+}
+
+//TODO: fix
+function changeFont(elFont, idx) {
+    var elInput = getElInput(idx);
+    gMeme.txts[idx].font = elFont.value;
+    renderMeme(gMeme);
+}
+
+function changeShadow(elColor, idx) {
+    gMeme.txts[idx].shadowColor = elColor.value;
+    renderMeme(gMeme);
+}
+
+function switchBlur() {
+
+}
+
+function moveUp(idx) {
+    var elInput = getElInput(idx);
+    if (gMeme.txts[idx].y > gMeme.txts[idx].size) gMeme.txts[idx].y--;
+    renderMeme(gMeme);
+}
+
+function moveDown(idx) {
+    var elInput = getElInput(idx);
+    var height = getCanvasHeight();
+    var max = (height - gMeme.txts[idx].size);
+    if (gMeme.txts[idx].y < (height - 5)) {
+        gMeme.txts[idx].y++;
         renderMeme(gMeme);
     }
+}
 
-    function moveDown(idx) {
-        var elInput = document.getElementById('txt-input-' + idx);
-        var height = getCanvasHeight();
-        var max = (height - gMeme.txts[idx].size);
-        if (gMeme.txts[idx].y < (height - 5)) {
-            gMeme.txts[idx].y++;
-            renderMeme(gMeme);
-        }
-    }
+function increaseFont(idx) {
+    var elInput = getElInput(idx);
+    var MAX_VAL = 50;
 
-    function increaseFont(idx) {
-        var elInput = document.getElementById('txt-input-' + idx);
-        var MAX_VAL = 50;
-
-        if (gMeme.txts[idx].size < MAX_VAL) {
-            gMeme.txts[idx].size++;
-            renderMeme(gMeme);
-        }
-    }
-
-    function decreaseFont(idx) {
-        var elInput = document.getElementById('txt-input-' + idx);
-        var MIN_VAL = 18;
-
-        if (gMeme.txts[idx].size > MIN_VAL) {
-            gMeme.txts[idx].size--;
-            renderMeme(gMeme);
-        }
-    }
-
-    function changeFontColor(idx) {
-        var elInput = document.getElementById('input-color-' + idx);
-        gMeme.txts[idx].color = elInput.value;
+    if (gMeme.txts[idx].size < MAX_VAL) {
+        gMeme.txts[idx].size++;
         renderMeme(gMeme);
     }
+}
 
-    function addNewLine() {
-        gMeme.txts.push(createNewLineObject(0, 0));
-        var idx = gMeme.txts.length - 1;
-        var elEditTxtCon = document.querySelector('.edit-txt-container');
-        elEditTxtCon.innerHTML += renderNewLine(gMeme.txts[idx].line, idx);
+function decreaseFont(idx) {
+    var elInput = getElInput(idx);
+    var MIN_VAL = 18;
+
+    if (gMeme.txts[idx].size > MIN_VAL) {
+        gMeme.txts[idx].size--;
+        renderMeme(gMeme);
     }
+}
 
-    function deleteLine(elBtn) {
-        var idx = elBtn.id.split('-')[1];
-        gMeme.txts.splice(idx, 1);
-        renderTxtContainer();
+function changeFontColor(elFontColor, idx) {
+    gMeme.txts[idx].color = elFontColor.value;
+    renderMeme(gMeme);
+}
+
+function addNewLine() {
+    gMeme.txts.push(createNewLineObject(0, 0));
+    var idx = gMeme.txts.length - 1;
+    var elEditTxtCon = document.querySelector('.edit-txt-container');
+    elEditTxtCon.innerHTML += renderNewLine(gMeme.txts[idx].line, idx);
+}
+
+function deleteLine(elBtn) {
+    var idx = elBtn.id.split('-')[1];
+    gMeme.txts.splice(idx, 1);
+    renderTxtContainer();
+}
+
+function createNewLineObject(x, y) {
+    return {
+        line: 'Your text will appear here',
+        size: 20,
+        font: 'sans-serif',
+        align: 'center',
+        color: '#fff',
+        shadowColor: '#fff',
+        blur: false,
+        x: x,
+        y: y
     }
+}
 
-    function createNewLineObject(x, y) {
-        return {
-            line: 'Your text will appear here',
-            size: 20,
-            align: 'center',
-            color: '#fff',
-            shadow: false,
-            x: x,
-            y: y
-        }
-    }
+function renderTeam() {
+    var strHtml = '';
+    var strHtmls = gteams.map(function (team, idx) {
+        strHtml = renderTeamMemeber(team, idx);
+        return strHtml;
+    });
 
-    function renderTeam() {
-        var strHtml = '';
-        var strHtmls = gteams.map(function (team, idx) {
-            strHtml = renderTeamMemeber(team, idx);
-            return strHtml;
-        });
+    var elAbout = document.querySelector('.about-container');
+    elAbout.innerHTML = strHtmls.join('');
+}
 
-        var elAbout = document.querySelector('.about-container');
-        elAbout.innerHTML = strHtmls.join('');
-    }
-
-    function renderTeamMemeber(team) {
-        return `
+function renderTeamMemeber(team) {
+    return `
         <div class="about-img">
         <img class="shape" src=${team.url} />
         </div>
@@ -393,10 +424,10 @@ function renderMeme(meme) {
             </div>
         </div>
     `;
-    }
+}
 
-    function downloadCanvas(elBtn) {
-        var dataURL = document.getElementById('meme-canvas').toDataURL();
-        elBtn.href = dataURL;
-    }
+function downloadCanvas(elBtn) {
+    var dataURL = document.getElementById('meme-canvas').toDataURL();
+    elBtn.href = dataURL;
+}
 

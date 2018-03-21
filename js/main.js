@@ -1,6 +1,12 @@
 /* */
 'use strict'
 
+var SHADOW_COLOR = "black";
+var BLUR = 20;
+var INITIAL_X = 20;
+var INITIAL_TOP_Y = 40;
+var INITIAL_BOTTOM_Y = 270;
+
 var gNextId;
 var gImgs;
 var gMeme;
@@ -48,8 +54,8 @@ function init() {
 function creategMeme() {
     return {
         selectedImgId: 0,
-        txts: [createNewLineObject(20, 40),
-        createNewLineObject(20, 270)]
+        txts: [createNewLineObject(INITIAL_X, INITIAL_TOP_Y),
+        createNewLineObject(INITIAL_X, INITIAL_BOTTOM_Y)]
     }
 }
 
@@ -121,7 +127,7 @@ function renderImgs(imgs) {
         return strHtml;
     });
     // strHtmls.push(`<img src="img/addimg.png" onclick="addImg()"/>`);
-    
+
     var elImgGrid = document.querySelector('.img-grid');
     elImgGrid.innerHTML = strHtmls.join('');
 }
@@ -201,21 +207,25 @@ function changeMemeText(elInput) {
 
 function alignText(idx, direction) {
     var width = getCanvasWidth();
+    var rightX = width - gMeme.txts[idx].size - INITIAL_X;
+    var centerX = (width / 2 - gMeme.txts[idx].size);
+
 
     switch (direction) {
         case 'right':
-            gMeme.txts[idx].x = width - 50;
+            gMeme.txts[idx].x = rightX;
             gMeme.txts[idx].align = 'end';
             break;
+
         case 'center':
-            gMeme.txts[idx].x = width / 2
+            gMeme.txts[idx].x = centerX;
             gMeme.txts[idx].align = 'center';
             break;
+
         default:
-            gMeme.txts[idx].x = 20;
+            gMeme.txts[idx].x = INITIAL_X;
             gMeme.txts[idx].align = 'start';
     }
-
     renderMeme(gMeme);
 }
 
@@ -242,8 +252,10 @@ function drawTextForTxts(gMeme, context) {
 function drawTextForTxt(context, txt) {
     context.fillStyle = txt.color;
     context.lineStyle = "#ffff00";
-    context.font = txt.size + "px sans-serif";
+    // context.font = txt.size + "px sans-serif";
+    context.font = txt.size + "px" + " " + txt.font;
     context.shadowColor = txt.shadowColor;
+    context.shadowBlur = txt.blur;
     if (!txt.line) txt.line = "Your text will appear here";
     context.fillText(txt.line, txt.x, txt.y);
 }
@@ -261,6 +273,7 @@ function renderTxtContainer() {
 
 function renderNewLine(txt, idx) {
     var width = getCanvasWidth();
+    var options = renderOptions();
 
     return `
     <div class="meme-txt-wrapper">  
@@ -271,19 +284,17 @@ function renderNewLine(txt, idx) {
             <button id="btn-right-${idx}" onclick="alignText(${idx}, 'right')">right</button>
             <button onclick="increaseFont(${idx})">+</button>
             <button onclick="decreaseFont(${idx})">-</button>
-            <input type="color" id="input-color-${idx}" onchange="changeFontColor(this, ${idx})">color</input>
-            <label for="txt-shadow-color">Text shadow color</label>
-            <input type="color" name="txt-shadow-color" onchange="changeShadow(this,${idx})"></input>
-            <label for="txt-shadow-blur">Text shadow blur</label>
-            <input type="checkbox" name="txt-shadow-blur" onclick="switchBlur()"></input>
+            <label for="color">Color</label>
+            <input type="color" name="color" id="input-color-${idx}" onchange="changeFontColor(this, ${idx})"></input>
+            </br>
+            <label for="txt-shadow-color">Text shadow</label>
+            <input type="checkbox" name="txt-shadow" onchange="switchShadow(this,${idx})"></input>
             <label for="txt-font">Font</label>
-            <datalist id="fontList" onchange="changeFont(this, ${idx})">
-            <option value="sans-serif" label="sans-serif" />
-            <option value="Arial" label="Arial" />       
-            </datalist>
             <form>
-            <input type="text" id="font" name="font" list="fontList" />
-            </form>
+            <select id = "font" onchange = "changeFont(this,${idx})">
+             ${options}
+            </select>
+             </form>
             <button onclick="moveUp(${idx})">up</button>
             <button onclick="moveDown(${idx})">down</button>
             <button id=btn-${idx} onclick="deleteLine(this)">Delete</button>
@@ -292,25 +303,37 @@ function renderNewLine(txt, idx) {
     `;
 }
 
+function renderOptions() {
+    var fonts = ["impactRegular", "rc", "erinValerie", "rocky", "smoke", "vavont"];
 
-function getElInput(idx){
+    var strHtmls = '';
+    var options = fonts.map(function (font) {
+        strHtmls += `<option value = ${font}>${font}</option>`;
+    });
+
+    return strHtmls;
+}
+
+function getElInput(idx) {
     return document.getElementById('txt-input-' + idx);
 }
 
-//TODO: fix
 function changeFont(elFont, idx) {
-    var elInput = getElInput(idx);
     gMeme.txts[idx].font = elFont.value;
     renderMeme(gMeme);
 }
 
-function changeShadow(elColor, idx) {
-    gMeme.txts[idx].shadowColor = elColor.value;
+
+function switchShadow(elShadow, idx) {
+    if (elShadow.checked) {
+        gMeme.txts[idx].blur = BLUR;
+        gMeme.txts[idx].shadowColor = SHADOW_COLOR;
+
+    } else {
+        gMeme.txts[idx].blur = 0;
+        gMeme.txts[idx].shadowColor = "rgba(0,0,0,0)";
+    }
     renderMeme(gMeme);
-}
-
-function switchBlur() {
-
 }
 
 function moveUp(idx) {
@@ -355,16 +378,34 @@ function changeFontColor(elFontColor, idx) {
 }
 
 function addNewLine() {
-    gMeme.txts.push(createNewLineObject(0, 0));
-    var idx = gMeme.txts.length - 1;
-    var elEditTxtCon = document.querySelector('.edit-txt-container');
-    elEditTxtCon.innerHTML += renderNewLine(gMeme.txts[idx].line, idx);
+    var y = calcNewY();
+    var height = getCanvasHeight();
+    var max = (gMeme.txts.length > 0) ? INITIAL_BOTTOM_Y - gMeme.txts[gMeme.txts.length - 1].size : height;
+
+    if (y < max) {
+        gMeme.txts.push(createNewLineObject(INITIAL_X, y));
+        renderMeme(gMeme);
+
+        var idx = gMeme.txts.length - 1;
+        var elEditTxtCon = document.querySelector('.edit-txt-container');
+        elEditTxtCon.innerHTML += renderNewLine(gMeme.txts[idx].line, idx);
+    }
+}
+
+function calcNewY() {
+    var y = gMeme.txts.reduce(function (acc, txt) {
+        acc += txt.size;
+        return acc;
+    }, INITIAL_TOP_Y)
+
+    return y;
 }
 
 function deleteLine(elBtn) {
     var idx = elBtn.id.split('-')[1];
     gMeme.txts.splice(idx, 1);
     renderTxtContainer();
+    renderMeme(gMeme);
 }
 
 function createNewLineObject(x, y) {
@@ -374,8 +415,8 @@ function createNewLineObject(x, y) {
         font: 'sans-serif',
         align: 'center',
         color: '#fff',
-        shadowColor: '#fff',
-        blur: false,
+        shadowColor: "rgba(0,0,0,0)",
+        blur: 0,
         x: x,
         y: y
     }

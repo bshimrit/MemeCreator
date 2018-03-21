@@ -3,3 +3,8 @@
 @import 'normal.css' (min-width: 1060px); 
 /* @import '_mobile-menu.css' (max-width: 830px); */
 
+@import 'global.css';
+@import 'narrow.css'    (min-width: 831px);
+@import 'normal.css'    (min-width: 1060px); 
+@import 'mobile.css'    (max-width: 830px);
+

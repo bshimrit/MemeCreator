@@ -23,6 +23,42 @@
     src: url('../fonts/Lato-Regular.ttf');
 }
 
+/*---Impact----- */
+@font-face {
+    font-family: impactRegular;
+    src: url('../fonts/impact/impact.ttf');
+}
+
+/*---Rc----- */
+@font-face {
+    font-family: rc;
+    src: url('../fonts/rc/rc.otf');
+}
+
+/*---erin-valerie----- */
+@font-face {
+    font-family: erinValerie;
+    src: url('../fonts/erin-valerie/ErinValerie.ttf');
+}
+
+/*---rocky----- */
+@font-face {
+    font-family: rocky;
+    src: url('../fonts/rocky/ROCKYAOE.ttf');
+}
+
+/*---smoke----- */
+@font-face {
+    font-family: smoke;
+    src: url('../fonts/smoke/SMOKE.ttf');
+}
+
+/*---vavont----- */
+@font-face {
+    font-family: vavont;
+    src: url('../fonts/vavont/vavont.ttf');
+}
+
 
 /*-------Global---------*/
 * {

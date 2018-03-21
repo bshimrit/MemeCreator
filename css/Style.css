@@ -68,6 +68,13 @@ a {
     font-family: 'latoBold', sans-serif;
 }
 
+.container {
+    max-width: 980px;
+    margin: 0 auto;
+    width: 100%;
+    z-index: 100;
+}
+
 .align-text-left{
     text-align: left;
 }
@@ -225,8 +232,13 @@ header {
 
 .close {
     display: none;
+    z-index: -1;
 }
 
 .meme-line-txt {
     width: 50%;
+}
+
+.meme-txt-wrapper {
+    margin-top: 20px;
 }

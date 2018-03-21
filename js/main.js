@@ -6,6 +6,7 @@ var gImgs;
 
 var gMeme = {
     selectedImgId: 0,
+<<<<<<< HEAD
     txts: [{
         line: 'Enter your text here',
         size: 20,
@@ -22,34 +23,49 @@ var gMeme = {
         x: 20,
         y: 80
     }]
+=======
+    txts: [newLineObject(20,40),
+        newLineObject(20,80)]
+>>>>>>> 78a9f86cac66c61aa3d7ba85d212a32ae05b55c8
 };
 
-// var gteams = { id: 1, url:}
+var gteams = [
+    { id: 1,
+      url:'img/team/1.jpg',
+      name:'Ilana', 
+      title:'developer',
+      description: 'I do everything!'},
+    { id: 1,
+    url:'img/team/2.jpg',
+    name:'Ilana', 
+    title:'developer',
+    description: 'I do everything!'}
 
-// }
+];
 
 function init() {
     gNextId = 0;
     gImgs = createImgs();
     renderImgs(gImgs);
     renderWords(gImgs);
+    renderTxtContainer();
 }
 
 function createImgs() {
     var imgs = [];
 
-    imgs.push(createImg('img/img01.jpg', ['tree', 'green', 'mountain', 'field']));
-    imgs.push(createImg('img/img02.jpg', ['water', 'field', 'sunrise', 'sky']));
-    imgs.push(createImg('img/img03.jpg', ['wheat', 'field', 'sky']));
+    imgs.push(createImg('img/meme/img01.jpg', ['tree', 'green', 'mountain', 'field']));
+    imgs.push(createImg('img/meme/img02.jpg', ['water', 'field', 'sunrise', 'sky']));
+    imgs.push(createImg('img/meme/img03.jpg', ['wheat', 'field', 'sky']));
 
     //TODO: fix data
-    imgs.push(createImg('img/img01.jpg', ['tree', 'green', 'mountain', 'field']));
-    imgs.push(createImg('img/img02.jpg', ['water', 'field', 'sunrise', 'sky']));
-    imgs.push(createImg('img/img03.jpg', ['wheat', 'field', 'sky']));
-    imgs.push(createImg('img/img01.jpg', ['tree', 'green', 'mountain', 'field']));
-    imgs.push(createImg('img/img02.jpg', ['water', 'field', 'sunrise', 'sky']));
-    imgs.push(createImg('img/img03.jpg', ['wheat', 'field', 'sky']));
-    imgs.push(createImg('img/img03.jpg', ['wheat', 'field', 'sky']));
+    imgs.push(createImg('img/meme/img01.jpg', ['tree','green','mountain','field']));
+    imgs.push(createImg('img/meme/img02.jpg', ['water','field','sunrise','sky']));
+    imgs.push(createImg('img/meme/img03.jpg', ['wheat','field','sky']));
+    imgs.push(createImg('img/meme/img01.jpg', ['tree','green','mountain','field']));
+    imgs.push(createImg('img/meme/img02.jpg', ['water','field','sunrise','sky']));
+    imgs.push(createImg('img/meme/img03.jpg', ['wheat','field','sky']));
+    imgs.push(createImg('img/meme/img03.jpg', ['wheat','field','sky']));
 
     return imgs;
 }
@@ -131,17 +147,19 @@ function addImg() {
     elImgInput.value = '';
 }
 
+<<<<<<< HEAD
 function openMemeEditor(elImg) {
     gMeme = updMeme(elImg);
+=======
+function openMemeEditor(elImg){
+    updMeme(elImg);
+>>>>>>> 78a9f86cac66c61aa3d7ba85d212a32ae05b55c8
     drawImage();
     toggleWin();
 }
 
-function updMeme(elImg) {
-    return {
-        selectedImgId: parseInt(elImg.id),
-        txts: []
-    }
+function updMeme(elImg){
+    gMeme.selectedImgId = parseInt(elImg.id);
 }
 
 function removeAligns(elPicTxt) {
@@ -213,6 +231,7 @@ function toggleWin() {
     elClose.classList.toggle('close');
 }
 
+<<<<<<< HEAD
 function drawText(text, context, x, y) {
     context.fillStyle = "#000";
     context.lineStyle = "#ffff00";
@@ -223,3 +242,64 @@ function drawText(text, context, x, y) {
 }
 
 
+=======
+function renderTxtContainer(){
+    var strHtml = '';
+    var strHtmls = gMeme.txts.map(function(txt, idx){
+        strHtml = renderNewLine(txt.line,idx);
+        return strHtml;
+    });
+
+    var elEditTxtCon = document.querySelector('.edit-txt-container');
+    elEditTxtCon.innerHTML = strHtmls.join('');
+}
+
+function renderNewLine(txt,idx){
+    return `
+    <div class="meme-txt-wrapper">  
+        <input class="meme-line-txt" id="txt-input-${idx} placeholder="${txt}"></input>
+        <div clas="txt-ctrl flex justify-center" id=txt-${idx}>
+            <button>left</button>
+            <button>center</button>
+            <button>right</button>
+            <button>+</button>
+            <button>-</button>
+            <input type="color"></input>
+            <label for="txt-shadow">Text shadow</label>
+            <input type="checkbox" name="txt-shadow"></input>
+            <label for="txt-font">Font</label>
+            <input type="text" name="txt-font"></input>
+            <button>up</button>
+            <button>down</button>
+            <button id=btn-${idx} onclick="deleteLine(this)">Delete</button>
+        </div>
+    </div>
+    `;
+}
+
+function addNewLine(){
+    gMeme.txts.push(newLineObject(0,0));
+    var idx = gMeme.txts.length - 1;
+    
+    var elEditTxtCon = document.querySelector('.edit-txt-container');
+    elEditTxtCon.innerHTML += renderNewLine(gMeme.txts[idx].line,idx);
+}
+
+function deleteLine(elBtn){
+    var idx = elBtn.id.split('-')[1];
+    gMeme.txts.splice(idx,1);
+    renderTxtContainer();
+}
+
+function newLineObject(x,y){
+    return {
+        line: 'Enter your text here',
+        size: 20,
+        align: 'center',
+        color: '#fff',
+        shadow: false,
+        x: x,
+        y: y
+    }
+}
+>>>>>>> 78a9f86cac66c61aa3d7ba85d212a32ae05b55c8

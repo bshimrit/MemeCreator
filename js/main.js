@@ -1,6 +1,9 @@
 /* */
 'use strict'
 
+var SHADOW_COLOR = "black";
+var BLUR = 20;
+
 var gNextId;
 var gImgs;
 var gMeme;
@@ -121,7 +124,7 @@ function renderImgs(imgs) {
         return strHtml;
     });
     // strHtmls.push(`<img src="img/addimg.png" onclick="addImg()"/>`);
-    
+
     var elImgGrid = document.querySelector('.img-grid');
     elImgGrid.innerHTML = strHtmls.join('');
 }
@@ -244,6 +247,7 @@ function drawTextForTxt(context, txt) {
     context.lineStyle = "#ffff00";
     context.font = txt.size + "px sans-serif";
     context.shadowColor = txt.shadowColor;
+    context.shadowBlur = txt.blur;
     if (!txt.line) txt.line = "Your text will appear here";
     context.fillText(txt.line, txt.x, txt.y);
 }
@@ -272,10 +276,8 @@ function renderNewLine(txt, idx) {
             <button onclick="increaseFont(${idx})">+</button>
             <button onclick="decreaseFont(${idx})">-</button>
             <input type="color" id="input-color-${idx}" onchange="changeFontColor(this, ${idx})">color</input>
-            <label for="txt-shadow-color">Text shadow color</label>
-            <input type="color" name="txt-shadow-color" onchange="changeShadow(this,${idx})"></input>
-            <label for="txt-shadow-blur">Text shadow blur</label>
-            <input type="checkbox" name="txt-shadow-blur" onclick="switchBlur()"></input>
+            <label for="txt-shadow-color">Text shadow</label>
+            <input type="checkbox" name="txt-shadow" onchange="switchShadow(this,${idx})"></input>
             <label for="txt-font">Font</label>
             <datalist id="fontList" onchange="changeFont(this, ${idx})">
             <option value="sans-serif" label="sans-serif" />
@@ -292,8 +294,16 @@ function renderNewLine(txt, idx) {
     `;
 }
 
+{/* <datalist id="fontList" onchange="changeFont(this, ${idx})">
+<option value="sans-serif" label="sans-serif" />
+<option value="Arial" label="Arial" />       
+</datalist>
+<form>
+<input type="text" id="font" name="font" list="fontList" />
+</form> */}
 
-function getElInput(idx){
+
+function getElInput(idx) {
     return document.getElementById('txt-input-' + idx);
 }
 
@@ -304,13 +314,18 @@ function changeFont(elFont, idx) {
     renderMeme(gMeme);
 }
 
-function changeShadow(elColor, idx) {
-    gMeme.txts[idx].shadowColor = elColor.value;
+
+function switchShadow(elShadow, idx) {
+    debugger;
+    if (elShadow.checked) {
+        gMeme.txts[idx].blur = BLUR;
+        gMeme.txts[idx].shadowColor = SHADOW_COLOR;
+
+    } else{
+        gMeme.txts[idx].blur = 0;
+        gMeme.txts[idx].shadowColor = "rgba(0,0,0,0)";
+    }
     renderMeme(gMeme);
-}
-
-function switchBlur() {
-
 }
 
 function moveUp(idx) {
@@ -374,8 +389,8 @@ function createNewLineObject(x, y) {
         font: 'sans-serif',
         align: 'center',
         color: '#fff',
-        shadowColor: '#fff',
-        blur: false,
+        shadowColor: "rgba(0,0,0,0)",
+        blur: 0,
         x: x,
         y: y
     }

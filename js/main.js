@@ -207,21 +207,25 @@ function changeMemeText(elInput) {
 
 function alignText(idx, direction) {
     var width = getCanvasWidth();
+    var rightX = width - gMeme.txts[idx].size - INITIAL_X;
+    var centerX = (width / 2 - gMeme.txts[idx].size);
+
 
     switch (direction) {
         case 'right':
-            gMeme.txts[idx].x = width - 50;
+            gMeme.txts[idx].x = rightX;
             gMeme.txts[idx].align = 'end';
             break;
+
         case 'center':
-            gMeme.txts[idx].x = width / 2
+            gMeme.txts[idx].x = centerX;
             gMeme.txts[idx].align = 'center';
             break;
+
         default:
-            gMeme.txts[idx].x = 20;
+            gMeme.txts[idx].x = INITIAL_X;
             gMeme.txts[idx].align = 'start';
     }
-
     renderMeme(gMeme);
 }
 
@@ -365,7 +369,7 @@ function changeFontColor(elFontColor, idx) {
 function addNewLine() {
     var y = calcNewY();
     var height = getCanvasHeight();
-    var max = (gMeme.txts.length > 0)? INITIAL_BOTTOM_Y - gMeme.txts[gMeme.txts.length - 1].size : height;
+    var max = (gMeme.txts.length > 0) ? INITIAL_BOTTOM_Y - gMeme.txts[gMeme.txts.length - 1].size : height;
 
     if (y < max) {
         gMeme.txts.push(createNewLineObject(INITIAL_X, y));

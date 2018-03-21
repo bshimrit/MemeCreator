@@ -293,6 +293,9 @@ function renderNewLine(txt, idx) {
             <select id = "font" onchange = "changeFont(this,${idx})">
              <option value = "Arial">Arial</option>
              <option value = "David">David</option>
+             <option value = "impactRegular">Impact</option>
+             <option value = "impacted">Impacted</option>
+             <option value = "impactUnicode">Impact Unicode</option>
             </select>
              </form>
             <button onclick="moveUp(${idx})">up</button>

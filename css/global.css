@@ -23,6 +23,22 @@
     src: url('../fonts/Lato-Regular.ttf');
 }
 
+/*---Impact----- */
+@font-face {
+    font-family: impacted;
+    src: url('../fonts/impacted.ttf');
+}
+
+@font-face {
+    font-family: impactUnicode;
+    src: url('../fonts/unicode.impact.ttf');
+}
+
+@font-face {
+    font-family: impactRegular;
+    src: url('../fonts/impact.ttf');
+}
+
 
 /*-------Global---------*/
 * {

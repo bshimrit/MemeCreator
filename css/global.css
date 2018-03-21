@@ -11,6 +11,19 @@
     font-family: 'FontAwesome';
 }
 
+/*---Lato-Bold----- */
+@font-face {
+    font-family: latoBold; 
+    src: url('../fonts/Lato-Bold.ttf');
+}
+
+/*---Lato-Regular----- */
+@font-face {
+    font-family: latoRegular; 
+    src: url('../fonts/Lato-Regular.ttf');
+}
+
+
 /*-------Global---------*/
 * {
     box-sizing: border-box;
@@ -196,11 +209,12 @@ li a:visited {
 .add-img input{
     display: none;
 }
+
 .img-grid {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     grid-gap: 20px;
-    width: 66.666%;
+    width: 100%;
     margin-top: 20px;
 }
 
@@ -213,6 +227,10 @@ li a:visited {
     width: 33.333%;
     display: flex;
     flex-wrap: wrap;
+    margin-top: 20px;
+    display: none;
+    padding-left: 20px;
+    color: #2eb398;
 }
 
 .filter-cloud>span:not(:first-child){
@@ -253,11 +271,12 @@ li a:visited {
     background: #f1f1f1;
 }
 
+
 .search button {
     float: left;
     width: 20%;
     padding: 10px;
-    background: #2196F3;
+    background: #2eb398;
     color: white;
     font-size: 17px;
     border: 1px solid grey;

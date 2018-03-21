@@ -1,5 +1,5 @@
-@import '_global.css';
-@import '_narrow.css' (min-width: 740px); 
-@import '_normal.css' (min-width: 1060px); 
+@import 'global.css';
+@import 'narrow.css' (min-width: 740px); 
+@import 'normal.css' (min-width: 1060px); 
 /* @import '_mobile-menu.css' (max-width: 830px); */
 

@@ -39,24 +39,32 @@
     </header>
     <main>
         <div class="img-container">
-            <section class="container flex space-between align-start open">
-                <div>
-                    <div class="add-img">
-                        <button class="fa clear-btn" onclick="document.getElementById('imgFiles').click();"></button>
-                        <input type="file" id="imgFiles" onchange="addImg()"/>
+            <section class="container  open">
+                <div class="flex flex-column justify-start">
+                    <div class="flex space-between">
+                        <div class="add-img">
+                            <button class="fa clear-btn" onclick="document.getElementById('imgFiles').click();"></button>
+                            <input type="file" id="imgFiles" onchange="addImg()"/>
+                        </div>
+                        <div class="search">
+                            <input type="text" placeholder="Search.." name="search2">
+                            <button type="submit" onclick="searchImgInput()">
+                                <i class="fa"></i>
+                            </button>
+                        </div>
                     </div>
-                    <div class="img-grid">
+                    <div class="flex space-between align-start">
+                        <div class="img-grid">
+                            <!-- render images grid -->
+                        </div>
+                        <div class="filters-container">
+                            <div class="filter-cloud flex flex-wrap">
+                                <!-- render cloud words -->
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="filters-container">
-                    <div class="search">
-                        <input type="text" placeholder="Search.." name="search2">
-                        <button type="submit" onclick="searchImgInput()">
-                            <i class="fa"></i>
-                        </button>
-                    </div>
-                    <div class="filter-cloud flex flex-wrap"></div>
-                </div>
+                
             </section>
             <section class="container meme-container flex space-between close">
                 <div class="meme-img">

@@ -75,18 +75,6 @@ a {
     z-index: 100;
 }
 
-.align-text-left{
-    text-align: left;
-}
-
-.align-text-right{
-    text-align: right;
-}
-
-.align-text-center{
-    text-align: center;
-}
-
 /*---flex---*/
 
 .flex {

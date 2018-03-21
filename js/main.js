@@ -366,7 +366,6 @@ function renderTeamMemeber(team){
 }
 
 function downloadCanvas(elBtn) {
-    // debugger;
     var dataURL = document.getElementById('meme-canvas').toDataURL();
     elBtn.href = dataURL;
 }

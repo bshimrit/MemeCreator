@@ -7,6 +7,7 @@
     <title></title>
     <link rel="stylesheet" href="css/Style.css">
 </head>
+
 <body onload="init()">
     <header>
         <nav class="main-menu">
@@ -18,7 +19,7 @@
                     <a href="#about">About</a>
                 </li>
                 <li>
-                    <img src=""/>
+                    <img src="" />
                 </li>
                 <li>
                     <a href="#">Blog</a>
@@ -33,7 +34,7 @@
         <section class="container img-container flex space-between align-start open">
             <div>
                 <label for="imgFiles"></label>
-                <input type="file" id="imgFiles" name="imgFiles"/>
+                <input type="file" id="imgFiles" name="imgFiles" />
                 <button onclick="addImg()">Add</button>
                 <div class="img-grid">
                 </div>
@@ -41,7 +42,9 @@
             <div class="filters-container">
                 <div class="search">
                     <input type="text" placeholder="Search.." name="search2">
-                    <button type="submit" onclick="searchImgInput()"><i class="fa"></i></button>
+                    <button type="submit" onclick="searchImgInput()">
+                        <i class="fa"></i>
+                    </button>
                 </div>
                 <div class="filter-cloud flex flex-wrap"></div>
             </div>
@@ -63,14 +66,14 @@
         <section>
             <div class="container about-container flex space-between align-start">
                 <div class="about-img">
-                    <img src="img/img01.jpg"/>
+                    <img src="img/img01.jpg" />
                 </div>
                 <div class="about-info flex flex-column align-start" id="about">
                     <h1>Smith</h1>
                     <h2>Illustrator</h2>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci ut cupiditate 
-                        neque culpa sunt. Explicabo ea esse dolorum similique recusandae, ratione, in eos consequuntur 
-                        nisi culpa provident necessitatibus, nesciunt error?</p>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci ut cupiditate neque culpa sunt. Explicabo
+                        ea esse dolorum similique recusandae, ratione, in eos consequuntur nisi culpa provident necessitatibus,
+                        nesciunt error?</p>
                     <div class="social flex">
                         <ul class="clean-list inline-flex">
                             <li class="fa facebook pointer flex justify-center align-center">
@@ -101,7 +104,7 @@
                 <h1>Get in touch</h1>
                 <h2>In order to get in touch use the contact form below:</h2>
                 <div class="contact-info flex space-between">
-                    <div class="contact-input flex flex-column space-between align-end" >
+                    <div class="contact-input flex flex-column space-between align-end">
                         <input type="text" placeholder="Name(Required)" required></input>
                         <input type="email" placeholder="Email(Required)" required></input>
                         <input type="text" placeholder="Subject"></input>
@@ -109,10 +112,8 @@
                         <button>Send</button>
                     </div>
                     <aside class="company-info">
-                        <p>Quisque Hendrerit: purus dapibus, ornare nibh vitae, viverra nibh. 
-                            Fusce vitae aliquam tellus. 
-                            Proin sit amet volutpat libero. 
-                            Nulla sed nunc et tortor luctus faucibus morbi vitae. 
+                        <p>Quisque Hendrerit: purus dapibus, ornare nibh vitae, viverra nibh. Fusce vitae aliquam tellus. Proin
+                            sit amet volutpat libero. Nulla sed nunc et tortor luctus faucibus morbi vitae.
                         </p>
                         <div>Elm St. 14/05 Lost City </div>
                         <div>+ 3528 331 86 35</div>
@@ -121,13 +122,47 @@
                 </div>
             </form>
         </section>
+<<<<<<< HEAD
+        <section class="container meme-container">
+            <canvas>
+
+            </canvas>
+            <button>choose another image</button>
+
+
+            <div>
+                <input placeholder="Enter upper text here"></input>
+
+                <!-- TEST -->
+                <div id="div1">
+                   text
+                </div>
+                <!-- TEST -->
+
+                <div clas="upper-txt-ctrl">
+                    <div class="align-txt">
+                        <button onclick="alignLeft()">left</button>
+                        <button onclick="alignCenter()">center</button>
+                        <button onclick="alignRight()">right</button>
+                    </div>
+                    <div class="size-txt">
+                        <button>+</button>
+                        <button>-</button>
+                    </div>
+                    <input type="color"></input>
+                </div>
+            </div>
+            <input placeholder="Enter lower text here"></input>
+        </section>
+=======
+>>>>>>> 4282d93ffa561048306577e244f604e73bbbdc2d
     </main>
     <footer>
         <small>
             © Copyright 2013 by PSDchat
         </small>
     </footer>
-    <script src="js/main.js" ></script>
+    <script src="js/main.js"></script>
 </body>
 
 </html>

@@ -83,7 +83,7 @@ function createKeywordsForImgs(imgs) {
 function renderImgs(imgs) {
     var strHtml = '';
 
-    var strHtmls = imgs.map(function(img, idx){
+    var strHtmls = imgs.map(function (img, idx) {
         strHtml = `<img  id="${img.id}" src="${img.url}" onclick="openMemeEditor(this)"/>`;
         return strHtml;
     });
@@ -92,7 +92,7 @@ function renderImgs(imgs) {
     elImgGrid.innerHTML = strHtmls.join('');
 }
 
-function searchImgInput(){
+function searchImgInput() {
     var searchValue = document.querySelector('.search input').value;
     searchImg(searchValue);
 }
@@ -105,7 +105,7 @@ function renderWords(imgs) {
 
     for (var key in wordCountMap) {
         var count = wordCountMap[key];
-        strHtmls += `<span style="font-size: ${MIN_SIZE * count}px">${key}</span>`;
+        strHtmls += `<span style="font-size: ${MIN_SIZE * count}px" onclick="searchImg('${key}')">${key}</span>`;
     }
 
     var wordsCloud = document.querySelector('.filter-cloud');
@@ -120,10 +120,10 @@ function searchImg(searchValue) {
     renderImgs(filteredImgs);
 }
 
-function addImg(){
+function addImg() {
     var elImgInput = document.querySelector('#imgFiles');
     var filename = elImgInput.value.replace(/^.*[\\\/]/, '');
-    gImgs.push(createImg('img/' + filename,[]));
+    gImgs.push(createImg('img/' + filename, []));
     renderImgs(gImgs);
     elImgInput.value = '';
 }
@@ -136,6 +136,30 @@ function openMemeEditor(elImg){
 
 function updMeme(elImg){
     gMeme.selectedImgId = parseInt(elImg.id);
+}
+
+function removeAligns(elPicTxt) {
+    elPicTxt.classList.remove('align-text-right');
+    elPicTxt.classList.remove('align-text-left');
+    elPicTxt.classList.remove('align-text-center');
+}
+
+function alignLeft() {
+    var elPicTxt = document.getElementById('div1');
+    removeAligns(elPicTxt);
+    elPicTxt.classList.add('align-text-left');
+}
+
+function alignRight() {
+    var elPicTxt = document.getElementById('div1');
+    removeAligns(elPicTxt);
+    elPicTxt.classList.add('align-text-right');
+}
+
+function alignCenter() {
+    var elPicTxt = document.getElementById('div1');
+    removeAligns(elPicTxt);
+    elPicTxt.classList.add('align-text-center');
 }
 
 

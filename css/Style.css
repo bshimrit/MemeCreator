@@ -28,6 +28,12 @@ html {
     text-transform:initial;
 }
 
+.container {
+    max-width: 980px;
+    margin: 0 auto;
+    width: 100%;
+}
+
 body {
     margin: 0;
 }
@@ -40,6 +46,10 @@ h2 {
 
 a {
     text-decoration: none;
+}
+
+#div1{
+    background-color: aqua;
 }
 
 
@@ -64,6 +74,19 @@ a {
     width: 100%;
     z-index: 100;
 }
+
+.align-text-left{
+    text-align: left;
+}
+
+.align-text-right{
+    text-align: right;
+}
+
+.align-text-center{
+    text-align: center;
+}
+
 /*---flex---*/
 
 .flex {

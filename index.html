@@ -10,14 +10,15 @@
 
 <body onload="init()">
     <header>
-        <nav class="main-menu">
+        <button class="fa hamburger menu-btn clear-btn" onclick="toggleMenu(this)"></button>
+        <nav class="main-menu close">
             <ul class="clean-list flex space-between align-center">
-                <button class="fa hamburger menu-btn clear-btn" onclick="toggleMenu(this)"></button>
+                <!-- <button class="fa hamburger menu-btn clear-btn" onclick="toggleMenu(this)"></button> -->
                 <li>
-                    <a href="#" data-trans = "Portfolio">Portfolio</a>
+                    <a href="#" data-trans="Portfolio">Portfolio</a>
                 </li>
                 <li>
-                    <a href="#about" data-trans = "About">About</a>
+                    <a href="#about" data-trans="About">About</a>
                 </li>
                 <li>
                     <ul class="logo">

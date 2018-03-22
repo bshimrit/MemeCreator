@@ -70,3 +70,7 @@
     top: 14%;
     background-color: lightgrey;
 }
+
+.main-menu{
+    display: block;
+}

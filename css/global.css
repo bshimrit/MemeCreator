@@ -242,7 +242,8 @@ footer {
 
 .hamburger {
     display: block;
-    transition: transform .5s
+    color: black;
+    transition: transform .5s;
 }
 
 .main-menu li a{

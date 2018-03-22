@@ -157,7 +157,9 @@ function changeTeamMember() {
 
 function toggleMenu(elHamburger) {
     var mainMenu = document.querySelector('.main-menu ul');
+    var nav = document.querySelector('nav');
     mainMenu.classList.toggle('open');
+    nav.classList.toggle('close');
     elHamburger.classList.toggle('open');
 }
 

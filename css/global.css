@@ -23,6 +23,21 @@
     src: url('../fonts/Lato-Regular.ttf');
 }
 
+/*---Lato-Black----- */
+@font-face {
+    font-family: latoBlack; 
+    src: url('../fonts/lato-black/Lato-Black.ttf');
+}
+
+/*---Maven-pro-Regular----- */
+@font-face {
+    font-family: mavenProRegular; 
+    src: url('../fonts/maven-pro/MavenPro-Regular.ttf');
+}
+
+
+
+
 /*---Impact----- */
 @font-face {
     font-family: impactRegular;
@@ -90,7 +105,7 @@ body {
 h2 {
     font-size: 30px;
     font-weight: normal;
-    margin: 0 0 35px;
+    margin: 0 0 20px;
 }
 
 a {
@@ -105,6 +120,105 @@ h1 {
     margin: 0;
 }
 
+.contact-input > input{
+    background-color: #454545;
+    border: none;
+}
+
+.contact-input > input:not(:first-child){
+    margin-top: 15px;
+}
+
+.contact-input > input:first-child{
+    margin-top: 5px;
+}
+
+/* .contact-input > input:not(.form-msg){
+    height: 40px;
+} */
+
+/* input[type="text"].form-msg{
+    height: 150px;
+    margin-bottom: 15px; 
+} */
+
+/* aside> p.contact{
+    margin-top: 60px;
+} */
+
+aside> p > span{
+    margin-right: 5px;
+    color: #bebebe;
+    line-height: 21.56px;
+}
+
+.contact-input ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: #bebebe;
+    padding-left: 15px;
+  }
+
+  .contact-input ::-moz-placeholder { /* Firefox 19+ */
+    color: #bebebe;
+    padding-left: 15px;
+  }
+  .contact-input ::-ms-input-placeholder { /* IE 10+ */
+    color: #bebebe;
+    padding-left: 15px;
+  }
+  .contact-input ::-moz-placeholder { /* Firefox 18- */
+    color: #bebebe;
+    padding-left: 15px;
+  }
+
+input[type="text"].form-msg > span::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    /* margin-bottom: 125px;  */
+    /* padding-bottom: 125px; */
+    /* top: 0;
+    position: absolute; */
+}
+
+.form-send{
+    background-color: #2eb398;
+    color: #d7fcf5;
+    border: none;
+    font-family: 'latoBold', sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 21.56px;
+    text-transform: uppercase;
+}
+
+.company-info{
+    color: #bebebe;
+    font-family: 'latoRegular', sans-serif;
+    line-height: 21.56px;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.company-info > p{
+    margin-top: 0;
+}
+
+.contact-form > div > h1{
+    color: #e0e0e0;
+    font-family: 'mavenProRegular', sans-serif;
+    font-size: 30px;
+    font-weight: 400;
+    line-height: 4.56px;
+}
+
+.contact-form > div > h2{
+    font-family: 'mavenProRegular', sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 21.56px;
+    color: #bebebe;
+    margin-top: 15px;
+}
+
+ 
+   
 
 /*----Helpers----*/
 
@@ -374,6 +488,24 @@ small {
     color:#454545;
 }
 
+.info-grid{
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(12, 1fr);
+    grid-gap: 20px;
+    width: 100%;
+    margin-top: 20px;
+}
+.info-grid input ,.info-grid .company-info{
+    grid-column: span 6;
+    grid-row: span 2;
+}
+
+.info-grid .company-info 
+
+/* input.name{
+    grid-row: span 4;
+} */
 
 /****** shape *****/
 .shape {

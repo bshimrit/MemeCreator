@@ -196,6 +196,8 @@ function renderMeme(meme) {
         drawTextForTxts(gMeme, context);
     }
 }
+
+
 function changeMemeText(elInput) {
     var idxStr = elInput.id;
     var width = getCanvasWidth();
@@ -252,11 +254,9 @@ function drawTextForTxts(gMeme, context) {
 function drawTextForTxt(context, txt) {
     context.fillStyle = txt.color;
     context.lineStyle = "#ffff00";
-    // context.font = txt.size + "px sans-serif";
     context.font = txt.size + "px" + " " + txt.font;
     context.shadowColor = txt.shadowColor;
     context.shadowBlur = txt.blur;
-    if (!txt.line) txt.line = "Your text will appear here";
     context.fillText(txt.line, txt.x, txt.y);
 }
 
@@ -277,7 +277,7 @@ function renderNewLine(txt, idx) {
 
     return `
     <div class="meme-txt-wrapper">  
-        <input class="meme-line-txt" id="txt-input-${idx}" placeholder="${txt}" oninput="changeMemeText(this)"></input>
+        <input class="meme-line-txt" id="txt-input-${idx}" placeholder="Enter your text here" oninput="changeMemeText(this)"></input>
         <div clas="txt-ctrl flex justify-center" id=txt-${idx}>
             <button id="btn-left-${idx}" onclick="alignText(${idx}, 'left')">left</button>
             <button id="btn-center-${idx}" onclick="alignText(${idx}, 'center')">center</button>
@@ -291,7 +291,7 @@ function renderNewLine(txt, idx) {
             <input type="checkbox" name="txt-shadow" onchange="switchShadow(this,${idx})"></input>
             <label for="txt-font">Font</label>
             <form>
-            <select id = "font" onchange = "changeFont(this,${idx})">
+            <select id = "font" onchange="changeFont(this,${idx})">
              ${options}
             </select>
              </form>
@@ -304,11 +304,16 @@ function renderNewLine(txt, idx) {
 }
 
 function renderOptions() {
-    var fonts = ["impactRegular", "rc", "erinValerie", "rocky", "smoke", "vavont"];
+    var fonts = [{fontName: "impactRegular", displayedText: "Impact"},
+    {fontName: "Verdana", displayedText: "Verdana"},
+    {fontName: "Comic Sans MS", displayedText: "Comic Sans MS"},
+    {fontName: "Times New Roman", displayedText: "Times New Roman"},
+    {fontName: "Arial Black", displayedText: "Arial Black"}
+    ];
 
     var strHtmls = '';
     var options = fonts.map(function (font) {
-        strHtmls += `<option value = ${font}>${font}</option>`;
+        strHtmls += `<option value ="${font.fontName}">${font.displayedText}</option>`;
     });
 
     return strHtmls;
@@ -412,7 +417,7 @@ function createNewLineObject(x, y) {
     return {
         line: 'Your text will appear here',
         size: 20,
-        font: 'sans-serif',
+        font: 'impactRegular',
         align: 'center',
         color: '#fff',
         shadowColor: "rgba(0,0,0,0)",

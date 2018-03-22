@@ -14,10 +14,16 @@ var gCurTeamIdx = 0;
 var gteams = [
     {
         id: 1,
-        url: 'img/team/1.jpg',
+        url: 'img/team/5.jpg',
         name: 'Ilana',
-        title: 'front end developer',
-        description: 'I do everything!',
+        title: 'developer',
+        description: 'Hi! My name is Ilana. I\'m a junior developer, experienced\
+        in the languages: Javascript, html and css.I have previous occupational experience with C#, sql and visual basic.\
+        I am also familliar with several.Net Technologies, including: MVC, Web Api and winforms.\
+        I am currentlly studying in \'Coding academy\' to become a web developer.I have finished a .Net course in Hacker-u.\
+        In addition, I have a degree in Biology from the \'Tel-Aviv\' University, and experience in working in a medical laborotory.\
+        I always aspire to become better at what I do. I enjoy working in a team, and learning new things.\
+        I am responsible, organized, independant, and can be an asset to any team.',
         facebook: '',
         twitter: '',
         google: '',
@@ -30,7 +36,10 @@ var gteams = [
         url: 'img/team/2.jpg',
         name: 'Shimrit',
         title: 'developer',
-        description: 'front end developer',
+        description: 'I am an Industrial engineer who quickly discovered my real passion is development.\
+        I have a 10+ year exprience in software development, implementation and product management.\
+        I have recently joined the web development community and looking forward to making the best of this fresh start,\
+        while putting my experience to use in this new and exciting world.',
         facebook: '',
         twitter: '',
         google: '',
@@ -465,10 +474,12 @@ function renderTeamMemeber(team, idx) {
         <div class="about-img">
         <img src=${team.url} />
         </div>
-            <div class="about-info flex flex-column justify-start align-start" id="about">
+            <div class="about-info flex flex-column justify-end align-start" id="about">
+                <div class="info">
                 <h1>${team.name}</h1>
                 <h2>${team.title}</h2>
                 <p>${team.description}</p>
+                </div>
                 <div class="social flex">
                     <ul class="clean-list inline-flex">
                         <li class="fa facebook pointer flex justify-center align-center">

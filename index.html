@@ -14,10 +14,10 @@
             <ul class="clean-list flex space-between align-center">
                 <button class="fa hamburger menu-btn clear-btn" onclick="toggleMenu(this)"></button>
                 <li>
-                    <a href="#">Portfolio</a>
+                    <a href="#" data-trans = "Portfolio">Portfolio</a>
                 </li>
                 <li>
-                    <a href="#about">About</a>
+                    <a href="#about" data-trans = "About">About</a>
                 </li>
                 <li>
                     <ul class="logo">
@@ -51,7 +51,7 @@
                             <button class="fa img-grid-btn pointer" onclick="addImg()"></button>
                         </div>
                         <div class="search">
-                            <input class="input-base"  type="text" placeholder="Search.." name="search2">
+                            <input class="input-base" type="text" placeholder="Search.." name="search2">
                             <button class="fa pointer img-grid-btn" type="submit" onclick="searchImgInput()"></button>
                         </div>
                     </div>
@@ -81,7 +81,7 @@
                             <button class="fa clear-btn base-btn pointer" onClick="addNewLine()"></button>
                         </li>
                         <li>
-                            <button class="fa clear-btn base-btn pointer" onclick="changeMainView()"></button>
+                            <button class="fa clear-btn base-btn pointer close-window" onclick="changeMainView()"></button>
                         </li>
                     </ul>
                     <div class="edit-txt-container">
@@ -125,6 +125,7 @@
                 </div>
             </form>
         </section>
+
     </main>
     <div style="font-family :impactRegular;"></div>
     <footer>

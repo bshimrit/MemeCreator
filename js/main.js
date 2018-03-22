@@ -63,6 +63,10 @@ function init() {
 
 }
 
+function setLangAndRender(lang) {
+    setLang(lang);
+}
+
 function getCanvasHeight() {
     var elCanvas = document.getElementById('meme-canvas');
     var height = elCanvas.height;
@@ -269,20 +273,31 @@ function renderNewLine(txt, idx) {
             <button class="fa clear-btn base-btn base-btn-small" onclick="moveUp(${idx})"></button>
             <button class="fa clear-btn base-btn base-btn-small" onclick="moveDown(${idx})"></button>
             <button id=btn-${idx} class="fa clear-btn base-btn base-btn-small" onclick="deleteLine(this)"></button>
-            <label class="fa cb-container">Shadow
+            <form class="form">
+                <label class="fa cb-container"> Shadow
                 <input type="checkbox" onchange="switchShadow(this,${idx})">
                 <span class="checkmark"></span>
-            </label>
+               
+                <label class="fa" for="txt-font"></label>
+                <select id = "font" onchange = "changeFont(this,${idx})">
+                 ${options}
+                </select>
+                 </form>
             </div>
-            <form>
-            <label class="fa" for="txt-font"></label>
-            <select id = "font" onchange = "changeFont(this,${idx})">
-             ${options}
-            </select>
-             </form>
+           
     </div>
     `;
 }
+
+/* <label class="fa" for="txt-font"></label> <select id = "font" onchange = "changeFont(this,${idx})">
+${options}
+</select> */
+
+/* <label class="fa cb-container">Shadow
+<label class="fa cb-container">
+<input type="checkbox" onchange="switchShadow(this,${idx})">
+<span class="checkmark"></span>
+</label> */
 
 function renderOptions() {
     var fonts = [{ fontName: "impactRegular", displayedText: "Impact" },

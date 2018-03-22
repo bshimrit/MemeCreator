@@ -24,11 +24,11 @@ var gteams = [
         In addition, I have a degree in Biology from the \'Tel-Aviv\' University, and experience in working in a medical laborotory.\
         I always aspire to become better at what I do. I enjoy working in a team, and learning new things.\
         I am responsible, organized, independant, and can be an asset to any team.',
-        facebook: '',
+        facebook: 'https://www.facebook.com/ilana.mostovski',
         twitter: '',
         google: '',
-        pintrest: '',
-        linkedin: '',
+        pintrest: 'https://www.pinterest.com/ilana_most/',
+        linkedin: 'https://www.linkedin.com/in/ilana-mostvoski-949aa214b/',
         dribbble: ''
     },
     {
@@ -40,11 +40,11 @@ var gteams = [
         I have a 10+ year exprience in software development, implementation and product management.\
         I have recently joined the web development community and looking forward to making the best of this fresh start,\
         while putting my experience to use in this new and exciting world.',
-        facebook: '',
-        twitter: '',
+        facebook: 'https://www.facebook.com/shimrit.belahousky',
+        twitter: 'https://twitter.com/shimritsn',
         google: '',
         pintrest: '',
-        linkedin: '',
+        linkedin: 'https://www.linkedin.com/in/shimrit-snapir',
         dribbble: ''
     }
 

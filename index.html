@@ -41,16 +41,14 @@
         <div class="img-container">
             <section class="container img-wrapper open">
                 <div class="flex flex-column justify-start">
-                    <div class="flex space-between">
+                    <div class="flex space-between flex-wrap">
                         <div class="add-img">
                             <input type="url" placeholder="Add a new image from url" id="imgFiles"/>
-                            <button class="fa clear-btn base-btn pointer" onclick="addImg()"></button>
+                            <button class="fa img-grid-btn pointer" onclick="addImg()"></button>
                         </div>
                         <div class="search">
                             <input type="text" placeholder="Search.." name="search2">
-                            <button class="pointer" type="submit" onclick="searchImgInput()">
-                                <i class="fa"></i>
-                            </button>
+                            <button class="fa pointer img-grid-btn" type="submit" onclick="searchImgInput()"></button>
                         </div>
                     </div>
                     <div class="flex space-between align-start">

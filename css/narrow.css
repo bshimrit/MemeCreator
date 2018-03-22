@@ -1,7 +1,34 @@
 .main-menu {
     padding: 30px 230px;
     font-size: 1em;
+
+    background-color: #323232;
+    height: 90px;
+    padding: 20px;
+    /* transform: translate(0, 0); */
+    position: static;
 }
+
+.main-menu > ul> li{
+    padding: 0;
+}
+
+.main-menu ul> li{
+    display: block;
+}
+
+.hamburger {
+    display: none;
+}
+
+ul{
+    display: flex;
+    flex-direction: row;
+}
+
+/* ul.logo, li.front-img, li.back-img{
+    display: block;
+} */
 
 .filters-container {
     display:block;
@@ -25,8 +52,6 @@
 }
 
 .social li {
-    /* width: 25px; */
-    /* padding: 12.5px; */
     padding: 12.5px;
 }
 
@@ -36,6 +61,4 @@
 
 .about-info{
     width: 66.666%;
-    /* height: 297px; */
-    /* position: relative; */
 }

@@ -185,7 +185,6 @@ function openMemeEditor(elImg) {
     updMeme(elImg);
     renderMeme(gMeme);
     changeMainView();
-    
 }
 
 function updMeme(elImg) {
@@ -202,9 +201,12 @@ function renderMeme(meme) {
     img.src = memeImg.url;
 
     img.onload = function () {
-        // debugger;
         canvas.width = img.width;
         canvas.height = img.height;
+
+        var height = getCanvasHeight();
+        gMeme.txts[1].y = height - INITIAL_TOP_Y;
+
         context.drawImage(img, 0, 0, img.width, img.height);
         drawTextForTxts(gMeme, context);
     }
@@ -225,8 +227,6 @@ function alignText(idx, direction) {
     var rightX = width - gMeme.txts[idx].size - INITIAL_X;
     var centerX = width / 2 - gMeme.txts[idx].size;
     
-    // debugger;
-
     switch (direction) {
         case 'right':
             gMeme.txts[idx].x = rightX;
@@ -437,7 +437,7 @@ function createNewLineObject(x, y) {
         line: 'Your text will appear here',
         size: 20,
         font: 'impactRegular',
-        align: 'center',
+        align: 'start',
         color: '#ffffff',
         shadowColor: "rgba(0,0,0,0)",
         blur: 0,

@@ -102,6 +102,8 @@ html {
     max-width: 980px;
     margin: 0 auto;
     width: 100%;
+    padding-right: 10px;
+    padding-left: 10px;
 }
 
 body {
@@ -527,6 +529,8 @@ input[type=text], input[type=url]{
     font-size: 12px;
     margin-bottom: 40px;
     /* text-transform: capitalize; */
+    overflow: hidden;
+    max-height: 190px;
 }
 
 .about-container button {

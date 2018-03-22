@@ -105,7 +105,7 @@ html {
 }
 
 body {
-    margin: 0;
+    margin: 0 auto;
 }
 
 h2 {
@@ -126,98 +126,7 @@ h1 {
     margin: 0;
 }
 
-.contact-input > input{
-    background-color: #454545;
-    border: none;
-}
 
-.contact-input > input:not(:first-child){
-    margin-top: 15px;
-}
-
-.contact-input > input:first-child{
-    margin-top: 5px;
-}
-
-/* .contact-input > input:not(.form-msg){
-    height: 40px;
-} */
-
-/* input[type="text"].form-msg{
-    height: 150px;
-    margin-bottom: 15px; 
-} */
-
-/* aside> p.contact{
-    margin-top: 60px;
-} */
-
-aside> p > span{
-    margin-right: 5px;
-    color: #bebebe;
-    line-height: 21.56px;
-}
-
-.contact-input ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-    color: #bebebe;
-    padding-left: 15px;
-  }
-
-  .contact-input ::-moz-placeholder { /* Firefox 19+ */
-    color: #bebebe;
-    padding-left: 15px;
-  }
-  .contact-input ::-ms-input-placeholder { /* IE 10+ */
-    color: #bebebe;
-    padding-left: 15px;
-  }
-  .contact-input ::-moz-placeholder { /* Firefox 18- */
-    color: #bebebe;
-    padding-left: 15px;
-  }
-
-
-.form-send{
-    background-color: #2eb398;
-    color: #d7fcf5;
-    border: none;
-    font-family: 'latoBold', sans-serif;
-    font-weight: 700;
-    font-size: 12px;
-    line-height: 21.56px;
-    text-transform: uppercase;
-}
-
-.company-info{
-    color: #bebebe;
-    font-family: 'latoRegular', sans-serif;
-    line-height: 21.56px;
-    font-size: 12px;
-    font-weight: 400;
-}
-
-.company-info > p{
-    margin-top: 0;
-}
-
-.contact-form > div > h1{
-    color: #e0e0e0;
-    font-family: 'mavenProRegular', sans-serif;
-    font-size: 30px;
-    font-weight: 400;
-    line-height: 4.56px;
-}
-
-.contact-form > div > h2{
-    font-family: 'mavenProRegular', sans-serif;
-    font-size: 18px;
-    font-weight: 400;
-    line-height: 21.56px;
-    color: #bebebe;
-    margin-top: 15px;
-}
-
- 
    
 a:visited {
     color: initial;
@@ -359,6 +268,81 @@ footer {
 }
 
 /***** main ********/
+.contact-input > input{
+    background-color: #454545;
+    border: none;
+}
+
+.contact-input > input:not(:first-child){
+    margin-top: 15px;
+}
+
+.contact-input > input:first-child{
+    margin-top: 5px;
+}
+
+
+aside> p > span{
+    margin-right: 5px;
+    color: #bebebe;
+    line-height: 21.56px;
+}
+
+.contact-input ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: #bebebe;
+    padding-left: 15px;
+  }
+
+  .contact-input ::-moz-placeholder { /* Firefox 19+ */
+    color: #bebebe;
+    padding-left: 15px;
+  }
+  .contact-input ::-ms-input-placeholder { /* IE 10+ */
+    color: #bebebe;
+    padding-left: 15px;
+  }
+  .contact-input ::-moz-placeholder { /* Firefox 18- */
+    color: #bebebe;
+    padding-left: 15px;
+  }
+
+
+.form-send{
+    background-color: #2eb398;
+    color: #d7fcf5;
+    border: none;
+    font-family: 'latoBold', sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 21.56px;
+    text-transform: uppercase;
+}
+
+.company-info{
+    color: #bebebe;
+    font-family: 'latoRegular', sans-serif;
+    line-height: 21.56px;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.contact-form > div > h1{
+    color: #e0e0e0;
+    font-family: 'mavenProRegular', sans-serif;
+    font-size: 30px;
+    font-weight: 400;
+    line-height: 4.56px;
+}
+
+.contact-form > div > h2{
+    font-family: 'mavenProRegular', sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 21.56px;
+    color: #bebebe;
+    margin-top: 15px;
+}
+
 .base-btn{
     border-radius: 50%;
     font-size: 18px;
@@ -383,9 +367,6 @@ footer {
 .txt-ctrl {
     margin-top: 20px;
 }
-/* .add-img input{
-    display: none;
-} */
 
 .txt-ctrl input[type="color"] {
     padding: 1px 2px;
@@ -419,7 +400,6 @@ footer {
 }
 
 .filter-cloud {
-    /* height: 50vh; */
     font-size: 15px;
 }
 .filter-cloud>span:not(:first-child){
@@ -431,7 +411,6 @@ footer {
 }
 
 .social li {
-    /* width: 25px; */
     padding: 12.5px;
 }
 
@@ -447,9 +426,6 @@ footer {
 .contact-input button {
     width: 90px;
     height: 37px;
-}
-.company-info {
-    width: 25%;
 }
 
 input[type=text], input[type=url]{
@@ -505,10 +481,6 @@ input[type=text], input[type=url]{
 
 .about-img{
     width: 30.333%;
-    /* for shape */
-    /* display: inline-block;
-    margin: 0 auto -275px auto;
-    overflow: hidden; */
 }
 
 .about-info{
@@ -590,20 +562,66 @@ small {
 .info-grid{
     display: grid;
     grid-template-columns: repeat(12, 1fr);
-    grid-template-rows: repeat(12, 1fr);
+    grid-template-rows: repeat(8,38px);
     grid-gap: 20px;
     width: 100%;
     margin-top: 20px;
 }
-.info-grid input ,.info-grid .company-info{
-    grid-column: span 6;
-    grid-row: span 2;
+.info-grid input{
+    grid-column: 1 / 9;
+    grid-row: span 1;
+    padding: 0;
 }
 
-.info-grid .company-info 
-
-/* input.name{
+.info-grid input.form-msg{
     grid-row: span 4;
+}
+
+.info-grid button{
+    grid-column: 7 / 9;
+    grid-row: span 1;
+}
+.info-grid .company-info {
+    grid-column: 9 / 12;
+    grid-row: 1 / 4;
+    margin-top: 0;
+}
+
+.info-grid .company-contact {
+    grid-column: 9 / 12;
+    grid-row: 4 / span 8;
+}
+
+.company-contact p {
+    font-family: "latoBold", sans-serif;
+    color: #bebebe;
+    margin-top: 0;
+    margin-bottom: 5px;
+    font-size: 12px;
+
+}
+
+.company-info span {
+    font-weight: bold;
+}
+
+.company-contact p span {
+    font-family: 'FontAwesome';
+    color: #2eb398;
+    display: inline-block;
+    width: 25px;
+}
+
+/* .info-grid .company-phone {
+    grid-column: 9 / 12;
+    grid-row: 4 / span 1;
+    margin: 0;
+}
+
+.info-grid .company-email {
+    grid-column: 9 / 12;
+    grid-row: 4 / span 1;
+    margin: 0;
 } */
 
 

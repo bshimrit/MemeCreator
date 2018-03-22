@@ -174,11 +174,11 @@ function searchImg(searchValue) {
 
 function addImg() {
     var elImgInput = document.querySelector('#imgFiles');
-    // var filename = elImgInput.value.replace(/^.*[\\\/]/, '');
-    // gImgs.push(createImg('img/meme/' + filename, []));
-    gImgs.push(createImg(elImgInput.value,['All']));
-    renderImgs(gImgs);
-    elImgInput.value = '';
+    if (elImgInput.value !== ''){
+        gImgs.push(createImg(elImgInput.value,['All']));
+        renderImgs(gImgs);
+        elImgInput.value = '';
+    }
 }
 
 function openMemeEditor(elImg) {
@@ -201,7 +201,11 @@ function renderMeme(meme) {
     img.src = memeImg.url;
 
     img.onload = function () {
+<<<<<<< HEAD
+        canvas.width = Math.min(img.width,window.innerWidth - 40);
+=======
         canvas.width = img.width;
+>>>>>>> e4b4216ff552d25db786b9e6e9e296c75e5896a1
         canvas.height = img.height;
 
         var height = getCanvasHeight();
@@ -269,7 +273,6 @@ function drawTextForTxts(gMeme, context) {
 function drawTextForTxt(context, txt) {
     context.fillStyle = txt.color;
     context.lineStyle = "#ffff00";
-    // context.font = txt.size + "px sans-serif";
     context.textAlign = txt.align;
     context.font = txt.size + "px" + " " + txt.font;
     context.shadowColor = txt.shadowColor;
@@ -295,7 +298,7 @@ function renderNewLine(txt, idx) {
     return `
     <div class="meme-txt-wrapper">  
         <div>
-            <input type="text" class="meme-line-txt" id="txt-input-${idx}" placeholder="${txt}" oninput="changeMemeText(this)"></input>
+            <input type="text" class="meme-line-txt" id="txt-input-${idx}" placeholder="Enter your text here" oninput="changeMemeText(this)"></input>
         </div>
         <div class="txt-ctrl flex justify-start flex-wrap" id=txt-${idx}>
             <button id="btn-left-${idx}" class="fa clear-btn base-btn base-btn-small" onclick="alignText(${idx}, 'left')"></button>
@@ -458,16 +461,6 @@ function renderTeam() {
 }
 
 function renderTeamMemeber(team, idx) {
-    // flex space-between align-start
-    // <div class="shape_row_even">
-    //         <div class="center">
-    //             <div class="about-img shape">
-    //                 <div class="shape1">
-    //                     <div class="shape2" style="background: url('${team.url}') center no-repeat"></div>
-    //                 </div>
-    //             </div>
-    //         </div>
-    //     </div>
 
     return `
     <div id="team-${idx}" class="${idx ? 'close' : 'open'} flex space-between align-start">

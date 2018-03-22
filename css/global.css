@@ -301,21 +301,21 @@ aside> p > span{
     line-height: 21.56px;
 }
 
-.contact-input ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+::-webkit-input-placeholder {
     color: #bebebe;
+    font-family: 'latoBold', sans-serif;
+}
+
+::-ms-input-placeholder {
+    color: #bebebe;
+    font-family: 'latoBold', sans-serif;
+}
+
+  .contact-input ::-webkit-input-placeholder { 
     padding-left: 15px;
   }
 
-  .contact-input ::-moz-placeholder { /* Firefox 19+ */
-    color: #bebebe;
-    padding-left: 15px;
-  }
-  .contact-input ::-ms-input-placeholder { /* IE 10+ */
-    color: #bebebe;
-    padding-left: 15px;
-  }
-  .contact-input ::-moz-placeholder { /* Firefox 18- */
-    color: #bebebe;
+  .contact-input ::-ms-input-placeholder {
     padding-left: 15px;
   }
 
@@ -451,11 +451,16 @@ input[type=text], input[type=url]{
 
 .img-grid-btn {
     padding: 10px;
-    background: #2eb398;
-    color: white;
+    color: #20816d;
     font-size: 17px;
-    border: 1px solid grey;
+    border: 1px solid transparent;
+    background-color: transparent;
     border-left: none;
+    width: 40px;
+}
+
+.add-img {
+    margin-bottom: 10px;
 }
 
 .search{

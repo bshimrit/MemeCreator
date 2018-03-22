@@ -10,12 +10,13 @@ var INITIAL_BOTTOM_Y = 270;
 var gNextId;
 var gImgs;
 var gMeme;
+var gCurTeamIdx = 0;
 var gteams = [
     {
         id: 1,
         url: 'img/team/1.jpg',
         name: 'Ilana',
-        title: 'developer',
+        title: 'front end developer',
         description: 'I do everything!',
         facebook: '',
         twitter: '',
@@ -29,7 +30,7 @@ var gteams = [
         url: 'img/team/2.jpg',
         name: 'Shimrit',
         title: 'developer',
-        description: 'I do everything!',
+        description: 'front end developer',
         facebook: '',
         twitter: '',
         google: '',
@@ -74,18 +75,16 @@ function getCanvasWidth() {
 function createImgs() {
     var imgs = [];
 
-    imgs.push(createImg('img/meme/img01.jpg', ['tree', 'green', 'mountain', 'field']));
-    imgs.push(createImg('img/meme/img02.jpg', ['water', 'field', 'sunrise', 'sky']));
-    imgs.push(createImg('img/meme/img03.jpg', ['wheat', 'field', 'sky']));
-
-    //TODO: fix data
-    imgs.push(createImg('img/meme/img01.jpg', ['tree', 'green', 'mountain', 'field']));
-    imgs.push(createImg('img/meme/img02.jpg', ['water', 'field', 'sunrise', 'sky']));
-    imgs.push(createImg('img/meme/img03.jpg', ['wheat', 'field', 'sky']));
-    imgs.push(createImg('img/meme/img01.jpg', ['tree', 'green', 'mountain', 'field']));
-    imgs.push(createImg('img/meme/img02.jpg', ['water', 'field', 'sunrise', 'sky']));
-    imgs.push(createImg('img/meme/img03.jpg', ['wheat', 'field', 'sky']));
-    imgs.push(createImg('img/meme/img03.jpg', ['wheat', 'field', 'sky']));
+    imgs.push(createImg('img/meme/img01.jpg', ['cartoon', 'surprised', 'yelling','All']));
+    imgs.push(createImg('img/meme/img02.jpg', ['dog', 'cute','animal','All']));
+    imgs.push(createImg('img/meme/img03.jpg', ['what?', 'angry', 'black','All']));
+    imgs.push(createImg('img/meme/img04.jpg', ['matrix', 'movie','All']));
+    imgs.push(createImg('img/meme/img05.jpg', ['cartoon', 'movie', 'spiderman','All']));
+    imgs.push(createImg('img/meme/img06.jpg', ['cartoon', 'movie', 'toy story','one day','All']));
+    imgs.push(createImg('img/meme/img07.jpg', ['cartoon', 'batman', 'slap','All']));
+    imgs.push(createImg('img/meme/img08.jpg', ['cute', 'cat', 'animal', 'cartoon','All']));
+    imgs.push(createImg('img/meme/img09.jpg', ['dance', 'kids', 'black','cute','All']));
+    imgs.push(createImg('img/meme/img10.jpg', ['Haim', 'tv', 'יצאת צדיק']));
 
     return imgs;
 }
@@ -123,10 +122,9 @@ function renderImgs(imgs) {
     var strHtml = '';
 
     var strHtmls = imgs.map(function (img, idx) {
-        strHtml = `<img  id="${img.id}" src="${img.url}" onclick="openMemeEditor(this)"/>`;
+        strHtml = `<img  class="pointer" id="${img.id}" src="${img.url}" onclick="openMemeEditor(this)"/>`;
         return strHtml;
     });
-    // strHtmls.push(`<img src="img/addimg.png" onclick="addImg()"/>`);
 
     var elImgGrid = document.querySelector('.img-grid');
     elImgGrid.innerHTML = strHtmls.join('');
@@ -138,14 +136,14 @@ function searchImgInput() {
 }
 
 function renderWords(imgs) {
-    var MIN_SIZE = 5;
+    var MIN_SIZE = 15;
     var keywords = createKeywordsForImgs(imgs);
     var wordCountMap = createkeywordsMap(keywords);
     var strHtmls = '';
 
     for (var key in wordCountMap) {
         var count = wordCountMap[key];
-        strHtmls += `<span style="font-size: ${MIN_SIZE * count}px" onclick="searchImg('${key}')">${key}</span>`;
+        strHtmls += `<span class="pointer" style="font-size: ${MIN_SIZE * count}px" onclick="searchImg('${key}')">${key}</span>`;
     }
 
     var wordsCloud = document.querySelector('.filter-cloud');
@@ -153,17 +151,23 @@ function renderWords(imgs) {
 }
 
 function searchImg(searchValue) {
-    var filteredImgs = gImgs.filter(function (img) {
-        return img.keywords.indexOf(searchValue) !== -1;
-    });
+    var filteredImgs = [];  
+    if (searchValue === ''){
+        filteredImgs = gImgs;
+    } else {
+        filteredImgs = gImgs.filter(function (img) {
+            return img.keywords.indexOf(searchValue) !== -1;
+        });
+    }
 
     renderImgs(filteredImgs);
 }
 
 function addImg() {
     var elImgInput = document.querySelector('#imgFiles');
-    var filename = elImgInput.value.replace(/^.*[\\\/]/, '');
-    gImgs.push(createImg('img/meme/' + filename, []));
+    // var filename = elImgInput.value.replace(/^.*[\\\/]/, '');
+    // gImgs.push(createImg('img/meme/' + filename, []));
+    gImgs.push(createImg(elImgInput.value,['All']));
     renderImgs(gImgs);
     elImgInput.value = '';
 }
@@ -171,14 +175,13 @@ function addImg() {
 function openMemeEditor(elImg) {
     updMeme(elImg);
     renderMeme(gMeme);
-    toggleWin();
+    changeMainView();
+    
 }
 
 function updMeme(elImg) {
     gMeme.selectedImgId = parseInt(elImg.id);
 }
-
-
 
 function renderMeme(meme) {
     var canvas = document.getElementById('meme-canvas');
@@ -190,6 +193,7 @@ function renderMeme(meme) {
     img.src = memeImg.url;
 
     img.onload = function () {
+        // debugger;
         canvas.width = img.width;
         canvas.height = img.height;
         context.drawImage(img, 0, 0, img.width, img.height);
@@ -210,8 +214,9 @@ function changeMemeText(elInput) {
 function alignText(idx, direction) {
     var width = getCanvasWidth();
     var rightX = width - gMeme.txts[idx].size - INITIAL_X;
-    var centerX = (width / 2 - gMeme.txts[idx].size);
-
+    var centerX = width / 2 - gMeme.txts[idx].size;
+    
+    // debugger;
 
     switch (direction) {
         case 'right':
@@ -236,13 +241,14 @@ function getIdxFromStr(idxStr) {
     return idx;
 }
 
-function toggleWin() {
-    var elOpen = document.querySelector('.open');
-    var elClose = document.querySelector('.close');
-    elOpen.classList.toggle('open');
-    elOpen.classList.toggle('close');
-    elClose.classList.toggle('open');
-    elClose.classList.toggle('close');
+function toggleWin(elObject) {
+    elObject.classList.toggle('open');
+    elObject.classList.toggle('close');
+}
+
+function changeMainView(){
+    toggleWin(document.querySelector('.img-wrapper'));
+    toggleWin(document.querySelector('.meme-container'));
 }
 
 function drawTextForTxts(gMeme, context) {
@@ -254,6 +260,8 @@ function drawTextForTxts(gMeme, context) {
 function drawTextForTxt(context, txt) {
     context.fillStyle = txt.color;
     context.lineStyle = "#ffff00";
+    // context.font = txt.size + "px sans-serif";
+    context.textAlign = txt.align;
     context.font = txt.size + "px" + " " + txt.font;
     context.shadowColor = txt.shadowColor;
     context.shadowBlur = txt.blur;
@@ -277,28 +285,30 @@ function renderNewLine(txt, idx) {
 
     return `
     <div class="meme-txt-wrapper">  
-        <input class="meme-line-txt" id="txt-input-${idx}" placeholder="Enter your text here" oninput="changeMemeText(this)"></input>
-        <div clas="txt-ctrl flex justify-center" id=txt-${idx}>
-            <button id="btn-left-${idx}" onclick="alignText(${idx}, 'left')">left</button>
-            <button id="btn-center-${idx}" onclick="alignText(${idx}, 'center')">center</button>
-            <button id="btn-right-${idx}" onclick="alignText(${idx}, 'right')">right</button>
-            <button onclick="increaseFont(${idx})">+</button>
-            <button onclick="decreaseFont(${idx})">-</button>
-            <label for="color">Color</label>
-            <input type="color" name="color" id="input-color-${idx}" onchange="changeFontColor(this, ${idx})"></input>
-            </br>
-            <label for="txt-shadow-color">Text shadow</label>
-            <input type="checkbox" name="txt-shadow" onchange="switchShadow(this,${idx})"></input>
-            <label for="txt-font">Font</label>
+        <div>
+            <input type="text" class="meme-line-txt" id="txt-input-${idx}" placeholder="${txt}" oninput="changeMemeText(this)"></input>
+        </div>
+        <div class="txt-ctrl flex justify-start flex-wrap" id=txt-${idx}>
+            <button id="btn-left-${idx}" class="fa clear-btn base-btn base-btn-small" onclick="alignText(${idx}, 'left')"></button>
+            <button id="btn-center-${idx}" class="fa clear-btn base-btn base-btn-small" onclick="alignText(${idx}, 'center')"></button>
+            <button id="btn-right-${idx}" class="fa clear-btn base-btn base-btn-small" onclick="alignText(${idx}, 'right')"></button>
+            <button class="fa clear-btn base-btn base-btn-small" onclick="increaseFont(${idx})"></button>
+            <button class="fa clear-btn base-btn base-btn-small" onclick="decreaseFont(${idx})"></button>
+            <input class="base-btn base-btn-small" type="color" name="color" id="input-color-${idx}" onchange="changeFontColor(this, ${idx})" value="${gMeme.txts[idx].color}"></input>
+            <button class="fa clear-btn base-btn base-btn-small" onclick="moveUp(${idx})"></button>
+            <button class="fa clear-btn base-btn base-btn-small" onclick="moveDown(${idx})"></button>
+            <button id=btn-${idx} class="fa clear-btn base-btn base-btn-small" onclick="deleteLine(this)"></button>
+            <label class="fa cb-container">Shadow
+                <input  type="checkbox" onchange="switchShadow(this,${idx})">
+                <span class="checkmark"></span>
+            </label>
+            </div>
             <form>
-            <select id = "font" onchange="changeFont(this,${idx})">
+            <label class="fa" for="txt-font"></label>
+            <select id = "font" onchange = "changeFont(this,${idx})">
              ${options}
             </select>
              </form>
-            <button onclick="moveUp(${idx})">up</button>
-            <button onclick="moveDown(${idx})">down</button>
-            <button id=btn-${idx} onclick="deleteLine(this)">Delete</button>
-        </div>
     </div>
     `;
 }
@@ -419,7 +429,7 @@ function createNewLineObject(x, y) {
         size: 20,
         font: 'impactRegular',
         align: 'center',
-        color: '#fff',
+        color: '#ffffff',
         shadowColor: "rgba(0,0,0,0)",
         blur: 0,
         x: x,
@@ -438,38 +448,53 @@ function renderTeam() {
     elAbout.innerHTML = strHtmls.join('');
 }
 
-function renderTeamMemeber(team) {
+function renderTeamMemeber(team, idx) {
+    // flex space-between align-start
+    // <div class="shape_row_even">
+    //         <div class="center">
+    //             <div class="about-img shape">
+    //                 <div class="shape1">
+    //                     <div class="shape2" style="background: url('${team.url}') center no-repeat"></div>
+    //                 </div>
+    //             </div>
+    //         </div>
+    //     </div>
+
     return `
+    <div id="team-${idx}" class="${idx ? 'close' : 'open'} flex space-between align-start">
         <div class="about-img">
         <img src=${team.url} />
         </div>
-        <div class="about-info flex flex-column align-start" id="about">
-            <h1>${team.name}</h1>
-            <h2>${team.title}</h2>
-            <p>${team.description}</p>
-            <div class="social flex">
-                <ul class="clean-list inline-flex">
-                    <li class="fa facebook pointer flex justify-center align-center">
-                        <a href="${team.facebook}"></a>
-                    </li>
-                    <li class="fa twitter pointer flex justify-center align-center">
-                        <a href="${team.twitter}"></a>
-                    </li>
-                    <li class="fa google-plus pointer flex justify-center align-center">
-                        <a href="${team.google}"></a>
-                    </li>
-                    <li class="fa pinterest pointer flex justify-center align-center">
-                        <a href="${team.pintrest}"></a>
-                    </li>
-                    <li class="fa linkedin pointer flex justify-center align-center">
-                        <a href="${team.linkedin}"></a>
-                    </li>
-                    <li class="fa dribbble pointer flex justify-center align-center">
-                        <a href="${team.dribble}"></a>
-                    </li>
-                </ul>
+            <div class="about-info flex flex-column justify-start align-start" id="about">
+                <h1>${team.name}</h1>
+                <h2>${team.title}</h2>
+                <p>${team.description}</p>
+                <div class="social flex">
+                    <ul class="clean-list inline-flex">
+                        <li class="fa facebook pointer flex justify-center align-center">
+                            <a href="${team.facebook}"></a>
+                        </li>
+                        <li class="fa twitter pointer flex justify-center align-center">
+                            <a href="${team.twitter}"></a>
+                        </li>
+                        <li class="fa google-plus pointer flex justify-center align-center">
+                            <a href="${team.google}"></a>
+                        </li>
+                        <li class="fa pinterest pointer flex justify-center align-center">
+                            <a href="${team.pintrest}"></a>
+                        </li>
+                        <li class="fa linkedin pointer flex justify-center align-center">
+                            <a href="${team.linkedin}"></a>
+                        </li>
+                        <li class="fa dribbble pointer flex justify-center align-center">
+                            <a href="${team.dribble}"></a>
+                        </li>
+                    </ul>
+                </div>
             </div>
+            <button class="fa pointer clear-btn" onclick="changeTeamMember()"></button>
         </div>
+    </div>
     `;
 }
 
@@ -478,3 +503,13 @@ function downloadCanvas(elBtn) {
     elBtn.href = dataURL;
 }
 
+function changeTeamMember(){
+    var elCurTeamMember = document.getElementById('team-'+ gCurTeamIdx);
+    toggleWin(elCurTeamMember);
+    
+    gCurTeamIdx++;
+    gCurTeamIdx = (gCurTeamIdx >= gteams.length ? 0 : gCurTeamIdx);
+    var elTeamMember = document.getElementById('team-' + gCurTeamIdx);
+    toggleWin(elTeamMember);
+
+}

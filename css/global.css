@@ -304,20 +304,19 @@ aside> p > span{
 ::-webkit-input-placeholder {
     color: #bebebe;
     font-family: 'latoBold', sans-serif;
+    padding-left: 15px;
+    /* position: absolute; */
+}
+
+.form-msg {
+    position: relative;
 }
 
 ::-ms-input-placeholder {
     color: #bebebe;
     font-family: 'latoBold', sans-serif;
+    padding-left: 15px;
 }
-
-  .contact-input ::-webkit-input-placeholder { 
-    padding-left: 15px;
-  }
-
-  .contact-input ::-ms-input-placeholder {
-    padding-left: 15px;
-  }
 
 
 .form-send{
@@ -441,13 +440,13 @@ aside> p > span{
     height: 37px;
 }
 
-input[type=text], input[type=url]{
+.input-base {
     padding: 10px;
-    font-size: 17px;
-    border: 1px solid grey;
-    background: #f1f1f1;
+    font-size: 12px;
+    border: 1px solid transparent;
+    background: #454545;
+    font-family: 'LatoRegular', sans-serif;
 }
-
 
 .img-grid-btn {
     padding: 10px;
@@ -539,7 +538,6 @@ input[type=text], input[type=url]{
     font-family: 'LatoRegular', sans-serif;
     font-size: 12px;
     margin-bottom: 40px;
-    /* text-transform: capitalize; */
     overflow: hidden;
     max-height: 190px;
 }
@@ -609,8 +607,11 @@ small {
     padding: 0;
 }
 
-.info-grid input.form-msg{
+
+.info-grid textarea.form-msg{
+    grid-column: 1 / 9;
     grid-row: span 4;
+    padding-left: 0; 
 }
 
 .info-grid button{

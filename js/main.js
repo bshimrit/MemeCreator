@@ -129,7 +129,6 @@ function addNewLine() {
 }
 
 function deleteLine(elBtn) {
-    debugger;
     var idx = elBtn.id.split('-')[1];
     gMeme.txts.splice(idx, 1);
     renderTxtContainer();
@@ -149,7 +148,6 @@ function changeTeamMember() {
     gCurTeamIdx = (gCurTeamIdx >= gteams.length ? 0 : gCurTeamIdx);
     var elTeamMember = document.getElementById('team-' + gCurTeamIdx);
     toggleWin(elTeamMember);
-
 }
 
 
@@ -158,13 +156,6 @@ function toggleMenu(elHamburger) {
     mainMenu.classList.toggle('open');
     elHamburger.classList.toggle('open');
 }
-
-// function searchImgInput() {
-//     var searchValue = document.querySelector('.search input').value;
-//     searchImg(searchValue);
-// }
-
-
 
 //** imges ** //
 function createImgs() {
@@ -361,188 +352,3 @@ function renderTeamMemeber(team, idx) {
     </div>
     `;
 }
-
-
-
-
-// function getIdxFromStr(idxStr) {
-//     var idx = +idxStr.substring((0, idxStr.lastIndexOf('-') + 1));
-//     return idx;
-// }
-
-// function renderTxtContainer() {
-//     var strHtml = '';
-//     var strHtmls = gMeme.txts.map(function (txt, idx) {
-//         strHtml = renderNewLine(txt.line, idx);
-//         return strHtml;
-//     });
-
-//     var elEditTxtCon = document.querySelector('.edit-txt-container');
-//     elEditTxtCon.innerHTML = strHtmls.join('');
-// }
-
-// function renderNewLine(txt, idx) {
-//     var width = getCanvasWidth();
-//     var options = renderOptions();
-
-//     return `
-//     <div class="meme-txt-wrapper">  
-//         <div>
-//             <input type="text" class="input-base meme-line-txt" id="txt-input-${idx}" placeholder="Enter your text here" oninput="changeMemeText(this)"></input>
-//         </div>
-//         <div class="txt-ctrl flex justify-start flex-wrap" id=txt-${idx}>
-//             <button id="btn-left-${idx}" class="fa clear-btn base-btn base-btn-small" onclick="alignText(${idx}, 'left')"></button>
-//             <button id="btn-center-${idx}" class="fa clear-btn base-btn base-btn-small" onclick="alignText(${idx}, 'center')"></button>
-//             <button id="btn-right-${idx}" class="fa clear-btn base-btn base-btn-small" onclick="alignText(${idx}, 'right')"></button>
-//             <button class="fa clear-btn base-btn base-btn-small" onclick="increaseFont(${idx})"></button>
-//             <button class="fa clear-btn base-btn base-btn-small" onclick="decreaseFont(${idx})"></button>
-//             <input class="base-btn base-btn-small" type="color" name="color" id="input-color-${idx}" onchange="changeFontColor(this, ${idx})" value="${gMeme.txts[idx].color}"></input>
-//             <button class="fa clear-btn base-btn base-btn-small" onclick="moveUp(${idx})"></button>
-//             <button class="fa clear-btn base-btn base-btn-small" onclick="moveDown(${idx})"></button>
-//             <button id=btn-${idx} class="fa clear-btn base-btn base-btn-small" onclick="deleteLine(this)"></button>
-//             <label class="fa cb-container">Shadow
-//                 <input type="checkbox" onchange="switchShadow(this,${idx})">
-//                 <span class="checkmark"></span>
-//             </label>
-//             </div>
-//             <form>
-//             <label class="fa" for="txt-font"></label>
-//             <select id = "font" onchange = "changeFont(this,${idx})">
-//              ${options}
-//             </select>
-//              </form>
-//     </div>
-//     `;
-// }
-
-// function renderOptions() {
-//     var fonts = [{ fontName: "impactRegular", displayedText: "Impact" },
-//     { fontName: "Verdana", displayedText: "Verdana" },
-//     { fontName: "Comic Sans MS", displayedText: "Comic Sans MS" },
-//     { fontName: "Times New Roman", displayedText: "Times New Roman" },
-//     { fontName: "Arial Black", displayedText: "Arial Black" }
-//     ];
-
-//     var strHtmls = '';
-//     var options = fonts.map(function (font) {
-//         strHtmls += `<option value ="${font.fontName}">${font.displayedText}</option>`;
-//     });
-
-//     return strHtmls;
-// }
-
-// function getElInput(idx) {
-//     return document.getElementById('txt-input-' + idx);
-// }
-
-// function changeFontColor(elFontColor, idx) {
-//     gMeme.txts[idx].color = elFontColor.value;
-//     renderMeme(gMeme);
-// }
-
-// function addNewLine() {
-//     var y = calcNewY();
-//     var height = getCanvasHeight();
-//     var max = (gMeme.txts.length > 0) ? INITIAL_BOTTOM_Y - gMeme.txts[gMeme.txts.length - 1].size : height;
-
-//     if (y < max) {
-//         gMeme.txts.push(createNewLineObject(INITIAL_X, y));
-//         renderMeme(gMeme);
-
-//         var idx = gMeme.txts.length - 1;
-//         var elEditTxtCon = document.querySelector('.edit-txt-container');
-//         elEditTxtCon.innerHTML += renderNewLine(gMeme.txts[idx].line, idx);
-//     }
-// }
-
-// function calcNewY() {
-//     var y = gMeme.txts.reduce(function (acc, txt) {
-//         acc += txt.size;
-//         return acc;
-//     }, INITIAL_TOP_Y)
-
-//     return y;
-// }
-
-// function deleteLine(elBtn) {
-//     var idx = elBtn.id.split('-')[1];
-//     gMeme.txts.splice(idx, 1);
-//     renderTxtContainer();
-//     renderMeme(gMeme);
-// }
-
-// function renderTeam() {
-//     var strHtml = '';
-//     var strHtmls = gteams.map(function (team, idx) {
-//         strHtml = renderTeamMemeber(team, idx);
-//         return strHtml;
-//     });
-
-//     var elAbout = document.querySelector('.about-container');
-//     elAbout.innerHTML = strHtmls.join('');
-// }
-
-// function renderTeamMemeber(team, idx) {
-
-//     return `
-//     <div id="team-${idx}" class="${idx ? 'close' : 'open'} flex space-between align-start">
-//         <div class="about-img">
-//         <img src=${team.url} />
-//         </div>
-//             <div class="about-info flex flex-column justify-end" id="about">
-//                 <div class="info">
-//                 <h1>${team.name}</h1>
-//                 <h2>${team.title}</h2>
-//                 <p>${team.description}</p>
-//                 </div>
-//                 <div class="social flex">
-//                     <ul class="clean-list inline-flex">
-//                         <li class="fa facebook pointer flex justify-center align-center">
-//                             <a href="${team.facebook}"></a>
-//                         </li>
-//                         <li class="fa twitter pointer flex justify-center align-center">
-//                             <a href="${team.twitter}"></a>
-//                         </li>
-//                         <li class="fa google-plus pointer flex justify-center align-center">
-//                             <a href="${team.google}"></a>
-//                         </li>
-//                         <li class="fa pinterest pointer flex justify-center align-center">
-//                             <a href="${team.pintrest}"></a>
-//                         </li>
-//                         <li class="fa linkedin pointer flex justify-center align-center">
-//                             <a href="${team.linkedin}"></a>
-//                         </li>
-//                         <li class="fa dribbble pointer flex justify-center align-center">
-//                             <a href="${team.dribble}"></a>
-//                         </li>
-//                     </ul>
-//                 </div>
-//             </div>
-//             <button class="fa pointer clear-btn" onclick="changeTeamMember()"></button>
-//         </div>
-//     </div>
-//     `;
-// }
-
-// function downloadCanvas(elBtn) {
-//     var dataURL = document.getElementById('meme-canvas').toDataURL();
-//     elBtn.href = dataURL;
-// }
-
-// function changeTeamMember() {
-//     var elCurTeamMember = document.getElementById('team-' + gCurTeamIdx);
-//     toggleWin(elCurTeamMember);
-
-//     gCurTeamIdx++;
-//     gCurTeamIdx = (gCurTeamIdx >= gteams.length ? 0 : gCurTeamIdx);
-//     var elTeamMember = document.getElementById('team-' + gCurTeamIdx);
-//     toggleWin(elTeamMember);
-
-// }
-
-
-// function toggleMenu(elHamburger) {
-//     var mainMenu = document.querySelector('.main-menu ul');
-//     mainMenu.classList.toggle('open');
-//     elHamburger.classList.toggle('open');
-// }

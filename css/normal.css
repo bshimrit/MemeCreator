@@ -13,11 +13,6 @@
     display: none;
 }
 
-ul{
-    display: flex;
-    flex-direction: row;
-} 
-
 .main-menu > ul> li{
     padding: 0;
     display: block;

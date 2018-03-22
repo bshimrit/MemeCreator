@@ -26,10 +26,6 @@ ul{
     flex-direction: row;
 }
 
-/* ul.logo, li.front-img, li.back-img{
-    display: block;
-} */
-
 .filters-container {
     display:block;
 }

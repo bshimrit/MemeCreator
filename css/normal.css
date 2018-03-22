@@ -7,17 +7,11 @@
     background-color: #323232;
     height: 90px;
     position: static;
-    /* transform: translate(0, 0); */
-    /* padding: 20px; */
 }
 
 .hamburger {
     display: none;
 }
-/* 
-ul.logo, li.front-img, li.back-img{
-    display: block;
-} */
 
 ul{
     display: flex;

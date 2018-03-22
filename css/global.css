@@ -251,20 +251,12 @@ ul{
 .main-menu {
     background-color: #323232;
     z-index: 1;
-    /* height: 90px; */
-    /* display: flex; */
     flex-direction: row; 
     position: fixed;
     top: 0;
     right: 0;
-    /* background-color: #292929; */
     height: 100vh;
     padding: 20px;
-    /* opacity: 0.8; */
-    /* transform: translate(100%, 0); */
-
-    /* transform: translate(0, 0);
-    transition: transform .5s; */
 }
 
 .main-menu ul> li{
@@ -272,13 +264,10 @@ ul{
 }
 
 .main-menu.open {
-    /* transform: translate(0, 0); */
     flex-direction: column; 
-    /* transform: translate(0, 100%); */
 }
 
 .main-menu ul.open> li{
-    /* transform: translate(0, 0); */
   display: block;
 }
 
@@ -286,14 +275,6 @@ ul{
     display: block;
     transition: transform .5s
 }
-
-/* ul.logo, li.front-img, li.back-img{
-    display: none;
-} */
-
-/* .hamburger.open {
-    transform: translate(-180px);
-} */
 
 .main-menu li a{
     color: #ffffff;

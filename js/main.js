@@ -201,11 +201,7 @@ function renderMeme(meme) {
     img.src = memeImg.url;
 
     img.onload = function () {
-<<<<<<< HEAD
         canvas.width = Math.min(img.width,window.innerWidth - 40);
-=======
-        canvas.width = img.width;
->>>>>>> e4b4216ff552d25db786b9e6e9e296c75e5896a1
         canvas.height = img.height;
 
         var height = getCanvasHeight();

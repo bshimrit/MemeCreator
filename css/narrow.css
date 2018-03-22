@@ -10,3 +10,16 @@
 .img-grid {
     width: 66.666%;
 }
+
+.meme-container {
+    flex-direction: row;
+}
+
+.meme-controls {
+    width: 40%;
+}
+
+.img-grid>img{
+    grid-column: span 4;
+    grid-row: span 4;
+}

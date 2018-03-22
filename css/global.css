@@ -14,13 +14,19 @@
 /*---Lato-Bold----- */
 @font-face {
     font-family: latoBold; 
-    src: url('../fonts/Lato-Bold.ttf');
+    src: url('../fonts/Lato/Lato-Bold.ttf');
 }
 
 /*---Lato-Regular----- */
 @font-face {
     font-family: latoRegular; 
-    src: url('../fonts/Lato-Regular.ttf');
+    src: url('../fonts/Lato/Lato-Regular.ttf');
+
+}
+/*---Maven-Pro-Regular----- */
+@font-face {
+    font-family: MavenProRegular; 
+    src: url('../fonts/MavenPro/MavenProRegular.ttf');
 }
 
 /*---Impact----- */
@@ -105,6 +111,9 @@ h1 {
     margin: 0;
 }
 
+a:visited {
+    color: initial;
+}
 
 /*----Helpers----*/
 
@@ -125,6 +134,10 @@ h1 {
     margin: 0 auto;
     width: 100%;
     z-index: 100;
+}
+
+.pointer:hover{
+    cursor: pointer;
 }
 
 /*---flex---*/
@@ -191,19 +204,24 @@ footer {
     height: 40px;
 }
 
-li a:visited {
-    color: #fff;
-}
+
 .main-menu {
     background-color: #323232;
     height: 90px;
 }
 
+.main-menu li a{
+    color: #ffffff;
+}
 .main-menu li a:hover {
     color: #2eb398;
 }
 
 .main-menu li:not(:last-child) {
+    margin-right: 20px;
+}
+
+.ctrl-btns li:not(:last-child){
     margin-right: 20px;
 }
 
@@ -233,7 +251,7 @@ li a:visited {
 }
 
 /***** main ********/
-.add-img button{
+.base-btn{
     border-radius: 50%;
     font-size: 18px;
     text-transform: uppercase;
@@ -242,25 +260,44 @@ li a:visited {
     background-color: #2eb398;
 }
 
-.add-img button:hover{
+.base-btn:hover {
     color: #fff;
 }
 
-.add-img input{
+.base-btn-small {
+    margin-right: 3px;
+    margin-bottom: 3px;
+    font-size: 14px;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.txt-ctrl {
+    margin-top: 20px;
+}
+/* .add-img input{
     display: none;
+} */
+
+.txt-ctrl input[type="color"] {
+    padding: 1px 2px;
+    width: 33px;
+    height: 33px;
 }
 
 .img-grid {
     display: grid;
-    grid-template-columns: repeat(12, 1fr);
+    grid-template-columns: repeat(12,1fr);
     grid-gap: 20px;
     width: 100%;
     margin-top: 20px;
 }
 
 .img-grid>img{
-    grid-column: span 4;
-    grid-row: span 4;
+    grid-column: span 6;
+    grid-row: span 6;
+    height: 150px;
+    margin: 0 auto;
 }
 
 .filters-container {
@@ -273,16 +310,21 @@ li a:visited {
     color: #2eb398;
 }
 
+.filter-cloud {
+    /* height: 50vh; */
+    font-size: 15px;
+}
 .filter-cloud>span:not(:first-child){
     margin-left: 10px;
 }
 
 .social {
-    margin-left:calc(100% - 150px);
+    margin-left:calc(100% - 230px);
 }
 
 .social li {
-    width: 25px;
+    /* width: 25px; */
+    padding: 12.5px;
 }
 
 .contact-input {
@@ -302,12 +344,10 @@ li a:visited {
     width: 25%;
 }
 
-.search input[type=text] {
+input[type=text], input[type=url]{
     padding: 10px;
     font-size: 17px;
     border: 1px solid grey;
-    float: left;
-    width: 80%;
     background: #f1f1f1;
 }
 
@@ -320,7 +360,6 @@ li a:visited {
     font-size: 17px;
     border: 1px solid grey;
     border-left: none;
-    cursor: pointer;
 }
 
 .search{
@@ -331,6 +370,11 @@ li a:visited {
     margin: 0 auto;
 }
 
+.meme-controls{
+    width: 70%; 
+    margin-left: 40px;
+
+}
 .meme-img {
     position: relative;
 }
@@ -353,6 +397,10 @@ li a:visited {
 
 .about-img{
     width: 30.333%;
+    /* for shape */
+    /* display: inline-block;
+    margin: 0 auto -275px auto;
+    overflow: hidden; */
 }
 
 .about-info{
@@ -361,14 +409,51 @@ li a:visited {
 
 .about-info h1 {
     color: #d7fcf5;
+    font-family: 'MavenProRegular', sans-serif;
     font-size:30px;
     text-transform: capitalize;
 }
 
 .about-info h2 {
     color: #20816d;
+    font-family: 'MavenProRegular', sans-serif;
     font-size: 18px;
     text-transform: capitalize;
+}
+
+.about-info p {
+    color: #d7fcf5;
+    font-family: 'LatoRegular', sans-serif;
+    font-size: 12px;
+    /* text-transform: capitalize; */
+}
+
+.about-container button {
+    font-size: 40px;
+}
+
+.about-container button:hover {
+    color: #ffffff;
+}
+
+
+.facebook {
+    background-color: #3660a0;
+}
+.twitter {
+    background-color: #2daae1;
+}
+.google-plus {
+    background-color: #db5643;
+}
+.pinterest {
+    background-color: #cb2127;
+}
+.linkedin {
+    background-color: #3278a3;
+}
+.dribbble {
+    background-color: #f06d9c;
 }
 
 .about {
@@ -395,31 +480,104 @@ small {
 }
 
 
+
 /****** shape *****/
-.shape {
-    position: relative;
-    width: 300px; 
-    height: 173.21px;
-    background-color: #64C7CC;
-    margin: 86.60px 0;
+/* .shape {
+    transform: rotate(120deg);
+    height: 440px;
+    overflow: hidden;
+    visibility: hidden;
+    width: 220px;
   }
   
-  .shape:before,
-  .shape:after {
+.shape1 {
+    transform: rotate(-60deg);
+    height: 100%;
+    overflow: hidden;
+    width: 100%;
+}
+
+.shape2 {
+    transform: rotate(-60deg);
+    height: 100%;
+    position: relative;
+    visibility: visible;
+    width: 100%;
+}
+
+.center {
+    float: left;
+    margin: 20px 10px;
+    width: 220px;
+  }
+  
+  .shape_row_even {
+    display: inline-block;
+    margin: 0 auto -275px auto;
+    overflow: hidden;
+  } */
+
+/***** check-box *******/
+
+.cb-container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 15px;
+
+    user-select: none;
+}
+
+.txt-ctrl .cb-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #323232;
+    border-radius: 5px;
+}
+
+/* On mouse-over, add a grey background color */
+.txt-ctrl .cb-container:hover input ~ .checkmark {
+    background-color: #2eb398;
+}
+
+/* When the checkbox is checked, add a blue background */
+.txt-ctrl .cb-container input:checked ~ .checkmark {
+    background-color: #2eb398;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
     content: "";
     position: absolute;
-    width: 0;
-    border-left: 150px solid transparent;
-    border-right: 150px solid transparent;
-  }
-  
-  .shape:before {
-    bottom: 100%;
-    border-bottom: 86.60px solid #64C7CC;
-  }
-  
-  .shape:after {
-    top: 100%;
-    width: 0;
-    border-top: 86.60px solid #64C7CC;
-  }
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.txt-ctrl .cb-container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+.txt-ctrl .cb-container .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}

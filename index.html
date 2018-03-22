@@ -39,16 +39,16 @@
     </header>
     <main>
         <div class="img-container">
-            <section class="container  open">
+            <section class="container img-wrapper open">
                 <div class="flex flex-column justify-start">
                     <div class="flex space-between">
                         <div class="add-img">
-                            <button class="fa clear-btn" onclick="document.getElementById('imgFiles').click();"></button>
-                            <input type="file" id="imgFiles" onchange="addImg()"/>
+                            <input type="url" placeholder="Add a new image from url" id="imgFiles"/>
+                            <button class="fa clear-btn base-btn pointer" onclick="addImg()"></button>
                         </div>
                         <div class="search">
                             <input type="text" placeholder="Search.." name="search2">
-                            <button type="submit" onclick="searchImgInput()">
+                            <button class="pointer" type="submit" onclick="searchImgInput()">
                                 <i class="fa"></i>
                             </button>
                         </div>
@@ -63,20 +63,25 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                
+                </div>  
             </section>
-            <section class="container meme-container flex space-between close">
+            <section class="meme-container container flex flex-column space-between close">
                 <div class="meme-img">
                     <canvas id="meme-canvas">
                     </canvas>
                 </div>
                 <div class="meme-controls flex flex-column justify-start"> 
-                    <div class="ctrl-btns flex justify-end">
-                        <button onclick="toggleWin()">Close</button>
-                        <a href="#" id="btn-save" download="myMeme.png" onclick="downloadCanvas(this)">Save</a>
-                        <button onClick="addNewLine()">Add line</button>
-                    </div>
+                    <ul class="ctrl-btns clean-list flex justify-end align-center">
+                        <li>
+                            <a href="#" id="btn-save" class="fa base-btn pointer" download="myMeme.png" onclick="downloadCanvas(this)"></a>
+                        </li>
+                        <li>
+                            <button class="fa clear-btn base-btn pointer" onClick="addNewLine()"></button>
+                        </li>
+                        <li>
+                            <button class="fa clear-btn base-btn pointer" onclick="changeMainView()"></button>
+                        </li>
+                    </ul>
                     <div class="edit-txt-container">
                         <!-- meme input fields come here -->
                     </div>

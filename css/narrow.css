@@ -62,3 +62,15 @@
 .hamburger {
     display: none;
 } 
+
+.base-btn.close-window{
+    position: absolute;
+    /* right: 0; */
+    left: 95%;
+    top: 14%;
+    background-color: lightgrey;
+}
+
+.main-menu{
+    display: block;
+}

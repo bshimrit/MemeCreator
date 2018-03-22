@@ -243,7 +243,8 @@ footer {
 
 .hamburger {
     display: block;
-    transition: transform .5s
+    color: black;
+    transition: transform .5s;
 }
 
 .main-menu li a{
@@ -296,6 +297,24 @@ footer {
 }
 
 /***** main ********/
+.form{
+    margin-left: 40px;
+}
+
+/* .base-btn.close-window{
+    position: absolute;
+    right: 0;
+    top: 14%;
+    background-color: lightgrey;
+} */
+
+.base-btn.close-window{
+    position: absolute;
+    left: 100%;
+    top: 5%;
+    background-color: lightgrey;
+}
+
 .contact-input > input{
     background-color: #454545;
     border: none;

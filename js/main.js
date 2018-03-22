@@ -132,6 +132,7 @@ function renderImgs(imgs) {
 
     var strHtmls = imgs.map(function (img, idx) {
         strHtml = `<img  class="pointer" id="${img.id}" src="${img.url}" onclick="openMemeEditor(this)"/>`;
+        // strHtml = `<div class="pointer" id="${img.id}" style="backgroundImage:url(${team.url})" onclick="openMemeEditor(this)"></div>`;
         return strHtml;
     });
 
@@ -255,6 +256,13 @@ function toggleWin(elObject) {
     elObject.classList.toggle('close');
 }
 
+function closeMeme(){
+    changeMainView();
+    gMeme = null;
+    gMeme = creategMeme();
+    renderTxtContainer();
+}
+
 function changeMainView(){
     toggleWin(document.querySelector('.img-wrapper'));
     toggleWin(document.querySelector('.meme-container'));
@@ -277,10 +285,8 @@ function drawTextForTxt(context, txt) {
 }
 
 function renderTxtContainer() {
-    var strHtml = '';
     var strHtmls = gMeme.txts.map(function (txt, idx) {
-        strHtml = renderNewLine(txt.line, idx);
-        return strHtml;
+        return renderNewLine(txt.line, idx);
     });
 
     var elEditTxtCon = document.querySelector('.edit-txt-container');
@@ -290,11 +296,10 @@ function renderTxtContainer() {
 function renderNewLine(txt, idx) {
     var width = getCanvasWidth();
     var options = renderOptions();
-
     return `
     <div class="meme-txt-wrapper">  
         <div>
-            <input type="text" class="input-base meme-line-txt" id="txt-input-${idx}" placeholder="Enter your text here" oninput="changeMemeText(this)"></input>
+            <input type="text" class="input-base meme-line-txt" id="txt-input-${idx}" oninput="changeMemeText(this)" value="${txt}"></input>
         </div>
         <div class="txt-ctrl flex justify-start flex-wrap" id=txt-${idx}>
             <button id="btn-left-${idx}" class="fa clear-btn base-btn base-btn-small" onclick="alignText(${idx}, 'left')"></button>
@@ -407,11 +412,14 @@ function addNewLine() {
 
     if (y < max) {
         gMeme.txts.push(createNewLineObject(INITIAL_X, y));
-        renderMeme(gMeme);
-
+        
         var idx = gMeme.txts.length - 1;
         var elEditTxtCon = document.querySelector('.edit-txt-container');
-        elEditTxtCon.innerHTML += renderNewLine(gMeme.txts[idx].line, idx);
+
+        
+        // elEditTxtCon.innerHTML += renderNewLine(gMeme.txts[idx].line, idx);
+        renderTxtContainer()
+        renderMeme(gMeme);
     }
 }
 
@@ -454,6 +462,8 @@ function renderTeam() {
 
     var elAbout = document.querySelector('.about-container');
     elAbout.innerHTML = strHtmls.join('');
+
+
 }
 
 function renderTeamMemeber(team, idx) {
@@ -519,4 +529,8 @@ function toggleMenu(elHamburger) {
     var mainMenu = document.querySelector('.main-menu ul');
     mainMenu.classList.toggle('open');
     elHamburger.classList.toggle('open');
+}
+
+function getInputs () {
+
 }

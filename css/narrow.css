@@ -9,21 +9,21 @@
     position: static;
 }
 
-.main-menu > ul> li{
+.main-menu ul li{
     padding: 0;
-    display: block;
+    display: flex;
 }
 
-.main-menu ul> li{
-    display: block;
+.main-menu>ul>li {
+    display: initial;
 }
-
 .hamburger {
     display: none;
 }
 
 .main-menu > ul{
     flex-direction: row;
+    padding-top: 20px;
 }
 
 .filters-container {

@@ -185,7 +185,6 @@ function openMemeEditor(elImg) {
     updMeme(elImg);
     renderMeme(gMeme);
     changeMainView();
-    
 }
 
 function updMeme(elImg) {
@@ -202,8 +201,16 @@ function renderMeme(meme) {
     img.src = memeImg.url;
 
     img.onload = function () {
+<<<<<<< HEAD
         canvas.width = Math.min(img.width,window.innerWidth - 40);
+=======
+        canvas.width = img.width;
+>>>>>>> e4b4216ff552d25db786b9e6e9e296c75e5896a1
         canvas.height = img.height;
+
+        var height = getCanvasHeight();
+        gMeme.txts[1].y = height - INITIAL_TOP_Y;
+
         context.drawImage(img, 0, 0, img.width, img.height);
         drawTextForTxts(gMeme, context);
     }
@@ -433,7 +440,7 @@ function createNewLineObject(x, y) {
         line: 'Your text will appear here',
         size: 20,
         font: 'impactRegular',
-        align: 'center',
+        align: 'start',
         color: '#ffffff',
         shadowColor: "rgba(0,0,0,0)",
         blur: 0,
@@ -460,7 +467,7 @@ function renderTeamMemeber(team, idx) {
         <div class="about-img">
         <img src=${team.url} />
         </div>
-            <div class="about-info flex flex-column justify-end align-start" id="about">
+            <div class="about-info flex flex-column justify-end" id="about">
                 <div class="info">
                 <h1>${team.name}</h1>
                 <h2>${team.title}</h2>

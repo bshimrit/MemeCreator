@@ -102,6 +102,8 @@ html {
     max-width: 980px;
     margin: 0 auto;
     width: 100%;
+    padding-right: 10px;
+    padding-left: 10px;
 }
 
 body {
@@ -416,7 +418,7 @@ aside> p > span{
 }
 
 .social li {
-    padding: 12.5px;
+    padding: 2.5px;
 }
 
 .contact-input {
@@ -489,13 +491,22 @@ input[type=text], input[type=url]{
 }
 
 .about-img{
-    width: 30.333%;
+    /* width: 30.333%; */
+
+    width: 50%;
+    /* for shape */
+    /* display: inline-block;
+    margin: 0 auto -275px auto;
+    overflow: hidden; */
+    margin-left: 20px;
 }
 
 .about-info{
-    width: 66.666%;
+    /* width: 66.666%; */
+    width: 50%;
     height: 297px;
     position: relative;
+    margin-left: 10px;
 }
 
 .info{
@@ -523,6 +534,8 @@ input[type=text], input[type=url]{
     font-size: 12px;
     margin-bottom: 40px;
     /* text-transform: capitalize; */
+    overflow: hidden;
+    max-height: 190px;
 }
 
 .about-container button {

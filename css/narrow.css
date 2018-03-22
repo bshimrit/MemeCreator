@@ -11,6 +11,7 @@
 
 .main-menu > ul> li{
     padding: 0;
+    display: block;
 }
 
 .main-menu ul> li{
@@ -57,3 +58,7 @@
 .about-info{
     width: 66.666%;
 }
+
+.hamburger {
+    display: none;
+} 

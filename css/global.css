@@ -216,8 +216,6 @@ aside> p > span{
     color: #bebebe;
     margin-top: 15px;
 }
-
- 
    
 a:visited {
     color: initial;
@@ -264,6 +262,11 @@ a:visited {
 .justify-start {
     justify-content: flex-start;
 }
+
+.justify-end {
+    justify-content: flex-end;
+}
+
 
 .align-center {
     align-items: center;
@@ -513,6 +516,13 @@ input[type=text], input[type=url]{
 
 .about-info{
     width: 66.666%;
+    height: 297px;
+    position: relative;
+}
+
+.info{
+    position: absolute;
+    top: 0;
 }
 
 .about-info h1 {
@@ -533,6 +543,7 @@ input[type=text], input[type=url]{
     color: #d7fcf5;
     font-family: 'LatoRegular', sans-serif;
     font-size: 12px;
+    margin-bottom: 40px;
     /* text-transform: capitalize; */
 }
 

@@ -128,10 +128,16 @@ h1 {
     margin: 0;
 }
 
-
+.social a{
+    color: black;
+}
    
-a:visited {
+.social a:visited {
     color: initial;
+}
+
+.social a:hover{
+    color: #ffffff;
 }
 
 /*----Helpers----*/

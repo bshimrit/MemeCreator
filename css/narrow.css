@@ -1,6 +1,29 @@
 .main-menu {
     padding: 30px 230px;
     font-size: 1em;
+
+    background-color: #323232;
+    height: 90px;
+    padding: 20px;
+    /* transform: translate(0, 0); */
+    position: static;
+}
+
+.main-menu > ul> li{
+    padding: 0;
+}
+
+.main-menu ul> li{
+    display: block;
+}
+
+.hamburger {
+    display: none;
+}
+
+ul{
+    display: flex;
+    flex-direction: row;
 }
 
 .filters-container {

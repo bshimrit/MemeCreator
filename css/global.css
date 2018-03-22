@@ -229,15 +229,51 @@ header {
     color: #fff;
 }
 
+.menu-btn{
+    color: white;
+    padding: 10px;
+}
+
 footer {
     background-color: #222222;
     height: 40px;
 }
 
+ul{
+    display: flex;
+    flex-direction: column;
+}
+
+.main-menu > ul> li{
+    padding: 60px 0;
+}
 
 .main-menu {
     background-color: #323232;
-    height: 90px;
+    z-index: 1;
+    flex-direction: row; 
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    padding: 20px;
+}
+
+.main-menu ul> li{
+    display: none;
+}
+
+.main-menu.open {
+    flex-direction: column; 
+}
+
+.main-menu ul.open> li{
+  display: block;
+}
+
+.hamburger {
+    display: block;
+    transition: transform .5s
 }
 
 .main-menu li a{
@@ -510,18 +546,11 @@ aside> p > span{
 }
 
 .about-img{
-    /* width: 30.333%; */
-
     width: 50%;
-    /* for shape */
-    /* display: inline-block;
-    margin: 0 auto -275px auto;
-    overflow: hidden; */
     margin-left: 20px;
 }
 
 .about-info{
-    /* width: 66.666%; */
     width: 50%;
     height: 297px;
     position: relative;
@@ -665,10 +694,16 @@ small {
     width: 25px;
 }
 
+<<<<<<< HEAD
 select {
     font-family: "latoBold", sans-serif;
 }
 
+=======
+
+
+
+>>>>>>> e5a0f7b6f3e261e7791dd216cc9796ebb0e574d8
 
 /****** shape *****/
 /* .shape {

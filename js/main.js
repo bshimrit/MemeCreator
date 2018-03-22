@@ -513,3 +513,10 @@ function changeTeamMember(){
     toggleWin(elTeamMember);
 
 }
+
+
+function toggleMenu(elHamburger) {
+    var mainMenu = document.querySelector('.main-menu ul');
+    mainMenu.classList.toggle('open');
+    elHamburger.classList.toggle('open');
+}

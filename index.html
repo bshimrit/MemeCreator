@@ -12,6 +12,7 @@
     <header>
         <nav class="main-menu">
             <ul class="clean-list flex space-between align-center">
+                <button class="fa hamburger menu-btn clear-btn" onclick="toggleMenu(this)"></button>
                 <li>
                     <a href="#">Portfolio</a>
                 </li>
@@ -32,8 +33,9 @@
                     <a href="#">Blog</a>
                 </li>
                 <li>
-                    <a href="#contactForm">Getintouch</a>
+                    <a href="#contactForm">Get in touch</a>
                 </li>
+                <!-- <button class="fa hamburger menu-btn clear-btn" onclick="toggleMenu(this)"></button> -->
             </ul>
         </nav>
     </header>
@@ -45,7 +47,7 @@
                         <div class="add-img">
                             <input class="input-base" type="url" placeholder="Add image from url...
                             
-                            " id="imgFiles"/>
+                            " id="imgFiles" />
                             <button class="fa img-grid-btn pointer" onclick="addImg()"></button>
                         </div>
                         <div class="search">
@@ -63,14 +65,14 @@
                             </div>
                         </div>
                     </div>
-                </div>  
+                </div>
             </section>
             <section class="meme-container container flex flex-column space-between close">
                 <div class="meme-img">
                     <canvas id="meme-canvas">
                     </canvas>
                 </div>
-                <div class="meme-controls flex flex-column justify-start"> 
+                <div class="meme-controls flex flex-column justify-start">
                     <ul class="ctrl-btns clean-list flex justify-start align-center">
                         <li>
                             <a href="#" id="btn-save" class="fa base-btn pointer" download="myMeme.png" onclick="downloadCanvas(this)"></a>
@@ -107,13 +109,16 @@
                         <input class="subject input-base" type="text" placeholder="Subject"></input>
                         <textarea class="form-msg input-base" type="text" placeholder="Write your message here..."></textarea>
                         <p class="company-info">
-                            <span>Quisque Hendrerit:</span> purus dapi-bus, ornare nibh vitae, viverra nibh. Fusce vitae aliquam tellus. 
-                            Proin sit amet volutpat libero. Nulla sed nunc et tortor luctus faucibus morbi vitae.
+                            <span>Quisque Hendrerit:</span> purus dapi-bus, ornare nibh vitae, viverra nibh. Fusce vitae aliquam
+                            tellus. Proin sit amet volutpat libero. Nulla sed nunc et tortor luctus faucibus morbi vitae.
                         </p>
-                        <div class = "company-contact">
-                            <p class="fa company-address"><span></span> Elm St. 14/05 Lost City</p>
-                            <p class="fa company-phone"><span></span> + 3528 331 86 35</p>
-                            <p class="fa company-email"><span></span> info@hexalcorp.com</p>
+                        <div class="company-contact">
+                            <p class="fa company-address">
+                                <span></span> Elm St. 14/05 Lost City</p>
+                            <p class="fa company-phone">
+                                <span></span> + 3528 331 86 35</p>
+                            <p class="fa company-email">
+                                <span></span> info@hexalcorp.com</p>
                         </div>
                         <button class="form-send">Send</button>
                     </div>

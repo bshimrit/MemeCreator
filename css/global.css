@@ -432,7 +432,6 @@ aside> p > span{
 }
 
 .social li {
-    /* padding: 2.5px; */
     width: 20px;
     height: 20px;
 }
@@ -453,15 +452,22 @@ aside> p > span{
 
 .input-base {
     padding: 10px;
-    font-size: 12px;
+    font-size: 16px;
     border: 1px solid transparent;
     background: #454545;
     font-family: 'LatoRegular', sans-serif;
 }
 
+.contact-form .input-base {
+    font-size: 12px;
+}
+
+.meme-line-txt {
+    width: 100%;
+}
 .img-grid-btn {
     padding: 10px;
-    color: #20816d;
+    color: #2eb398;;
     font-size: 17px;
     border: 1px solid transparent;
     background-color: transparent;
@@ -482,12 +488,9 @@ aside> p > span{
 }
 
 .meme-controls{
-    width: 70%; 
+    width: 80%; 
     margin-left: 40px;
 
-}
-.meme-img {
-    position: relative;
 }
 
 .meme-lines {
@@ -623,6 +626,7 @@ small {
     grid-column: 1 / 9;
     grid-row: span 4;
     padding-left: 0; 
+    resize: none;
 }
 
 .info-grid button{
@@ -661,17 +665,9 @@ small {
     width: 25px;
 }
 
-/* .info-grid .company-phone {
-    grid-column: 9 / 12;
-    grid-row: 4 / span 1;
-    margin: 0;
+select {
+    font-family: "latoBold", sans-serif;
 }
-
-.info-grid .company-email {
-    grid-column: 9 / 12;
-    grid-row: 4 / span 1;
-    margin: 0;
-} */
 
 
 /****** shape *****/
@@ -715,11 +711,12 @@ small {
 .cb-container {
     display: block;
     position: relative;
-    padding-left: 35px;
+    padding-left: 30px;
+    padding-top: 3px;
     margin-bottom: 12px;
     cursor: pointer;
     font-size: 15px;
-
+    font-family: "latoRegular", sans-serif;
     user-select: none;
 }
 

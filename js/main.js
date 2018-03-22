@@ -93,7 +93,7 @@ function createImgs() {
     imgs.push(createImg('img/meme/img07.jpg', ['cartoon', 'batman', 'slap','All']));
     imgs.push(createImg('img/meme/img08.jpg', ['cute', 'cat', 'animal', 'cartoon','All']));
     imgs.push(createImg('img/meme/img09.jpg', ['dance', 'kids', 'black','cute','All']));
-    imgs.push(createImg('img/meme/img10.jpg', ['Haim', 'tv', 'יצאת צדיק']));
+    imgs.push(createImg('img/meme/img10.jpg', ['Haim', 'tv', 'יצאת צדיק','All']));
 
     return imgs;
 }
@@ -201,7 +201,7 @@ function renderMeme(meme) {
     img.src = memeImg.url;
 
     img.onload = function () {
-        canvas.width = Math.min(img.width,window.innerWidth - 40);
+        canvas.width = Math.min(img.width,window.innerWidth / (window.matchMedia("(max-width: 740px)").matches ? 1 : 2) - 50);
         canvas.height = img.height;
 
         var height = getCanvasHeight();
@@ -294,7 +294,7 @@ function renderNewLine(txt, idx) {
     return `
     <div class="meme-txt-wrapper">  
         <div>
-            <input type="text" class="meme-line-txt" id="txt-input-${idx}" placeholder="Enter your text here" oninput="changeMemeText(this)"></input>
+            <input type="text" class="input-base meme-line-txt" id="txt-input-${idx}" placeholder="Enter your text here" oninput="changeMemeText(this)"></input>
         </div>
         <div class="txt-ctrl flex justify-start flex-wrap" id=txt-${idx}>
             <button id="btn-left-${idx}" class="fa clear-btn base-btn base-btn-small" onclick="alignText(${idx}, 'left')"></button>
@@ -307,7 +307,7 @@ function renderNewLine(txt, idx) {
             <button class="fa clear-btn base-btn base-btn-small" onclick="moveDown(${idx})"></button>
             <button id=btn-${idx} class="fa clear-btn base-btn base-btn-small" onclick="deleteLine(this)"></button>
             <label class="fa cb-container">Shadow
-                <input  type="checkbox" onchange="switchShadow(this,${idx})">
+                <input type="checkbox" onchange="switchShadow(this,${idx})">
                 <span class="checkmark"></span>
             </label>
             </div>

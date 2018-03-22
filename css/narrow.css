@@ -23,3 +23,19 @@
     grid-column: span 4;
     grid-row: span 4;
 }
+
+.social li {
+    /* width: 25px; */
+    /* padding: 12.5px; */
+    padding: 12.5px;
+}
+
+.about-img{
+    width: 30.333%;
+}
+
+.about-info{
+    width: 66.666%;
+    /* height: 297px; */
+    /* position: relative; */
+}

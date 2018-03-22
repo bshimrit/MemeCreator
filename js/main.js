@@ -474,7 +474,7 @@ function renderTeamMemeber(team, idx) {
         <div class="about-img">
         <img src=${team.url} />
         </div>
-            <div class="about-info flex flex-column justify-end align-start" id="about">
+            <div class="about-info flex flex-column justify-end" id="about">
                 <div class="info">
                 <h1>${team.name}</h1>
                 <h2>${team.title}</h2>

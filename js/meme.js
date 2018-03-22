@@ -44,6 +44,12 @@ function toggleWin(elObject) {
     elObject.classList.toggle('close');
 }
 
+function closeMeme(){
+    changeMainView();
+    gMeme = creategMeme();
+    renderTxtContainer();
+}
+
 //** render meme and texts **/
 function renderMeme(meme) {
     var canvas = document.getElementById('meme-canvas');

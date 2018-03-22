@@ -128,7 +128,8 @@ function addNewLine() {
 
         var idx = gMeme.txts.length - 1;
         var elEditTxtCon = document.querySelector('.edit-txt-container');
-        elEditTxtCon.innerHTML += renderNewLine(gMeme.txts[idx].line, idx);
+        // elEditTxtCon.innerHTML += renderNewLine(gMeme.txts[idx].line, idx);
+        renderTxtContainer();
     }
 }
 

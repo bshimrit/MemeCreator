@@ -280,6 +280,15 @@ footer {
     font-size: 0.75em;
 }
 
+
+#btn-save{
+    color: black;
+}
+
+#btn-save:hover{
+    color: white;
+}
+
 /***** main ********/
 .contact-input > input{
     background-color: #454545;

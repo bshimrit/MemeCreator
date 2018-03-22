@@ -435,7 +435,7 @@ function createNewLineObject(x, y) {
     return {
         line: 'Your text will appear here',
         size: 20,
-        font: 'impactRegular',
+        font: 'Impact',
         align: 'start',
         color: '#ffffff',
         shadowColor: "rgba(0,0,0,0)",

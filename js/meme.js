@@ -15,7 +15,7 @@ function createNewLineObject(x, y) {
         line: 'Your text will appear here',
         size: 20,
         font: 'Impact',
-        align: 'start',
+        align: 'center',
         color: '#ffffff',
         shadowColor: "rgba(0,0,0,0)",
         blur: 0,
@@ -26,6 +26,7 @@ function createNewLineObject(x, y) {
 
 function openMemeEditor(elImg) {
     updMeme(elImg);
+    initializeAlign();
     renderMeme(gMeme);
     changeMainView();
 }
@@ -67,10 +68,15 @@ function renderMeme(meme) {
 
         var height = getCanvasHeight();
         if(gMeme.txts[1]) gMeme.txts[1].y = height - INITIAL_TOP_Y;
-
         context.drawImage(img, 0, 0, canvas.width, canvas.height);
         drawTextForTxts(gMeme, context);
     }
+}
+
+function initializeAlign(){
+    gMeme.txts.forEach(function (txt, idx) {
+        alignText(idx, txt.align);
+    })
 }
 
 function drawTextForTxts(gMeme, context) {
@@ -86,7 +92,7 @@ function drawTextForTxt(context, txt) {
     context.font = txt.size + "px" + " " + txt.font;
     context.shadowColor = txt.shadowColor;
     context.shadowBlur = txt.blur;
-    context.fillText(txt.line, txt.x, txt.y);
+    context.fillText(txt.line.toUpperCase(), txt.x, txt.y);
 }
 
 //** perform changes on meme **/

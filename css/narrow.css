@@ -39,7 +39,7 @@
 }
 
 .meme-controls {
-    width: 40%;
+    width: 45%;
 }
 
 .img-grid>img{
@@ -49,6 +49,10 @@
 
 .social li {
     padding: 12.5px;
+}
+
+.meme-img {
+    width: 50%;
 }
 
 .about-img{

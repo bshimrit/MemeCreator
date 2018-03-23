@@ -68,7 +68,7 @@ html {
 }
 
 .container {
-    max-width: 980px;
+    max-width: 1050px;
     margin: 0 auto;
     width: 100%;
     padding-right: 10px;
@@ -123,12 +123,6 @@ h1 {
     padding: 0;
 }
 
-.container {
-    max-width: 980px;
-    margin: 0 auto;
-    width: 100%;
-    z-index: 100;
-}
 
 .pointer:hover{
     cursor: pointer;
@@ -481,6 +475,10 @@ aside> p > span{
 }
 
 .meme-line-txt {
+    width: 100%;
+}
+
+.meme-img {
     width: 100%;
 }
 .img-grid-btn {

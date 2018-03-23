@@ -61,8 +61,8 @@ function renderMeme(meme) {
     img.src = memeImg.url;
 
     img.onload = function () {
-        var ratio = (window.matchMedia("(max-width: 740px)").matches ? 1 : 2);
-        canvas.width = Math.min(img.width,window.innerWidth - 20 / ratio);
+        var curWidth = document.querySelector(".meme-img").offsetWidth;
+        canvas.width = Math.min(img.width,curWidth);
         canvas.height = img.height * (canvas.width / img.width);
 
         var height = getCanvasHeight();

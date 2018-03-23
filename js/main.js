@@ -265,7 +265,7 @@ function renderNewLine(txt, idx) {
         <div>
             <input type="text" class="input-base meme-line-txt" id="txt-input-${idx}" oninput="changeMemeText(this)" value="${txt}"></input>
         </div>
-        <div class="txt-ctrl flex justify-start flex-wrap" id=txt-${idx}>
+        <div class="txt-ctrl flex justify-start align-center flex-wrap" id=txt-${idx}>
             <button id="btn-left-${idx}" class="fa clear-btn base-btn base-btn-small" onclick="alignText(${idx}, 'left')"></button>
             <button id="btn-center-${idx}" class="fa clear-btn base-btn base-btn-small" onclick="alignText(${idx}, 'center')"></button>
             <button id="btn-right-${idx}" class="fa clear-btn base-btn base-btn-small" onclick="alignText(${idx}, 'right')"></button>
@@ -275,18 +275,20 @@ function renderNewLine(txt, idx) {
             <button class="fa clear-btn base-btn base-btn-small" onclick="moveUp(${idx})"></button>
             <button class="fa clear-btn base-btn base-btn-small" onclick="moveDown(${idx})"></button>
             <button id=btn-${idx} class="fa clear-btn base-btn base-btn-small" onclick="deleteLine(this)"></button>
-            <form class="form">
-                <label class="fa cb-container"> Shadow
-                <input type="checkbox" onchange="switchShadow(this,${idx})">
-                <span class="checkmark"></span>
-               
-                <label class="fa" for="txt-font"></label>
-                <select id = "font" onchange = "changeFont(this,${idx})">
-                 ${options}
-                </select>
-                 </form>
-            </div>
-           
+            <form class="style-form flex justify-start align-center">
+                <div>               
+                    <label class="fa cb-container"> Shadow
+                    <input type="checkbox" onchange="switchShadow(this,${idx})">
+                    <span class="checkmark"></span>
+                </div>
+                <div class="font-select">
+                    <label class="fa" for="txt-font"></label>
+                    <select id = "font" onchange = "changeFont(this,${idx})">
+                    ${options}
+                    </select>
+                </div>
+            </form>
+        </div>
     </div>
     `;
 }

@@ -291,9 +291,10 @@ footer {
 }
 
 /***** main ********/
-.form{
-    margin-left: 40px;
+.style-form{
+    width: 100%;
 }
+
 
 .base-btn.close-window{
     background-color: lightgrey;
@@ -722,11 +723,16 @@ select {
     position: relative;
     padding-left: 30px;
     padding-top: 3px;
-    margin-bottom: 12px;
+    /* margin-bottom: 12px; */
     cursor: pointer;
     font-size: 15px;
     font-family: "latoRegular", sans-serif;
     user-select: none;
+}
+
+.font-select {
+    margin-left: 10px;
+    padding-top: 5px;
 }
 
 .txt-ctrl .cb-container input {

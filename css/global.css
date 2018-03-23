@@ -301,17 +301,7 @@ footer {
     margin-left: 40px;
 }
 
-/* .base-btn.close-window{
-    position: absolute;
-    right: 0;
-    top: 14%;
-    background-color: lightgrey;
-} */
-
 .base-btn.close-window{
-    position: absolute;
-    left: 100%;
-    top: 5%;
     background-color: lightgrey;
 }
 

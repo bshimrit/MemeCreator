@@ -34,7 +34,7 @@
                     <a href="#">Blog</a>
                 </li>
                 <li>
-                    <a href="#contactForm">Get in touch</a>
+                    <a href="#contact-form">Get in touch</a>
                 </li>
                 <!-- <button class="fa hamburger menu-btn clear-btn" onclick="toggleMenu(this)"></button> -->
             </ul>
@@ -74,12 +74,16 @@
                     </canvas>
                 </div>
                 <div class="meme-controls flex flex-column justify-start">
-                    <ul class="ctrl-btns clean-list flex justify-start align-center">
+                    <ul class="ctrl-btns clean-list flex space-between align-center">
                         <li>
-                            <a href="#" id="btn-save" class="fa base-btn pointer" download="myMeme.png" onclick="downloadCanvas(this)"></a>
-                        </li>
-                        <li>
-                            <button class="fa clear-btn base-btn pointer" onClick="addNewLine()"></button>
+                            <ul class="ctrl-btns clean-list flex flex-start align-center">
+                               <li>
+                                   <a href="#" id="btn-save" class="fa base-btn pointer" download="myMeme.png" onclick="downloadCanvas(this)"></a>
+                               </li> 
+                               <li>
+                                   <button class="fa clear-btn base-btn pointer" onClick="addNewLine()"></button>
+                               </li>
+                            </ul>
                         </li>
                         <li>
                             <button class="fa clear-btn base-btn pointer close-window" onclick="closeMeme()"></button>

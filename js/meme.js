@@ -62,7 +62,7 @@ function renderMeme(meme) {
 
     img.onload = function () {
         var ratio = (window.matchMedia("(max-width: 740px)").matches ? 1 : 2);
-        canvas.width = Math.min(img.width,(window.innerWidth - 80) / ratio);
+        canvas.width = Math.min(img.width,window.innerWidth - 20 / ratio);
         canvas.height = img.height * (canvas.width / img.width);
 
         var height = getCanvasHeight();

@@ -293,16 +293,6 @@ function renderNewLine(txt, idx) {
     `;
 }
 
-/* <label class="fa" for="txt-font"></label> <select id = "font" onchange = "changeFont(this,${idx})">
-${options}
-</select> */
-
-/* <label class="fa cb-container">Shadow
-<label class="fa cb-container">
-<input type="checkbox" onchange="switchShadow(this,${idx})">
-<span class="checkmark"></span>
-</label> */
-
 function renderOptions() {
     var fonts = [{ fontName: "impactRegular", displayedText: "Impact" },
     { fontName: "Verdana", displayedText: "Verdana" },

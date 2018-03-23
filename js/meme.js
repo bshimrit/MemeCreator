@@ -61,13 +61,14 @@ function renderMeme(meme) {
     img.src = memeImg.url;
 
     img.onload = function () {
-        canvas.width = Math.min(img.width,window.innerWidth / (window.matchMedia("(max-width: 740px)").matches ? 1 : 2) - 50);
-        canvas.height = img.height;
+        var ratio = (window.matchMedia("(max-width: 740px)").matches ? 1 : 2);
+        canvas.width = Math.min(img.width,(window.innerWidth - 80) / ratio);
+        canvas.height = img.height * (canvas.width / img.width);
 
         var height = getCanvasHeight();
         if(gMeme.txts[1]) gMeme.txts[1].y = height - INITIAL_TOP_Y;
 
-        context.drawImage(img, 0, 0, img.width, img.height);
+        context.drawImage(img, 0, 0, canvas.width, canvas.height);
         drawTextForTxts(gMeme, context);
     }
 }

@@ -26,7 +26,7 @@ function createNewLineObject(x, y) {
 
 function openMemeEditor(elImg) {
     updMeme(elImg);
-    initializeAlign();
+    // initializeAlign();
     renderMeme(gMeme);
     changeMainView();
 }
@@ -59,6 +59,7 @@ function renderMeme(meme) {
         return img.id === gMeme.selectedImgId;
     });
     var img = new Image();
+    // debugger;
     img.src = memeImg.url;
 
     img.onload = function () {
@@ -69,13 +70,14 @@ function renderMeme(meme) {
         var height = getCanvasHeight();
         if(gMeme.txts[1]) gMeme.txts[1].y = height - INITIAL_TOP_Y;
         context.drawImage(img, 0, 0, canvas.width, canvas.height);
+        initializeAlign();
         drawTextForTxts(gMeme, context);
     }
 }
 
 function initializeAlign(){
     gMeme.txts.forEach(function (txt, idx) {
-        alignText(idx, txt.align);
+        setAlignment(idx, txt.align);
     })
 }
 
@@ -110,24 +112,40 @@ function changeFontColor(elFontColor, idx) {
     renderMeme(gMeme);
 }
 
-function alignText(idx, direction) {
+function setAlignment(idx, align){
     var width = getCanvasWidth();
     var rightX = width - gMeme.txts[idx].size - INITIAL_X;
     var centerX = width / 2 - gMeme.txts[idx].size;
     
-    switch (direction) {
-        case 'right':
+    switch (align) {
+        case 'end':
             gMeme.txts[idx].x = rightX;
-            gMeme.txts[idx].align = 'end';
+            // gMeme.txts[idx].align = 'end';
             break;
-
+    
         case 'center':
             gMeme.txts[idx].x = centerX;
-            gMeme.txts[idx].align = 'center';
+            // gMeme.txts[idx].align = 'center';
             break;
-
+    
         default:
             gMeme.txts[idx].x = INITIAL_X;
+            // gMeme.txts[idx].align = 'start';
+    }
+}
+function alignText(idx, direction) {
+    //setAlignment(idx, direction);
+
+    switch (direction) {
+        case 'right':
+            gMeme.txts[idx].align = 'end';
+            break;
+    
+        case 'center':
+            gMeme.txts[idx].align = 'center';
+            break;
+    
+        default:
             gMeme.txts[idx].align = 'start';
     }
     renderMeme(gMeme);

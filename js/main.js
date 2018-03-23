@@ -168,16 +168,16 @@ function toggleMenu(elHamburger) {
 function createImgs() {
     var imgs = [];
 
-    imgs.push(createImg('img/meme/img01.jpg', ['cartoon', 'surprised', 'yelling', 'All']));
-    imgs.push(createImg('img/meme/img02.jpg', ['dog', 'cute', 'animal', 'All']));
-    imgs.push(createImg('img/meme/img03.jpg', ['what?', 'angry', 'black', 'All']));
-    imgs.push(createImg('img/meme/img04.jpg', ['matrix', 'movie', 'All']));
-    imgs.push(createImg('img/meme/img05.jpg', ['cartoon', 'movie', 'spiderman', 'All']));
-    imgs.push(createImg('img/meme/img06.jpg', ['cartoon', 'movie', 'toy story', 'one day', 'All']));
-    imgs.push(createImg('img/meme/img07.jpg', ['cartoon', 'batman', 'slap', 'All']));
-    imgs.push(createImg('img/meme/img08.jpg', ['cute', 'cat', 'animal', 'cartoon', 'All']));
-    imgs.push(createImg('img/meme/img09.jpg', ['dance', 'kids', 'black', 'cute', 'All']));
-    imgs.push(createImg('img/meme/img10.jpg', ['Haim', 'tv', 'יצאת צדיק', 'All']));
+    imgs.push(createImg('img/meme/img01.jpg', ['cartoon', 'surprised', 'yelling', 'all']));
+    imgs.push(createImg('img/meme/img02.jpg', ['dog', 'cute', 'animal', 'all']));
+    imgs.push(createImg('img/meme/img03.jpg', ['what?', 'angry', 'black', 'all']));
+    imgs.push(createImg('img/meme/img04.jpg', ['matrix', 'movie', 'all']));
+    imgs.push(createImg('img/meme/img05.jpg', ['cartoon', 'movie', 'spiderman', 'all']));
+    imgs.push(createImg('img/meme/img06.jpg', ['cartoon', 'movie', 'toy story', 'one day', 'all']));
+    imgs.push(createImg('img/meme/img07.jpg', ['cartoon', 'batman', 'slap', 'all']));
+    imgs.push(createImg('img/meme/img08.jpg', ['cute', 'cat', 'animal', 'cartoon', 'all']));
+    imgs.push(createImg('img/meme/img09.jpg', ['dance', 'kids', 'black', 'cute', 'all']));
+    imgs.push(createImg('img/meme/img10.jpg', ['haim', 'tv', 'יצאת צדיק', 'all']));
 
     return imgs;
 }
@@ -196,7 +196,7 @@ function searchImg(searchValue) {
         filteredImgs = gImgs;
     } else {
         filteredImgs = gImgs.filter(function (img) {
-            return img.keywords.indexOf(searchValue) !== -1;
+            return img.keywords.indexOf(searchValue.toLowerCase()) !== -1;
         });
     }
     renderImgs(filteredImgs);
@@ -205,7 +205,7 @@ function searchImg(searchValue) {
 function addImg() {
     var elImgInput = document.querySelector('#imgFiles');
     if (elImgInput.value !== '') {
-        gImgs.push(createImg(elImgInput.value, ['All']));
+        gImgs.push(createImg(elImgInput.value, ['all']));
         renderImgs(gImgs);
         elImgInput.value = '';
     }

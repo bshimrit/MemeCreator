@@ -438,6 +438,7 @@ aside> p > span{
 
 .filter-cloud {
     font-size: 15px;
+    text-transform: capitalize;
 }
 .filter-cloud>span:not(:first-child){
     margin-left: 10px;
